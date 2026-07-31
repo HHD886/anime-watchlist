@@ -1,7 +1,37 @@
 {
   "version": 3,
-  "publishedAt": "2026-07-31T09:33:44.623Z",
+  "publishedAt": "2026-07-31T09:37:42.049Z",
   "items": [
+    {
+      "id": "8013cd7f-ab0b-495b-befd-175712883b39",
+      "title": "13岁女演员的情书",
+      "originalTitle": "恋文と13歳の女優",
+      "type": "manga",
+      "subtype": "SSR",
+      "weekday": "",
+      "priority": "SSR",
+      "current": 0,
+      "total": "",
+      "image": "https://lain.bgm.tv/pic/cover/l/3b/17/405577_5Pf21.jpg",
+      "tags": [
+        "日本",
+        "恋爱",
+        "漫画",
+        "青年",
+        "原创",
+        "系列",
+        "连载中",
+        "年龄差",
+        "芳文社",
+        "偶像",
+        "萝莉",
+        "2022"
+      ],
+      "sourceUrl": "https://bgm.tv/subject/405577",
+      "bangumiId": "405577",
+      "note": "Bangumi · 2023-04-27",
+      "importedAt": "2026-07-31T09:37:28.744Z"
+    },
     {
       "id": "47ed45c2-a6a8-4793-8844-43d8a9334c5b",
       "title": "寄宿学校的朱丽叶",
