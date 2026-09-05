@@ -1,7 +1,37 @@
 {
   "version": 3,
-  "publishedAt": "2026-08-31T19:38:28.040Z",
+  "publishedAt": "2026-09-05T15:45:54.843Z",
   "items": [
+    {
+      "id": "b8c52d7a-fc3a-414f-8687-d7b8b95a11d3",
+      "title": "这个美术社大有问题！",
+      "originalTitle": "この美術部には問題がある！",
+      "type": "binge",
+      "subtype": "SSR",
+      "weekday": "",
+      "priority": "SSR",
+      "current": 0,
+      "total": 12,
+      "image": "https://lain.bgm.tv/pic/cover/l/b6/fb/150746_AAL5A.jpg",
+      "tags": [
+        "校园",
+        "TV",
+        "恋爱",
+        "日本",
+        "漫画改",
+        "搞笑",
+        "日常",
+        "2016年7月",
+        "Feel.",
+        "2016",
+        "漫改",
+        "この美術部には問題がある！"
+      ],
+      "sourceUrl": "https://bgm.tv/subject/150746",
+      "bangumiId": "150746",
+      "note": "Bangumi · 2016-07-07",
+      "importedAt": "2026-09-05T15:45:39.608Z"
+    },
     {
       "id": "9b3d1953-b497-43a4-bdc9-825a6261f4ad",
       "title": "草莓棉花糖",
@@ -33,36 +63,6 @@
       "importedAt": "2026-08-31T19:37:19.051Z"
     },
     {
-      "id": "404df612-23ab-4c05-93da-eb7aa4982e20",
-      "title": "姐姐来了",
-      "originalTitle": "お姉ちゃんが来た",
-      "type": "novel",
-      "subtype": "SR",
-      "weekday": "",
-      "priority": "SR",
-      "current": 0,
-      "total": 13,
-      "image": "https://lain.bgm.tv/pic/cover/l/c6/22/85557_jmSe9.jpg",
-      "tags": [
-        "TV",
-        "日本",
-        "漫画改",
-        "日常",
-        "泡面番",
-        "2014年1月",
-        "弟控",
-        "搞笑",
-        "姐控",
-        "2014",
-        "姐姐来了",
-        "C2C"
-      ],
-      "sourceUrl": "https://bgm.tv/subject/85557",
-      "bangumiId": "85557",
-      "note": "Bangumi · 2014-01-08",
-      "importedAt": "2026-08-31T19:31:33.963Z"
-    },
-    {
       "id": "6087cadf-480d-436d-b701-679cf1b9a587",
       "title": "跟班×服务",
       "originalTitle": "サーバント×サービス",
@@ -70,7 +70,7 @@
       "subtype": "SSR",
       "weekday": "",
       "priority": "SSR",
-      "current": 0,
+      "current": 9,
       "total": 13,
       "image": "https://lain.bgm.tv/pic/cover/l/b0/46/69944_FZmY2.jpg",
       "tags": [
@@ -220,7 +220,7 @@
       "subtype": "SSR",
       "weekday": "",
       "priority": "SSR",
-      "current": 3,
+      "current": 11,
       "total": 12,
       "image": "https://lain.bgm.tv/pic/cover/l/5a/b7/240346_LDL3v.jpg",
       "tags": [
@@ -280,7 +280,7 @@
       "subtype": "SSR",
       "weekday": "",
       "priority": "SSR",
-      "current": 1,
+      "current": 3,
       "total": 15,
       "image": "https://lain.bgm.tv/pic/cover/l/c3/52/373712_WAhb0.jpg",
       "tags": [
