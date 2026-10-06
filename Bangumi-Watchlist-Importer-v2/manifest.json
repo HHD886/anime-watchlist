@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Bangumi 追番表手动分类导入",
+  "version": "2.0.0",
+  "description": "从 Bangumi 提取作品资料，并由用户手动选择每日更新、完结待看、漫画或小说区域、星期和优先级。",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://api.bgm.tv/*",
+    "https://bgm.tv/*",
+    "https://bangumi.tv/*",
+    "https://chii.in/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bgm.tv/*",
+        "https://bangumi.tv/*",
+        "https://chii.in/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "file:///*"
+      ],
+      "js": [
+        "file-bridge.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Bangumi 追番表导入"
+  }
+}
