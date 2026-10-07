@@ -1,7 +1,7 @@
 {
   "version": 4,
   "title": "王之宝库",
-  "publishedAt": "2026-10-07T11:40:08.682Z",
+  "publishedAt": "2026-10-07T12:04:54.793Z",
   "items": [
     {
       "id": "b8c52d7a-fc3a-414f-8687-d7b8b95a11d3",
@@ -834,7 +834,7 @@
       "media": "manga",
       "status": "wish",
       "unit": "话",
-      "score": null,
+      "score": 9.9,
       "bgmScore": null,
       "favorite": false,
       "personalTags": [],
@@ -844,10 +844,15 @@
       "year": "",
       "date": "",
       "createdAt": "2026-07-12T13:26:53.268Z",
-      "updatedAt": "2026-07-12T13:26:53.268Z",
+      "updatedAt": "2026-10-07T11:44:10.425Z",
       "finishedAt": "",
       "comments": [],
-      "scoreHistory": []
+      "scoreHistory": [
+        {
+          "score": 9.9,
+          "at": "2026-10-07T11:44:10.425Z"
+        }
+      ]
     },
     {
       "id": "7e650315-7ddc-4dfe-b81c-321a42a5251f",
@@ -1080,53 +1085,6 @@
       "date": "",
       "createdAt": "2026-07-12T13:21:35.025Z",
       "updatedAt": "2026-07-12T13:21:35.025Z",
-      "finishedAt": "",
-      "comments": [],
-      "scoreHistory": []
-    },
-    {
-      "id": "e033cf14-b409-4aff-99e1-5d260723876c",
-      "title": "二十世纪电气目录",
-      "originalTitle": "二十世紀電氣目録-ユーレカ・エヴリカ-",
-      "type": "daily",
-      "subtype": "周日",
-      "weekday": "周日",
-      "priority": "SR",
-      "current": 0,
-      "total": 13,
-      "image": "https://lain.bgm.tv/pic/cover/l/ce/3a/255209_9w0tU.jpg",
-      "tags": [
-        "TV",
-        "恋爱",
-        "日本",
-        "奇幻",
-        "小说改",
-        "京阿尼",
-        "2026年7月",
-        "轻小说改",
-        "京都动画",
-        "2026",
-        "京都アニメーション",
-        "轻改"
-      ],
-      "sourceUrl": "https://bgm.tv/subject/255209",
-      "bangumiId": "255209",
-      "note": "Bangumi · 2026-07-05",
-      "importedAt": "2026-07-12T13:15:07.703Z",
-      "media": "anime",
-      "status": "doing",
-      "unit": "集",
-      "score": null,
-      "bgmScore": null,
-      "favorite": false,
-      "personalTags": [],
-      "review": "",
-      "summary": "",
-      "series": "",
-      "year": "",
-      "date": "",
-      "createdAt": "2026-07-12T13:15:07.703Z",
-      "updatedAt": "2026-07-12T13:15:07.703Z",
       "finishedAt": "",
       "comments": [],
       "scoreHistory": []
@@ -1398,7 +1356,7 @@
       "media": "anime",
       "status": "doing",
       "unit": "集",
-      "score": null,
+      "score": 9.9,
       "bgmScore": null,
       "favorite": false,
       "personalTags": [],
@@ -1408,10 +1366,15 @@
       "year": "",
       "date": "",
       "createdAt": "2026-07-12T12:44:59.183Z",
-      "updatedAt": "2026-07-12T12:44:59.183Z",
+      "updatedAt": "2026-10-07T11:59:31.127Z",
       "finishedAt": "",
       "comments": [],
-      "scoreHistory": []
+      "scoreHistory": [
+        {
+          "score": 9.9,
+          "at": "2026-10-07T11:59:31.127Z"
+        }
+      ]
     },
     {
       "id": "c458edc9-0910-4725-b533-6286023b1b87",
