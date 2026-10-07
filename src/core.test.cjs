@@ -2,6 +2,21 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const C=require('./core.js');
+test('细评分覆盖 0.0–10.0 每个十分位且无重叠，9.5/9.6 与 5.0 边界正确',()=>{
+ for(let n=0;n<=100;n++){const score=n/10;assert.equal(C.gradeBands.filter(b=>score>=b.min&&score<=b.max).length,1,'score '+score);}
+ assert.equal(C.grade({score:9.6}),'9.6');assert.equal(C.grade({score:9.5}),'9.0');assert.equal(C.grade({score:9}),'9.0');assert.equal(C.grade({score:8.9}),'8.5');assert.equal(C.grade({score:5}),'5.0');assert.equal(C.grade({score:4.9}),'low');assert.equal(C.grade({score:null}),'unrated');
+});
+test('多标签交集与并集均支持个人标签，仅作品库记录不会进入待看或被补全导入重新加入',()=>{
+ const a=C.normalize({id:'a',title:'A',tags:['日常'],personalTags:['想重看'],inWatchlist:false,score:9.6});
+ const b=C.normalize({id:'b',title:'B',tags:['日常'],status:'doing'});
+ assert.deepEqual(C.filter([a,b],{tags:['日常','想重看'],tagMode:'all'}).map(i=>i.id),['a']);
+ assert.deepEqual(C.filter([a,b],{tags:['想重看','日常'],tagMode:'any'}).map(i=>i.id),['a','b']);
+ assert.equal(C.filter([a,b],{tags:['日常','想重看'],grade:'9.0'}).length,0);
+ assert.equal(C.isWatching(a),false);assert.equal(C.isWatching(b),true);
+ assert.equal(C.isWatching(C.normalize({status:'done',inWatchlist:true})),false);
+ assert.equal(C.isWatching(C.normalize({status:'dropped'})),false);
+ assert.equal(C.merge([a],[{id:'a',title:'A',inWatchlist:true}]).items[0].inWatchlist,false);
+});
 const original={version:3,items:[
  {id:'daily',title:'每日作品',type:'daily',subtype:'周四',weekday:'周四',priority:'SSR',current:3,total:12,note:'保留备注',tags:['日常'],bangumiId:'101'},
  {id:'binge',title:'完结作品',type:'binge',subtype:'SSR',weekday:'',priority:'SSR',current:0,total:12,note:'',tags:[],bangumiId:'102'},
@@ -16,7 +31,7 @@ test('旧格式四类记录完整迁移，保留 ID、优先级、进度、标�
 test('评分边界、小数、未评分与无效输入',()=>{
  for(const [input,want] of [[9.9,9.9],[9.85,9.9],[10,10],[0,0],['',null],[null,null],[-1,null],[11,null],['abc',null]])assert.equal(C.score(input),want);
  const a=[9,8.9,8,7.9,7,6.9,null,0,10].map(score=>C.normalize({score}));
- assert.deepEqual(a.map(C.grade),['9','8','8','7','7','low','unrated','low','9']);
+ assert.deepEqual(a.map(C.grade),['9.0','8.5','8.0','7.5','7.0','6.5','unrated','low','9.6']);
  assert.deepEqual(C.sort(a,'score').map(x=>x.score),[10,9,8.9,8,7.9,7,6.9,0,null]);
 });
 test('重复导入保留个人评分、评语、进度、封面与分类',()=>{
@@ -33,7 +48,7 @@ test('没有 Bangumi ID 时同媒介同名去重，动画与漫画保持独立',
 });
 test('组合筛选按媒体、标签、分区、状态与关键词工作',()=>{
  const i=C.normalize({title:'蓝色的故事',media:'manga',status:'done',score:9.8,tags:['日常'],personalTags:['后劲大'],review:'非常喜欢人物成长'});
- assert.equal(C.filter([i],{media:'manga',tag:'后劲大',grade:'9',status:'done',query:'成长 蓝色'}).length,1);
+ assert.equal(C.filter([i],{media:'manga',tag:'后劲大',grade:'9.6',status:'done',query:'成长 蓝色'}).length,1);
  assert.equal(C.filter([i],{media:'novel'}).length,0);assert.equal(C.filter([i],{favorite:true}).length,0);
 });
 test('书籍与动画从 Bangumi 获取正确类型、进度、评分与感想',()=>{

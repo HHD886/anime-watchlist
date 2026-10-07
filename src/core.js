@@ -10,6 +10,19 @@
   const priorities = ['SSR','SR','R'];
   const statuses = {wish:'想看 / 待读',doing:'在看 / 在读',done:'已完成',hold:'搁置',dropped:'放弃'};
   const mediaNames = {anime:'动画',manga:'漫画',novel:'小说'};
+  const gradeBands = [
+    {id:'9.6',min:9.6,max:10,label:'9.6–10.0'},
+    {id:'9.0',min:9,max:9.5,label:'9.0–9.5'},
+    {id:'8.5',min:8.5,max:8.9,label:'8.5–8.9'},
+    {id:'8.0',min:8,max:8.4,label:'8.0–8.4'},
+    {id:'7.5',min:7.5,max:7.9,label:'7.5–7.9'},
+    {id:'7.0',min:7,max:7.4,label:'7.0–7.4'},
+    {id:'6.5',min:6.5,max:6.9,label:'6.5–6.9'},
+    {id:'6.0',min:6,max:6.4,label:'6.0–6.4'},
+    {id:'5.5',min:5.5,max:5.9,label:'5.5–5.9'},
+    {id:'5.0',min:5,max:5.4,label:'5.0–5.4'},
+    {id:'low',min:0,max:4.9,label:'5.0 以下'}
+  ];
   const now = () => new Date().toISOString();
   const uid = () => globalThis.crypto?.randomUUID?.() || 'w-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
   const str = (v, max=100000) => String(v ?? '').slice(0,max);
@@ -41,7 +54,7 @@
     return {
       ...raw, id:str(raw.id||uid(),120),title:str(raw.title||raw.name_cn||raw.name||'未命名作品',300),
       originalTitle:str(raw.originalTitle,300),media,type,weekday,priority,subtype:type==='daily'?weekday:priority,
-      status,current,total,unit:['集','话','卷','章'].includes(raw.unit)?raw.unit:media==='anime'?'集':media==='manga'?'话':'卷',
+      status,current,total,inWatchlist:typeof raw.inWatchlist==='boolean'?raw.inWatchlist:!['done','dropped'].includes(status),unit:['集','话','卷','章'].includes(raw.unit)?raw.unit:media==='anime'?'集':media==='manga'?'话':'卷',
       score:score(raw.score),bgmScore:score(raw.bgmScore),favorite:raw.favorite===true,
       image:safeURL(raw.image,true),tags:tags(raw.tags),personalTags:tags(raw.personalTags),
       sourceUrl:safeURL(raw.sourceUrl)||(bangumiId?'https://bgm.tv/subject/'+bangumiId:''),bangumiId,
@@ -81,10 +94,16 @@
     }
     return {items:result,added,updated,skipped};
   }
-  function grade(i) {return i.score===null?'unrated':i.score>=9?'9':i.score>=8?'8':i.score>=7?'7':'low';}
+  function grade(i) {return i.score==null?'unrated':gradeBands.find(b=>i.score>=b.min&&i.score<=b.max)?.id||'unrated';}
+  function isWatching(i) {return i.inWatchlist!==false&&!['done','dropped'].includes(i.status);}
   function filter(items,f={}) {
     const words=str(f.query).toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
-    return items.filter(i=>(!f.media||f.media==='all'||i.media===f.media)&&(!f.status||i.status===f.status)&&(!f.grade||grade(i)===f.grade)&&(!f.favorite||i.favorite)&&(!f.tag||[...i.tags,...i.personalTags].includes(f.tag))&&words.every(w=>`${i.title} ${i.originalTitle} ${i.tags.join(' ')} ${i.personalTags.join(' ')} ${i.note} ${i.review} ${i.series}`.toLocaleLowerCase().includes(w)));
+    const selected=tags([...(Array.isArray(f.tags)?f.tags:[]),...(f.tag?[f.tag]:[])]);
+    return items.filter(i=>{
+      const own=[...i.tags,...i.personalTags];
+      const tagged=!selected.length||(f.tagMode==='any'?selected.some(t=>own.includes(t)):selected.every(t=>own.includes(t)));
+      return (!f.media||f.media==='all'||i.media===f.media)&&(!f.status||i.status===f.status)&&(!f.grade||grade(i)===f.grade)&&(!f.favorite||i.favorite)&&tagged&&words.every(w=>`${i.title} ${i.originalTitle} ${i.tags.join(' ')} ${i.personalTags.join(' ')} ${i.note} ${i.review} ${i.series}`.toLocaleLowerCase().includes(w));
+    });
   }
   function sort(items,by='recent') {
     return [...items].sort((a,b)=>{
@@ -132,5 +151,5 @@
     if(p.algorithm!=='AES-GCM'||p.kdf!=='PBKDF2-SHA256'||!Number.isInteger(p.iterations)||p.iterations<100000||p.iterations>1000000)throw new Error('不支持的加密备份格式');
     try{const key=await keyFor(password,un64(p.salt),p.iterations);const raw=await crypto.subtle.decrypt({name:'AES-GCM',iv:un64(p.iv)},key,un64(p.ciphertext));return parsePayload(new TextDecoder().decode(raw));}catch{throw new Error('口令不正确，或加密文件已损坏');}
   }
-  return {VERSION,weekdays,priorities,statuses,mediaNames,now,uid,str,number,score,tags,safeURL,subjectId,normalize,parsePayload,duplicate,merge,grade,filter,sort,bgmSubject,bytes64,un64,encrypt,decrypt};
+  return {VERSION,weekdays,priorities,statuses,mediaNames,gradeBands,now,uid,str,number,score,tags,safeURL,subjectId,normalize,parsePayload,duplicate,merge,grade,isWatching,filter,sort,bgmSubject,bytes64,un64,encrypt,decrypt};
 });

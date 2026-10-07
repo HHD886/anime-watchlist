@@ -1,6 +1,6 @@
 /* Scope-local cache; GitHub/Bangumi API requests and credentials are never cached. */
 const CACHE_PREFIX='hhd-workshelf-'+new URL(self.registration.scope).pathname+'-';
-const CACHE=CACHE_PREFIX+'4.0.1';
+const CACHE=CACHE_PREFIX+'4.1.0';
 const BASE=self.registration.scope;
 const SHELL=['index.html','editor.html','manifest.webmanifest','icon.svg'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL.map(p=>new URL(p,BASE).href))).then(()=>self.skipWaiting()));});
