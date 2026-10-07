@@ -1,4 +1,4 @@
-/* HHD 余白作品库 · portable data model, migration and encryption. No dependencies. */
+/* HHD 王之宝库作品库 · portable data model, migration and encryption. No dependencies. */
 (function (root, factory) {
   const core = factory();
   if (typeof module === 'object' && module.exports) module.exports = core;
@@ -59,7 +59,7 @@
     if(!Array.isArray(list))throw new Error('未找到作品数组；请使用旧版或新版导出的 JSON 备份');
     if(list.length>20000)throw new Error('一次最多导入 20000 部作品');
     const ids=new Set();const items=list.map(normalize).map(i=>{if(ids.has(i.id))i.id=uid();ids.add(i.id);return i;});
-    return {version:VERSION,title:str(p.title||'HHD 的作品库',80),publishedAt:str(p.publishedAt),items};
+    return {version:VERSION,title:str(!p.title||p.title==='HHD 的作品库'?'王之宝库':p.title,80),publishedAt:str(p.publishedAt),items};
   }
   function duplicate(items, item) {
     return items.find(i=> i.id===item.id || (item.bangumiId&&i.bangumiId===item.bangumiId) || (!item.bangumiId&&!i.bangumiId&&i.media===item.media&&i.title===item.title));

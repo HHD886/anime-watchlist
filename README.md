@@ -1,6 +1,6 @@
 # anime-watchlist
 
-余白 · HHD 的动画、漫画、小说收藏室。
+王之宝库 · HHD 的动画、漫画、小说收藏室。
 
 [打开作品库](https://hhd886.github.io/anime-watchlist/) · [进入编辑](https://hhd886.github.io/anime-watchlist/editor.html) · [完整中文说明](README_CN.txt)
 
