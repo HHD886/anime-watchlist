@@ -1,7 +1,7 @@
 {
   "version": 4,
   "title": "王之宝库",
-  "publishedAt": "2026-10-07T11:38:48.220Z",
+  "publishedAt": "2026-10-07T11:40:08.682Z",
   "items": [
     {
       "id": "b8c52d7a-fc3a-414f-8687-d7b8b95a11d3",
@@ -105,7 +105,7 @@
       "subtype": "SSR",
       "weekday": "",
       "priority": "SSR",
-      "current": 9,
+      "current": 10,
       "total": 13,
       "image": "https://lain.bgm.tv/pic/cover/l/b0/46/69944_FZmY2.jpg",
       "tags": [
@@ -139,7 +139,7 @@
       "year": "",
       "date": "",
       "createdAt": "2026-08-31T19:31:08.506Z",
-      "updatedAt": "2026-08-31T19:31:08.506Z",
+      "updatedAt": "2026-10-07T11:39:30.871Z",
       "finishedAt": "",
       "comments": [],
       "scoreHistory": []
