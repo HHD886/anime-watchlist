@@ -105,3 +105,34 @@ test('多个年份取并集，再与题材和评分筛选组合；年份排序�
  assert.deepEqual(C.filter(items,{query:'2026'}).map(i=>i.id),['new','other']);
  const ordered=C.sort(items,'year');assert.equal(C.yearOf(ordered[0]),'2026');assert.equal(C.yearOf(ordered[1]),'2026');assert.equal(ordered.at(-1).id,'unknown');assert.equal(items[0].id,'old');
 });
+
+test('系列归类、改名和移出只改变整理资料；个人记录、来源与其他合集完整保留',()=>{
+ const input=[{id:'a',title:'第一季',series:'旧合集',score:9.9,review:'长评',current:8,total:12,comments:[{id:'c',text:'随手记',at:'2026'}],seriesCover:true},{id:'b',title:'OVA',series:'旧合集',score:8.8},{id:'c',title:'原作',media:'novel',series:'其他合集',review:'原作评语'}].map(C.normalize),before=JSON.stringify(input);
+ const result=C.assignSeries(input,{name:'  新合集  ',source:'旧合集',ids:['a','c'],coverId:'c',parts:{a:{kind:'season',label:'第一季',order:'2'},c:{kind:'original',label:'原作小说',order:'1'}}});
+ assert.equal(JSON.stringify(input),before);assert.equal(result.length,3);assert.equal(result[1].series,'');assert.equal(result[0].series,'新合集');assert.equal(result[0].seriesCover,false);assert.equal(result[2].seriesCover,true);assert.equal(result[2].seriesKind,'original');
+ for(let n=0;n<input.length;n++)for(const k of ['id','title','score','review','current','total','media','comments','scoreHistory','bangumiId','inWatchlist'])assert.deepEqual(result[n][k],input[n][k],k);
+ assert.throws(()=>C.assignSeries(input,{name:'空',ids:[]}),/至少/);assert.throws(()=>C.assignSeries(input,{name:'合',ids:['missing']}),/变动/);
+ assert.equal(C.merge(result,[{id:'a',series:'误覆盖',seriesLabel:'错误版本'}]).items[0].series,'新合集');
+});
+test('系列收起跨媒体只占一格，筛选命中一季仍能展开全部成员，未评分不当作零分',()=>{
+ const items=[{id:'a',title:'第一季',series:'合集',year:'2014',score:9.8,media:'anime',tags:['奇幻'],seriesOrder:2},{id:'b',title:'小说',series:'合集',year:'2012',score:null,media:'novel',seriesKind:'original',seriesOrder:1},{id:'c',title:'OVA',series:'合集',year:'2015',score:9.1,tags:['日常']},{id:'single',title:'独立'}].map(C.normalize);
+ const groups=C.groupSeries(items);assert.equal(groups.length,2);assert.equal(groups[0].members.length,3);assert.equal(groups[0].year,'2015');assert.equal(groups[0].score,9.8);
+ const filtered=C.groupSeries(C.filter(items,{years:['2014'],media:'anime',tags:['奇幻']}),items);assert.equal(filtered.length,1);assert.equal(filtered[0].matches.length,1);assert.equal(filtered[0].members.length,3);assert.equal(filtered[0].year,'2014');assert.deepEqual(C.seriesOrder(items.slice(0,3)).map(i=>i.id),['b','a','c']);
+ assert.equal(C.groupSeries([items[1]])[0].score,null);
+});
+test('系列类型覆盖季度、OVA、OAD、剧场版、特别篇、上下部、篇章与 MV，手填优先',()=>{
+ for(const [title,want] of [['作品 第三季','season'],['作品 OVA','ova'],['作品OAD','oad'],['剧场版 作品','movie'],['作品 特别篇','special'],['作品 上篇','part'],['作品 最终篇','arc'],['作品 MV','mv']])assert.equal(C.seriesKind({title}),want,title);
+ assert.equal(C.seriesKind({title:'作品 OVA',seriesKind:'other'}),'other');assert.equal(C.seriesLabel({title:'作品 第三季',seriesLabel:'第 25–48 话'}),'第 25–48 话');
+});
+test('名称建议只返回待确认清单，不修改作品，不用未匹配数字创建错误合集',()=>{
+ const items=[{id:'a',title:'好故事'},{id:'b',title:'好故事 第二季'},{id:'c',title:'好故事 OVA'},{id:'d',title:'好故事',media:'novel'},{id:'f',title:'另一个故事',series:'已整理'},{id:'g',title:'86'},{id:'h',title:'87'}].map(C.normalize),before=JSON.stringify(items);
+ const suggestions=C.seriesSuggestions(items);assert.equal(JSON.stringify(items),before);assert.equal(suggestions.length,1);assert.deepEqual(suggestions[0].ids,['a','b','c','d']);assert.equal(suggestions[0].name,'好故事');
+});
+test('系列资料随导入选项和加密备份保存，旧数据缺少系列字段仍能读取',async()=>{
+ const i=C.applyImportOptions({id:'a',title:'OVA',seriesKind:'ova',seriesLabel:'特别收录',seriesOrder:3,seriesCover:true},{series:'同一系列',placement:'library'}),p=C.parsePayload({items:[i]});
+ const restored=await C.decrypt(await C.encrypt(p,'series-password-2026'),'series-password-2026');assert.deepEqual(restored,p);assert.equal(i.series,'同一系列');assert.equal(C.parsePayload([{title:'旧记录'}]).items[0].series,'');
+});
+test('关联导入的小说改编漫画仍属于漫画，不把小说改标签当作小说媒介',()=>{
+ assert.equal(C.bgmSubject({id:200,type:1,name:'小说改编的漫画',platform:'漫画',tags:[{name:'小说改'}]}).media,'manga');
+ assert.equal(C.bgmSubject({id:201,type:1,name:'小说原作',tags:[{name:'轻小说'}]}).media,'novel');
+});

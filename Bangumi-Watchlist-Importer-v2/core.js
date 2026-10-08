@@ -10,6 +10,7 @@
   const priorities = ['SSR','SR','R'];
   const statuses = {wish:'想看 / 待读',doing:'在看 / 在读',done:'已完成',hold:'搁置',dropped:'放弃'};
   const mediaNames = {anime:'动画',manga:'漫画',novel:'小说'};
+  const seriesKinds = {main:'正篇',season:'季度 / 续作',ova:'OVA',oad:'OAD',special:'番外 / 特别篇',movie:'剧场版',part:'上 / 下部',arc:'篇章',mv:'MV / 短片',original:'原作',adaptation:'改编',spinoff:'外传 / 衍生',other:'其他'};
   const gradeBands = [
     {id:'9.6',min:9.6,max:10,label:'9.6–10.0'},
     {id:'9.0',min:9,max:9.5,label:'9.0–9.5'},
@@ -41,6 +42,61 @@
     return candidates.length===1?candidates[0]:'';
   }
   function topicTags(i) {return [...new Set([...tags(i.personalTags),...tags(i.tags)])].filter(t=>!yearTag(t));}
+  function seriesName(v) {return str(v,300).trim().replace(/\s+/g,' ');}
+  function seriesKey(v) {return seriesName(v).normalize('NFKC').toLocaleLowerCase();}
+  function seriesKind(i) {
+    if(Object.hasOwn(seriesKinds,i.seriesKind))return i.seriesKind;
+    const name=[i.title,i.originalTitle].join(' '),meta=tags(i.tags).join(' ');
+    if(/\bOAD\b/i.test(name+' '+meta))return 'oad';
+    if(/\bOVA\b/i.test(name+' '+meta))return 'ova';
+    if(/剧场版|劇場版|映画|总集篇|総集編/.test(name)||/剧场版|劇場版/.test(meta))return 'movie';
+    if(/(?:^|\s)MV(?:\s|$)|音乐视频|ミュージックビデオ/i.test(name))return 'mv';
+    if(/番外|特别篇|特別編|\bSP\b|特典/i.test(name))return 'special';
+    if(/外传|外傳|スピンオフ/.test(name))return 'spinoff';
+    if(/第[\d一二三四五六七八九十]+[季期]|\b(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season)\b/i.test(name))return 'season';
+    if(/(?:[上中下前后後][篇編部])|第\d+部分|\bpart\s*\d+/i.test(name))return 'part';
+    if(/篇(?:章)?$|編$/.test(i.title))return 'arc';
+    return 'main';
+  }
+  function seriesLabel(i) {return str(i.seriesLabel,80).trim()||str(i.title).match(/第[\d一二三四五六七八九十]+[季期]|第\d+部分|[上中下前后後][篇編部]/)?.[0]||seriesKinds[seriesKind(i)];}
+  function seriesOrder(items) {return [...items].sort((a,b)=>{
+    const order=i=>i.seriesOrder!==''&&i.seriesOrder!=null&&Number.isFinite(Number(i.seriesOrder))?Number(i.seriesOrder):Infinity;
+    return order(a)-order(b)||(Number(yearOf(a))||9999)-(Number(yearOf(b))||9999)||a.title.localeCompare(b.title,'zh-CN',{numeric:true});
+  });}
+  function seriesMembers(items,name) {const key=seriesKey(name);return key?items.filter(i=>seriesKey(i.series)===key):[];}
+  function groupSeries(items,all=items) {
+    const allGroups=new Map(),groups=new Map(),out=[];
+    for(const i of all){const key=seriesKey(i.series);if(key){if(!allGroups.has(key))allGroups.set(key,[]);allGroups.get(key).push(i);}}
+    for(const i of items){const key=seriesKey(i.series);if(!key){out.push(i);continue;}if(!groups.has(key)){const entry={_series:true,key,title:seriesName(i.series),series:seriesName(i.series),matches:[],members:allGroups.get(key)||[]};groups.set(key,entry);out.push(entry);}groups.get(key).matches.push(i);}
+    for(const g of groups.values()){
+      const ordered=seriesOrder(g.members),representative=ordered.find(i=>i.seriesCover&&i.image)||ordered.find(i=>i.image)||ordered[0];
+      const scores=g.matches.map(i=>i.score).filter(s=>s!==null),years=g.matches.map(yearOf).filter(Boolean).sort();
+      Object.assign(g,{id:representative.id,image:representative.image,media:representative.media,score:scores.length?Math.max(...scores):null,year:years.at(-1)||'',favorite:g.matches.some(i=>i.favorite),tags:tags(g.matches.flatMap(i=>i.tags)),personalTags:tags(g.matches.flatMap(i=>i.personalTags)),priority:priorities.find(p=>g.matches.some(i=>i.priority===p))||'R',updatedAt:g.matches.map(i=>i.updatedAt||i.createdAt||'').sort().at(-1)||'',createdAt:''});
+    }
+    return out;
+  }
+  function seriesBase(title) {
+    return seriesName(title).replace(/^(?:剧场版|劇場版|映画)\s*/,'').replace(/\s*(?:第[\d一二三四五六七八九十]+[季期]|第\d+部分|\b(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season|OVA|OAD|SP|part\s*\d+)\b|番外|特别篇|特別編|[上中下前后後][篇編部]).*$/i,'').replace(/[\s·:：\-—]+$/,'').trim();
+  }
+  function seriesSuggestions(items) {
+    const clean=v=>seriesKey(v).replace(/[\s!！?？·・:：～〜~—\-，,。]/g,''),names=new Map();
+    for(const i of items){const name=seriesBase(i.series||i.title);if(name&&clean(name).length>=2&&!names.has(clean(name)))names.set(clean(name),name);}
+    const groups=new Map();
+    for(const i of items){if(i.series)continue;let key=clean(seriesBase(i.title));const withoutNumber=key.replace(/[2-9二三四五六七八九十]+$/,'');if(withoutNumber.length>=3&&names.has(withoutNumber))key=withoutNumber;
+      if(!groups.has(key))groups.set(key,{name:names.get(key)||seriesBase(i.title),ids:[]});groups.get(key).ids.push(i.id);}
+    return [...groups.values()].filter(g=>g.name&&(g.ids.length>1||seriesMembers(items,g.name).length)).sort((a,b)=>b.ids.length-a.ids.length||a.name.localeCompare(b.name,'zh-CN'));
+  }
+  function assignSeries(items,{name,ids,source='',coverId='',parts={}}={}) {
+    name=seriesName(name);if(!name)throw new Error('请填写系列名称');const selected=new Set(ids||[]);
+    if(!selected.size)throw new Error('请至少选择一部作品');if([...selected].some(id=>!items.some(i=>i.id===id)))throw new Error('部分作品已变动，请重新打开整理页面');
+    const sourceKey=seriesKey(source),targetKey=seriesKey(name),stamp=now();
+    return items.map(i=>{
+      if(selected.has(i.id)){const p=parts[i.id]||{};return normalize({...i,series:name,seriesKind:p.kind||i.seriesKind,seriesLabel:p.label??i.seriesLabel,seriesOrder:p.order??i.seriesOrder,seriesCover:coverId?i.id===coverId:i.seriesCover,updatedAt:stamp});}
+      if(sourceKey&&seriesKey(i.series)===sourceKey)return normalize({...i,series:'',seriesCover:false,updatedAt:stamp});
+      if(coverId&&seriesKey(i.series)===targetKey&&i.seriesCover)return normalize({...i,seriesCover:false,updatedAt:stamp});
+      return i;
+    });
+  }
   function safeURL(v, image=false) {
     let s=str(v,5000000).trim();if(s.startsWith('//'))s='https:'+s;
     if(image && /^data:image\/(?:png|jpeg|webp|gif);base64,[a-z\d+/=\s]+$/i.test(s))return s;
@@ -69,6 +125,7 @@
     if(priorities.includes(options.priority))result.priority=options.priority;
     if(weekdays.includes(options.weekday)&&result.type==='daily')result.weekday=options.weekday;
     result.personalTags=tags([...result.personalTags,...tags(options.personalTags||[])]);
+    if(seriesName(options.series))result.series=seriesName(options.series);
     return normalize(result);
   }
   function normalize(raw={}) {
@@ -90,7 +147,8 @@
       score:score(raw.score),bgmScore:score(raw.bgmScore),favorite:raw.favorite===true,
       image:safeURL(raw.image,true),tags:tags(raw.tags),personalTags:tags(raw.personalTags),
       sourceUrl:safeURL(raw.sourceUrl)||(bangumiId?'https://bgm.tv/subject/'+bangumiId:''),bangumiId,
-      note:str(raw.note),review:str(raw.review),summary:str(raw.summary),series:str(raw.series,300),
+      note:str(raw.note),review:str(raw.review),summary:str(raw.summary),series:seriesName(raw.series),
+      seriesKind:Object.hasOwn(seriesKinds,raw.seriesKind)?raw.seriesKind:'',seriesLabel:str(raw.seriesLabel,80).trim(),seriesOrder:raw.seriesOrder==null||raw.seriesOrder===''?'':number(raw.seriesOrder),seriesCover:raw.seriesCover===true,
       year:str(raw.year,4),date:str(raw.date,20),createdAt:str(raw.createdAt||raw.importedAt||''),updatedAt:date,
       importedAt:str(raw.importedAt),finishedAt:str(raw.finishedAt),
       comments:(Array.isArray(raw.comments)?raw.comments:[]).filter(x=>x&&typeof x==='object').map(x=>({id:str(x.id||uid()),text:str(x.text),at:str(x.at||now())})),
@@ -150,7 +208,8 @@
   function bgmSubject(s,collection=null) {
     if(!s||![1,2].includes(Number(s.type)))throw new Error('只支持动画、漫画和小说条目');
     const tagList=tags([...(s.meta_tags||[]),...(s.tags||[])]);
-    let media=Number(s.type)===2?'anime': /小说|轻小说|Novel/i.test([s.platform,...tagList].join(' '))?'novel':'manga';
+    const novelTag=[s.platform,...tagList].some(t=>/^(?:小说|小說|轻小说|輕小說|Novel|Light Novel)$/i.test(str(t).trim()));
+    let media=Number(s.type)===2?'anime':/漫画|漫畫|Manga/i.test(s.platform||'')?'manga':novelTag?'novel':'manga';
     const info=(keys)=>{const row=(s.infobox||[]).find(x=>keys.includes(x.key));return row?typeof row.value==='string'?row.value:'':'';};
     const dayText=info(['放送星期','放送日']);const digit=dayText.replace(/星期|周|曜日/g,'').match(/[一二三四五六日天月火水木金土]/)?.[0];
     const weekday=({'一':'周一','二':'周二','三':'周三','四':'周四','五':'周五','六':'周六','日':'周日','天':'周日','月':'周一','火':'周二','水':'周三','木':'周四','金':'周五','土':'周六'})[digit]||'';
@@ -185,5 +244,5 @@
     if(p.algorithm!=='AES-GCM'||p.kdf!=='PBKDF2-SHA256'||!Number.isInteger(p.iterations)||p.iterations<100000||p.iterations>1000000)throw new Error('不支持的加密备份格式');
     try{const key=await keyFor(password,un64(p.salt),p.iterations);const raw=await crypto.subtle.decrypt({name:'AES-GCM',iv:un64(p.iv)},key,un64(p.ciphertext));return parsePayload(new TextDecoder().decode(raw));}catch{throw new Error('口令不正确，或加密文件已损坏');}
   }
-  return {VERSION,weekdays,priorities,statuses,mediaNames,gradeBands,now,uid,str,number,score,tags,yearTag,yearOf,topicTags,safeURL,subjectId,parseSubjectList,applyImportOptions,normalize,parsePayload,duplicate,merge,grade,isWatching,filter,sort,bgmSubject,bytes64,un64,encrypt,decrypt};
+  return {VERSION,weekdays,priorities,statuses,mediaNames,seriesKinds,gradeBands,now,uid,str,number,score,tags,yearTag,yearOf,topicTags,seriesName,seriesKey,seriesKind,seriesLabel,seriesOrder,seriesMembers,groupSeries,seriesBase,seriesSuggestions,assignSeries,safeURL,subjectId,parseSubjectList,applyImportOptions,normalize,parsePayload,duplicate,merge,grade,isWatching,filter,sort,bgmSubject,bytes64,un64,encrypt,decrypt};
 });
