@@ -1,43 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Bangumi 追番表手动分类导入",
-  "version": "2.0.0",
-  "description": "从 Bangumi 提取作品资料，并由用户手动选择每日更新、完结待看、漫画或小说区域、星期和优先级。",
-  "permissions": [
-    "storage"
-  ],
-  "host_permissions": [
-    "https://api.bgm.tv/*",
-    "https://bgm.tv/*",
-    "https://bangumi.tv/*",
-    "https://chii.in/*"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
+  "name": "王之宝库 · Bangumi 导入助手",
+  "version": "4.2.0",
+  "description": "适配王之宝库 v4.2：网站与本地 HTML 同步，单部/多选/整页导入，支持仅存作品库、完成状态、个人评分、评语与标签。",
+  "permissions": ["storage"],
+  "host_permissions": ["https://api.bgm.tv/*", "https://bgm.tv/*", "https://bangumi.tv/*", "https://chii.in/*"],
+  "background": {"service_worker": "background.js"},
   "content_scripts": [
-    {
-      "matches": [
-        "https://bgm.tv/*",
-        "https://bangumi.tv/*",
-        "https://chii.in/*"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "run_at": "document_idle"
-    },
-    {
-      "matches": [
-        "file:///*"
-      ],
-      "js": [
-        "file-bridge.js"
-      ],
-      "run_at": "document_idle"
-    }
+    {"matches": ["https://bgm.tv/*", "https://bangumi.tv/*", "https://chii.in/*"], "js": ["core.js", "content.js"], "run_at": "document_idle"},
+    {"matches": ["https://hhd886.github.io/anime-watchlist/*", "file:///*"], "js": ["file-bridge.js"], "run_at": "document_idle"}
   ],
-  "action": {
-    "default_title": "Bangumi 追番表导入"
-  }
+  "action": {"default_title": "王之宝库导入助手", "default_popup": "popup.html"}
 }

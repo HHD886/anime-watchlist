@@ -1,109 +1,41 @@
 (() => {
-  if (window.__BGM_WATCHLIST_IMPORTER_V2__) return;
-  window.__BGM_WATCHLIST_IMPORTER_V2__ = true;
-
-  const host = document.createElement('div');
-  host.id = 'bgm-watchlist-importer';
-  host.innerHTML = `
-    <div class="bwi-title">追番表手动导入</div>
-    <label class="bwi-label">导入区域</label>
-    <select class="bwi-target">
-      <option value="daily">每日更新区</option>
-      <option value="binge">完结待看区</option>
-      <option value="manga">漫画待看区</option>
-      <option value="novel">小说待看区</option>
-    </select>
-    <div class="bwi-weekday-wrap">
-      <label class="bwi-label">更新星期</label>
-      <select class="bwi-weekday">
-        <option>周一</option><option>周二</option><option>周三</option><option>周四</option><option>周五</option><option>周六</option><option>周日</option>
-      </select>
-    </div>
-    <label class="bwi-label">优先级</label>
-    <select class="bwi-tier">
-      <option value="SSR">SSR · 最优先</option><option value="SR">SR · 比较想看</option><option value="R">R · 有空再看</option>
-    </select>
-    <button class="bwi-current">导入当前条目</button>
-    <button class="bwi-page">按以上设置导入本页</button>
-    <div class="bwi-status">区域、星期和优先级均由你决定，不再自动分类。</div>`;
-  const style = document.createElement('style');
-  style.textContent = `
-    #bgm-watchlist-importer{position:fixed;right:16px;bottom:18px;z-index:2147483647;width:210px;padding:12px;border:1px solid rgba(120,120,140,.28);border-radius:14px;background:rgba(255,255,255,.96);box-shadow:0 10px 32px rgba(20,24,36,.18);font:13px/1.4 system-ui,"Microsoft YaHei",sans-serif;color:#222;backdrop-filter:blur(12px)}
-    #bgm-watchlist-importer .bwi-title{font-weight:800;margin-bottom:8px}
-    #bgm-watchlist-importer .bwi-label{display:block;margin-top:7px;color:#666;font-size:11px}
-    #bgm-watchlist-importer select,#bgm-watchlist-importer button{width:100%;margin-top:4px;padding:8px 9px;border:1px solid #ddd;border-radius:9px;background:#fff;color:#222;font:inherit}
-    #bgm-watchlist-importer button{margin-top:8px;cursor:pointer;background:#6c63ff;color:#fff;border-color:#6c63ff}
-    #bgm-watchlist-importer button.bwi-page{background:#fff;color:#4d47c9}
-    #bgm-watchlist-importer button:disabled{opacity:.55;cursor:wait}
-    #bgm-watchlist-importer .bwi-status{margin-top:8px;color:#777;font-size:11px;word-break:break-word}
-    #bgm-watchlist-importer .bwi-weekday-wrap[hidden]{display:none}
-    html[data-theme="dark"] #bgm-watchlist-importer{background:rgba(32,34,43,.96);color:#f4f4f7;border-color:#444}
-    html[data-theme="dark"] #bgm-watchlist-importer select,html[data-theme="dark"] #bgm-watchlist-importer button.bwi-page{background:#252833;color:#eee;border-color:#444}`;
-  document.documentElement.append(style);
-  document.body.append(host);
-
-  const currentBtn = host.querySelector('.bwi-current');
-  const pageBtn = host.querySelector('.bwi-page');
-  const targetSelect = host.querySelector('.bwi-target');
-  const weekdayWrap = host.querySelector('.bwi-weekday-wrap');
-  const weekdaySelect = host.querySelector('.bwi-weekday');
-  const tierSelect = host.querySelector('.bwi-tier');
-  const status = host.querySelector('.bwi-status');
-  const currentMatch = location.pathname.match(/\/subject\/(\d+)/);
-  if (!currentMatch) currentBtn.disabled = true;
-
-  const send = message => new Promise(resolve => chrome.runtime.sendMessage(message, resolve));
-  const sleep = ms => new Promise(r => setTimeout(r,ms));
-  function refreshControls() { weekdayWrap.hidden = targetSelect.value !== 'daily'; }
-  function setBusy(busy,text) {
-    currentBtn.disabled = busy || !currentMatch; pageBtn.disabled = busy;
-    targetSelect.disabled = busy; weekdaySelect.disabled = busy; tierSelect.disabled = busy;
-    if(text) status.textContent=text;
+  'use strict';
+  if(window.__BGM_KING_SHELF_V42__)return;window.__BGM_KING_SHELF_V42__=true;
+  const C=globalThis.Shelf,VERSION='4.2.0',SETTINGS='king_shelf_import_settings_v42';
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  document.getElementById('bgm-watchlist-importer')?.remove();
+  const host=document.createElement('div');host.id='bgm-watchlist-importer';host.style.cssText='position:fixed;right:16px;bottom:16px;z-index:2147483647;';document.body.append(host);
+  const root=host.attachShadow({mode:'open'});
+  root.innerHTML=`<style>
+    :host{font:13px/1.5 system-ui,"Microsoft YaHei",sans-serif;color:#292c29}*{box-sizing:border-box}button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer}button:disabled{opacity:.55;cursor:wait}.panel{width:330px;max-width:calc(100vw - 24px);max-height:86vh;overflow:auto;border:1px solid #ddd8cf;border-radius:14px;background:#faf9f6;box-shadow:0 8px 35px #2223;padding:15px}.head{display:flex;align-items:center;justify-content:space-between;gap:10px}.head strong{font-size:15px}.sub{font-size:11px;color:#787b74}.toggle{width:auto;padding:4px 10px;background:#fff;color:#444;border:1px solid #ddd;border-radius:7px}label{display:block;font-size:12px;color:#555;margin:9px 0 3px}select,input,textarea{width:100%;background:#fff;color:#222;border:1px solid #d8d8d1;border-radius:7px;padding:7px 8px;min-width:0}textarea{resize:vertical}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{width:100%;margin-top:9px;border:1px solid #d6d8d1;background:white;color:#333;border-radius:8px;padding:9px}.primary{background:#2d3831;color:#fff;border-color:#2d3831}.row{display:flex;align-items:center;gap:8px}.row .btn{flex:1}.status{font-size:12px;color:#667562;margin-top:12px;overflow-wrap:anywhere}.choices{max-height:210px;overflow:auto;margin-top:10px;border:1px solid #e2e0d8;border-radius:8px;padding:8px}.choices label{display:flex;align-items:flex-start;gap:7px;font-size:12px;margin:5px 0}.choices input{width:auto;margin-top:3px}.small{font-size:11px;color:#73766c;margin:6px 0}a{color:#6e7c60}details{margin-top:10px}summary{cursor:pointer;font-size:12px}.collapsed .body{display:none}.collapsed{width:215px}.error{color:#9c4d3a}[hidden]{display:none!important}
+  </style><section class="panel"><div class="head"><div><strong>王之宝库 · 导入助手</strong><div class="sub">v${VERSION} · 网站 / 本地均可同步</div></div><button class="toggle" aria-label="收起导入助手">收起</button></div><div class="body">
+  <div class="grid"><div><label for="placement">收藏位置</label><select id="placement"><option value="library">仅存作品库</option><option value="watch">加入追番追更</option></select></div><div><label for="status-choice">观看 / 阅读状态</label><select id="status-choice"><option value="wish">想看 / 待读</option><option value="doing">在看 / 在读</option><option value="done">已看完 / 已读完</option><option value="hold">搁置</option><option value="dropped">放弃</option></select></div></div>
+  <div class="grid"><div><label for="media">作品类型</label><select id="media"><option value="auto">自动识别类型</option><option value="anime">动画</option><option value="manga">漫画</option><option value="novel">小说</option></select></div><div><label for="priority">待看优先级</label><select id="priority"><option value="R">R · 有空再看</option><option value="SR">SR · 比较想看</option><option value="SSR">SSR · 最优先</option></select></div></div>
+  <div id="watch-fields"><div class="grid"><div><label for="watch-type">动画区域</label><select id="watch-type"><option value="binge">完结待看</option><option value="daily">每日更新</option></select></div><div id="weekday-wrap"><label for="weekday">更新星期</label><select id="weekday">${C.weekdays.map(d=>`<option>${d}</option>`).join('')}</select></div></div></div>
+  <label for="tags">个人标签（逗号分隔）</label><input id="tags" placeholder="例如：童年回忆、想重看">
+  <details><summary>当前作品评分 / 评语（可选）</summary><label for="score">我的评分（0.0–10.0）</label><input id="score" type="number" min="0" max="10" step="0.1" placeholder="例如 9.9"><label for="review">我的评语</label><textarea id="review" rows="3" placeholder="记下你对这部作品的感受"></textarea><p class="small">仅用于“加入当前作品”，不会批量套用到其他作品。</p></details>
+  <button class="btn primary" id="current">加入当前作品</button><button class="btn" id="pick-page">选择本页作品…</button><div id="page-selection" hidden><div class="row"><label><input id="page-all" type="checkbox" style="width:auto" checked>全选本页</label><span id="page-count" class="small"></span></div><div class="choices" id="page-items"></div><button class="btn primary" id="page-import">将选中作品加入队列</button></div><button class="btn" id="pause" hidden>停止读取（保留已成功条目）</button><button class="btn" id="retry" hidden>重试失败条目</button>
+  <div class="status" id="status" role="status">先选收藏位置，再加入队列。已有作品的评分与评语由作品库的重复规则保护。</div><div class="row"><button class="btn" id="export">导出队列 JSON</button><a class="btn" style="text-align:center;text-decoration:none" href="https://hhd886.github.io/anime-watchlist/editor.html" target="_blank" rel="noopener noreferrer">打开王之宝库</a></div><p class="small">进入网站 → 导入作品 → Bangumi 插件 → 读取队列。大量收藏也可直接在网站按账号整批导入。</p></div></section>`;
+  const $=id=>root.getElementById(id),currentId=location.pathname.match(/^\/subject\/(\d+)(?:\/|$)/)?.[1];
+  const send=message=>new Promise((resolve,reject)=>chrome.runtime.sendMessage(message,result=>{const error=chrome.runtime.lastError;if(error)reject(new Error('插件已更新，请刷新 Bangumi 页面'));else if(!result?.ok)reject(new Error(result?.error||'插件没有响应'));else resolve(result);}));
+  const pause=ms=>new Promise(r=>setTimeout(r,ms));let busy=false,stopped=false,failed=[],lastOptions=null,lastSingle=false;
+  const say=(s,error=false)=>{$('status').textContent=s;$('status').classList.toggle('error',error);};
+  function options(){return {placement:$('placement').value,status:$('status-choice').value,media:$('media').value,type:$('watch-type').value,weekday:$('weekday').value,priority:$('priority').value,personalTags:$('tags').value};}
+  function controls(){const done=['done','dropped'].includes($('status-choice').value);if(done)$('placement').value='library';$('placement').disabled=busy||done;$('watch-fields').hidden=$('placement').value!=='watch'||['manga','novel'].includes($('media').value);$('weekday-wrap').hidden=$('watch-type').value!=='daily';$('current').disabled=busy||!currentId;}
+  function setBusy(value){busy=value;root.querySelectorAll('input,select,textarea,button').forEach(b=>{if(!['pause','export'].includes(b.id)&&!b.classList.contains('toggle'))b.disabled=value;});$('pause').hidden=!value;controls();}
+  for(const id of ['placement','status-choice','media','watch-type','weekday','priority','tags'])$(id).addEventListener('change',()=>{controls();chrome.storage.local.set({[SETTINGS]:options()}).catch(()=>{});});
+  chrome.storage.local.get(SETTINGS).then(data=>{if(data[SETTINGS]){const v=data[SETTINGS];for(const [id,key] of Object.entries({placement:'placement','status-choice':'status',media:'media','watch-type':'type',weekday:'weekday',priority:'priority',tags:'personalTags'}))if(v[key]!=null)$(id).value=v[key];}controls();}).catch(()=>{});controls();
+  root.querySelector('.toggle').addEventListener('click',e=>{const small=root.querySelector('.panel').classList.toggle('collapsed');e.target.textContent=small?'展开':'收起';e.target.setAttribute('aria-label',small?'展开导入助手':'收起导入助手');});
+  function pageCandidates(){const map=new Map();let anchors=[...document.querySelectorAll('#browserItemList h3 a[href*="/subject/"], #browserItemList a.subjectCover[href*="/subject/"]')];if(!anchors.length&&!currentId)anchors=[...document.querySelectorAll('a[href*="/subject/"]')];for(const a of anchors){let url;try{url=new URL(a.getAttribute('href'),location.href);}catch{continue;}const id=C.subjectId(url.href);if(!id)continue;const name=a.getAttribute('title')||a.textContent.trim()||'Bangumi #'+id;if(!map.has(id)||!name.startsWith('Bangumi #'))map.set(id,{id,title:name});}if(!map.size&&currentId)map.set(currentId,{id:currentId,title:document.querySelector('#headerSubject h1')?.textContent.trim()||document.title});return [...map.values()].slice(0,500);}
+  $('pick-page').addEventListener('click',()=>{const list=pageCandidates();if(!list.length){say('本页没有找到作品条目。可打开 Bangumi 条目、搜索结果或收藏列表。');return;}$('page-selection').hidden=false;$('page-all').checked=true;$('page-count').textContent=`共 ${list.length} 部（单页最多 500 部）`;$('page-items').innerHTML=list.map(i=>`<label><input type="checkbox" class="pick" value="${esc(i.id)}" checked><span>${esc(i.title)}</span></label>`).join('');});
+  $('page-all').addEventListener('change',e=>root.querySelectorAll('.pick').forEach(c=>c.checked=e.target.checked));
+  async function run(ids,single=false,retry=false){if(busy)return;if(!ids.length){say('请先勾选作品');return;}const opts=retry?lastOptions:options();lastOptions=opts;if(!retry)lastSingle=single;const score=$('score').value;if(single&&score!==''&&C.score(score)===null){say('评分请填写 0.0–10.0',true);return;}failed=[];stopped=false;setBusy(true);$('retry').hidden=true;let success=0,count=0;
+    try{for(let n=0;n<ids.length&&!stopped;n++){say(`正在读取 ${n+1}/${ids.length} · 已加入 ${success} 部`);try{const r=await send({type:'FETCH_SUBJECT',id:ids[n]});let i=C.applyImportOptions(r.item,opts);if(single){i.score=C.score(score);i.review=$('review').value.trim();}const saved=await send({type:'SAVE_ITEMS',items:[i]});success++;count=saved.count;}catch(e){failed.push({id:ids[n],error:e.message});}await pause(150);}if(stopped){const done=new Set([...ids.slice(0,success+failed.length)]);for(const id of ids)if(!done.has(id))failed.push({id,error:'尚未读取'});}say(`${stopped?'已停止':'已完成'}：加入 ${success} 部，${failed.length?'失败 / 未完成 '+failed.length+' 部；':''}队列共 ${count} 部。回到王之宝库读取队列。`,!!failed.length);}
+    finally{setBusy(false);$('retry').hidden=!failed.length;}
   }
-  function applyPlacement(item) {
-    const type = targetSelect.value;
-    const priority = tierSelect.value;
-    const weekday = type === 'daily' ? weekdaySelect.value : '';
-    return { ...item, type, weekday, priority, subtype: type === 'daily' ? weekday : priority };
-  }
-
-  async function fetchOne(id) {
-    const result = await send({type:'FETCH_SUBJECT',id});
-    if (!result?.ok) throw new Error(result?.error || '读取失败');
-    return applyPlacement(result.item);
-  }
-  async function save(items) {
-    const result = await send({type:'SAVE_ITEMS',items});
-    if (!result?.ok) throw new Error(result?.error || '保存失败');
-    return result.queue?.length || 0;
-  }
-
-  targetSelect.addEventListener('change', refreshControls);
-  refreshControls();
-
-  currentBtn.addEventListener('click', async () => {
-    try {
-      setBusy(true,'正在读取当前条目…');
-      const item=await fetchOne(currentMatch[1]);
-      const count=await save([item]);
-      const place=item.type==='daily'?`${item.weekday} · ${item.priority}`:`${targetSelect.options[targetSelect.selectedIndex].text} · ${item.priority}`;
-      status.textContent=`已保存《${item.title}》到 ${place}；待同步 ${count} 条`;
-    } catch(e){status.textContent='失败：'+e.message;} finally {setBusy(false); refreshControls();}
-  });
-
-  pageBtn.addEventListener('click', async () => {
-    const ids=[...new Set([...document.querySelectorAll('a[href*="/subject/"]')].map(a => (a.getAttribute('href')||'').match(/\/subject\/(\d+)/)?.[1]).filter(Boolean))].slice(0,80);
-    if(currentMatch && !ids.includes(currentMatch[1])) ids.unshift(currentMatch[1]);
-    if(!ids.length){status.textContent='本页没有找到条目链接';return;}
-    try {
-      setBusy(true,`找到 ${ids.length} 个条目，正在读取…`); const items=[]; let failed=0;
-      for(let i=0;i<ids.length;i++){
-        status.textContent=`正在读取 ${i+1}/${ids.length}…`;
-        try{items.push(await fetchOne(ids[i]));}catch{failed++;}
-        await sleep(120);
-      }
-      const count=items.length?await save(items):0;
-      status.textContent=`已按当前设置保存 ${items.length} 条，失败 ${failed} 条；待同步 ${count} 条`;
-    } catch(e){status.textContent='失败：'+e.message;} finally {setBusy(false); refreshControls();}
-  });
+  $('current').addEventListener('click',()=>run([currentId],true).catch(e=>say(e.message,true)));
+  $('page-import').addEventListener('click',()=>run([...root.querySelectorAll('.pick:checked')].map(c=>c.value)).catch(e=>say(e.message,true)));
+  $('pause').addEventListener('click',()=>{stopped=true;say('正在停止，当前条目读取完成后保留已成功结果…');});
+  $('retry').addEventListener('click',()=>run(failed.map(x=>x.id),lastSingle,true).catch(e=>say(e.message,true)));
+  $('export').addEventListener('click',async()=>{try{const r=await send({type:'GET_QUEUE'});if(!r.items.length){say('队列为空，请先加入作品');return;}const url=URL.createObjectURL(new Blob([JSON.stringify({version:4,title:'王之宝库',items:r.items},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='王之宝库-Bangumi导入队列.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);say(`已导出 ${r.items.length} 部作品，可在网站“JSON 备份”中导入。`);}catch(e){say(e.message,true);}});
 })();

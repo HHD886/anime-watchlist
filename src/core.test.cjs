@@ -72,3 +72,13 @@ test('AES-GCM 加密可恢复全部中文、封面、评分、感想；错误口
  const modified={...encrypted,ciphertext:(encrypted.ciphertext[0]==='A'?'B':'A')+encrypted.ciphertext.slice(1)};await assert.rejects(C.decrypt(modified,'qa-password-2026'),/损坏/);
  await assert.rejects(C.encrypt(p,'short'),/至少/);
 });
+
+test('批量 ID 解析支持三域名、逗号换行、重复及无效输入，限额不截断',()=>{
+ const p=C.parseSubjectList('https://bgm.tv/subject/10\n10，https://bangumi.tv/subject/11;https://chii.in/subject/12 13 bad');assert.deepEqual(p.ids,['10','11','12','13']);assert.equal(p.duplicates,1);assert.deepEqual(p.invalid,['bad']);assert.throws(()=>C.parseSubjectList(Array.from({length:2001},(_,i)=>String(i+1)).join('\n')),/2000/);
+});
+test('批量收藏位置/完成状态/类型与标签应用，保留来源星期和个人记录',()=>{
+ const original=C.normalize({id:'a',title:'测试',type:'daily',weekday:'周五',status:'doing',current:3,total:12,score:9.9,review:'评语',personalTags:['原标签']});
+ const unchanged=C.applyImportOptions(original,{placement:'keep',status:'keep',type:'keep',weekday:'keep'});assert.equal(unchanged.weekday,'周五');assert.equal(unchanged.current,3);
+ const done=C.applyImportOptions(original,{placement:'watch',status:'done',personalTags:'新标签'});assert.equal(done.inWatchlist,false);assert.equal(done.current,12);assert.equal(done.score,9.9);assert.equal(done.review,'评语');assert.deepEqual(done.personalTags,['原标签','新标签']);
+ const library=C.applyImportOptions(original,{media:'novel',placement:'library'});assert.equal(library.media,'novel');assert.equal(library.type,'novel');assert.equal(library.unit,'卷');assert.equal(library.inWatchlist,false);
+});

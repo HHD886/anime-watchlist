@@ -5,6 +5,8 @@ import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
 const dir=path.dirname(fileURLToPath(import.meta.url)),require=createRequire(import.meta.url);
 const C=require('./src/core.js');
+// Share normalization and import options with the browser extension.
+fs.copyFileSync(path.join(dir,'src/core.js'),path.join(dir,'Bangumi-Watchlist-Importer-v2/core.js'));
 const read=f=>fs.readFileSync(path.join(dir,'src',f),'utf8');
 const assets=Object.fromEntries(['sw.js','icon.svg','manifest.webmanifest'].map(f=>[f,read(f)]));
 const standalone=process.argv.includes('--standalone');
