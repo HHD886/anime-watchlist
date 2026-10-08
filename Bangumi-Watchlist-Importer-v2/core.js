@@ -29,6 +29,18 @@
   function number(v, fallback=0) {const n=Number(v);return Number.isFinite(n)?Math.max(0,Math.floor(n)):fallback;}
   function score(v) {if(v === '' || v == null)return null;const n=Number(v);return Number.isFinite(n)&&n>=0&&n<=10?Math.round((n+Number.EPSILON)*10)/10:null;}
   function tags(v) {return [...new Set((Array.isArray(v)?v:str(v).split(/[,，、\n]/)).map(x=>str(typeof x==='object'?x?.name:x,80).trim()).filter(Boolean))].slice(0,100);}
+  // Calendar tags are displayed once as a year, separate from topic tags.
+  function yearTag(v) {return str(v,80).trim().match(/^([12]\d{3})(?:年(?:\d{1,2}月(?:\d{1,2}日?)?|[春夏秋冬]季?)?番?|[-/.]\d{1,2}(?:[-/.]\d{1,2})?)?$/)?.[1]||'';}
+  function yearOf(i={}) {
+    const explicit=yearTag(i.year),date=yearTag(i.date);
+    if(explicit||date)return explicit||date;
+    // Older imports kept the Bangumi release date in the generated note.
+    const legacy=str(i.note).match(/(?:^|\n)\s*Bangumi\s*[·:：]\s*([12]\d{3})(?=[-/年.\s]|$)/i)?.[1];
+    if(legacy)return legacy;
+    const candidates=[...new Set(tags(i.tags).map(yearTag).filter(Boolean))];
+    return candidates.length===1?candidates[0]:'';
+  }
+  function topicTags(i) {return [...new Set([...tags(i.personalTags),...tags(i.tags)])].filter(t=>!yearTag(t));}
   function safeURL(v, image=false) {
     let s=str(v,5000000).trim();if(s.startsWith('//'))s='https:'+s;
     if(image && /^data:image\/(?:png|jpeg|webp|gif);base64,[a-z\d+/=\s]+$/i.test(s))return s;
@@ -119,14 +131,16 @@
   function filter(items,f={}) {
     const words=str(f.query).toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
     const selected=tags([...(Array.isArray(f.tags)?f.tags:[]),...(f.tag?[f.tag]:[])]);
+    const years=tags(Array.isArray(f.years)?f.years:[]);
     return items.filter(i=>{
       const own=[...i.tags,...i.personalTags];
       const tagged=!selected.length||(f.tagMode==='any'?selected.some(t=>own.includes(t)):selected.every(t=>own.includes(t)));
-      return (!f.media||f.media==='all'||i.media===f.media)&&(!f.status||i.status===f.status)&&(!f.grade||grade(i)===f.grade)&&(!f.favorite||i.favorite)&&tagged&&words.every(w=>`${i.title} ${i.originalTitle} ${i.tags.join(' ')} ${i.personalTags.join(' ')} ${i.note} ${i.review} ${i.series}`.toLocaleLowerCase().includes(w));
+      return (!f.media||f.media==='all'||i.media===f.media)&&(!f.status||i.status===f.status)&&(!f.grade||grade(i)===f.grade)&&(!f.favorite||i.favorite)&&(!years.length||years.includes(yearOf(i)||'unknown'))&&tagged&&words.every(w=>`${i.title} ${i.originalTitle} ${yearOf(i)} ${i.tags.join(' ')} ${i.personalTags.join(' ')} ${i.note} ${i.review} ${i.series}`.toLocaleLowerCase().includes(w));
     });
   }
   function sort(items,by='recent') {
     return [...items].sort((a,b)=>{
+      if(by==='year')return Number(yearOf(b))-Number(yearOf(a))||a.title.localeCompare(b.title,'zh-CN');
       if(by==='score')return (b.score??-1)-(a.score??-1)||a.title.localeCompare(b.title,'zh-CN');
       if(by==='title')return a.title.localeCompare(b.title,'zh-CN');
       if(by==='priority')return priorities.indexOf(a.priority)-priorities.indexOf(b.priority)||a.title.localeCompare(b.title,'zh-CN');
@@ -171,5 +185,5 @@
     if(p.algorithm!=='AES-GCM'||p.kdf!=='PBKDF2-SHA256'||!Number.isInteger(p.iterations)||p.iterations<100000||p.iterations>1000000)throw new Error('不支持的加密备份格式');
     try{const key=await keyFor(password,un64(p.salt),p.iterations);const raw=await crypto.subtle.decrypt({name:'AES-GCM',iv:un64(p.iv)},key,un64(p.ciphertext));return parsePayload(new TextDecoder().decode(raw));}catch{throw new Error('口令不正确，或加密文件已损坏');}
   }
-  return {VERSION,weekdays,priorities,statuses,mediaNames,gradeBands,now,uid,str,number,score,tags,safeURL,subjectId,parseSubjectList,applyImportOptions,normalize,parsePayload,duplicate,merge,grade,isWatching,filter,sort,bgmSubject,bytes64,un64,encrypt,decrypt};
+  return {VERSION,weekdays,priorities,statuses,mediaNames,gradeBands,now,uid,str,number,score,tags,yearTag,yearOf,topicTags,safeURL,subjectId,parseSubjectList,applyImportOptions,normalize,parsePayload,duplicate,merge,grade,isWatching,filter,sort,bgmSubject,bytes64,un64,encrypt,decrypt};
 });

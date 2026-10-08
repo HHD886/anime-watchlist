@@ -82,3 +82,26 @@ test('批量收藏位置/完成状态/类型与标签应用，保留来源星期
  const done=C.applyImportOptions(original,{placement:'watch',status:'done',personalTags:'新标签'});assert.equal(done.inWatchlist,false);assert.equal(done.current,12);assert.equal(done.score,9.9);assert.equal(done.review,'评语');assert.deepEqual(done.personalTags,['原标签','新标签']);
  const library=C.applyImportOptions(original,{media:'novel',placement:'library'});assert.equal(library.media,'novel');assert.equal(library.type,'novel');assert.equal(library.unit,'卷');assert.equal(library.inWatchlist,false);
 });
+
+test('年份优先使用手填年份、条目日期和旧导入日期，拒绝把观看感想当年份',()=>{
+ assert.equal(C.yearOf({year:'2024',date:'2023-04-27',tags:['2022']}),'2024');
+ assert.equal(C.yearOf({date:'2023-04-27',tags:['2022']}),'2023');
+ assert.equal(C.yearOf({note:'Bangumi · 2018-03-22',tags:['2017']}),'2018');
+ assert.equal(C.yearOf({tags:['2026年7月','2026']}),'2026');
+ assert.equal(C.yearOf({tags:['2020','2021']}),'');
+ assert.equal(C.yearOf({note:'2020 年看过',personalTags:['2020']}),'');
+ assert.equal(C.yearOf({year:'0000',date:'未定'}),'');
+ const raw={year:'',date:'',note:'Bangumi · 2020-04-01',tags:['2019']};const copy=JSON.stringify(raw);C.yearOf(raw);assert.equal(JSON.stringify(raw),copy);
+});
+test('年份标签只显示一次，年月日标签与题材标签分离',()=>{
+ const i=C.normalize({year:'2026',tags:['2026年7月','2026','2026-07-04','校园'],personalTags:['想重看','校园','2026年']});
+ assert.deepEqual(C.topicTags(i),['想重看','校园']);assert.equal(C.yearOf(i),'2026');
+ assert.equal(C.yearTag('2026年7月番'),'2026');assert.equal(C.yearTag('2026年春'),'2026');assert.equal(C.yearTag('2000年代'),'');assert.equal(C.yearTag('第2026话'),'');
+});
+test('多个年份取并集，再与题材和评分筛选组合；年份排序未知置底且不受心头好影响',()=>{
+ const items=[{id:'old',year:'2016',favorite:true,score:10,tags:['日常','校园']},{id:'new',date:'2026-07-01',score:9.9,tags:['日常','校园']},{id:'other',year:'2026',score:9.8,tags:['冒险']},{id:'unknown',score:9.7,tags:['日常']}].map(C.normalize);
+ assert.deepEqual(C.filter(items,{years:['2016','2026'],tags:['日常','校园'],grade:'9.6'}).map(i=>i.id),['old','new']);
+ assert.deepEqual(C.filter(items,{years:['unknown']}).map(i=>i.id),['unknown']);
+ assert.deepEqual(C.filter(items,{query:'2026'}).map(i=>i.id),['new','other']);
+ const ordered=C.sort(items,'year');assert.equal(C.yearOf(ordered[0]),'2026');assert.equal(C.yearOf(ordered[1]),'2026');assert.equal(ordered.at(-1).id,'unknown');assert.equal(items[0].id,'old');
+});
