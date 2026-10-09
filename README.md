@@ -1,5 +1,9 @@
 # anime-watchlist
 
+**当前 v4.5：[升级与使用说明](UPGRADE-v4.5.md) · [下载 Bangumi 插件 v4.5](Bangumi-Importer-v4.5.zip)**
+
+已加入自动系列扫描、待确认建议、手动归属保护、入库状态筛选、持久化导入队列和保存确认的双向同步。首次升级先备份，原有数据保留。插件请在原目录覆盖并重新加载。
+
 王之宝库 · HHD 的动画、漫画、小说收藏室。
 
 [打开作品库](https://hhd886.github.io/anime-watchlist/) · [进入编辑](https://hhd886.github.io/anime-watchlist/editor.html) · [完整中文说明](README_CN.txt)
@@ -23,7 +27,7 @@ GitHub Pages 是公开网站；希望作品内容需要口令才能查看，可�
 
 ```sh
 node build.mjs
-node --test src/core.test.cjs
+node --test src/core.test.cjs src/series.test.cjs
 ```
 
 重建保留现有 `data.json`，两个网页的内置作品数组均为空。`node build.mjs --standalone` 仅供制作含当前明文记录的本地编辑包，不应用于加密网站。

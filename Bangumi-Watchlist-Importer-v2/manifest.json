@@ -1,14 +1,47 @@
 {
   "manifest_version": 3,
   "name": "王之宝库 · Bangumi 导入助手",
-  "version": "4.2.0",
-  "description": "适配王之宝库 v4.2：网站与本地 HTML 同步，单部/多选/整页导入，支持仅存作品库、完成状态、个人评分、评语与标签。",
-  "permissions": ["storage"],
-  "host_permissions": ["https://api.bgm.tv/*", "https://bgm.tv/*", "https://bangumi.tv/*", "https://chii.in/*"],
-  "background": {"service_worker": "background.js"},
-  "content_scripts": [
-    {"matches": ["https://bgm.tv/*", "https://bangumi.tv/*", "https://chii.in/*"], "js": ["core.js", "content.js"], "run_at": "document_idle"},
-    {"matches": ["https://hhd886.github.io/anime-watchlist/*", "file:///*"], "js": ["file-bridge.js"], "run_at": "document_idle"}
+  "version": "4.5.0",
+  "description": "自动识别系列、入库状态与列表筛选；持久化队列、保存确认与双向同步，兼容原有个人作品库。",
+  "permissions": [
+    "storage"
   ],
-  "action": {"default_title": "王之宝库导入助手", "default_popup": "popup.html"}
+  "host_permissions": [
+    "https://api.bgm.tv/*",
+    "https://bgm.tv/*",
+    "https://bangumi.tv/*",
+    "https://chii.in/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bgm.tv/*",
+        "https://bangumi.tv/*",
+        "https://chii.in/*"
+      ],
+      "js": [
+        "core.js",
+        "content.js",
+        "status.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://hhd886.github.io/anime-watchlist/*",
+        "file:///*"
+      ],
+      "js": [
+        "file-bridge.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "王之宝库导入助手",
+    "default_popup": "popup.html"
+  }
 }

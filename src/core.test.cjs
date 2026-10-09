@@ -55,7 +55,7 @@ test('书籍与动画从 Bangumi 获取正确类型、进度、评分与感想',
  const book=C.bgmSubject({id:1,type:1,name:'原名',name_cn:'小说',platform:'小说',volumes:8,tags:[{name:'奇幻'}],rating:{score:7.5}}, {type:3,rate:9,vol_status:2,ep_status:50,comment:'短评',tags:['好看']});
  assert.equal(book.media,'novel');assert.equal(book.current,2);assert.equal(book.total,8);assert.equal(book.score,9);assert.equal(book.review,'短评');assert.deepEqual(book.personalTags,['好看']);
  const anime=C.bgmSubject({id:2,type:2,name:'动画',eps:12,infobox:[{key:'放送星期',value:'星期四'}]}, {type:3,rate:0,ep_status:3});assert.equal(anime.type,'daily');assert.equal(anime.weekday,'周四');assert.equal(anime.score,null);assert.equal(anime.current,3);
- assert.throws(()=>C.bgmSubject({id:2,type:4}),/只支持/);
+ assert.equal(C.bgmSubject({id:2,type:4,name:'游戏'}).media,'other');assert.throws(()=>C.bgmSubject({id:2,type:9}),/无法识别/);
 });
 test('恶意链接与不支持图片被过滤；中文与 HTML 文本作为数据保留',()=>{
  assert.equal(C.safeURL('javascript:alert(1)'), '');assert.equal(C.safeURL('data:text/html,<h1>x</h1>',true),'');

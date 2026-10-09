@@ -9,8 +9,8 @@
   const weekdays = ['周一','周二','周三','周四','周五','周六','周日'];
   const priorities = ['SSR','SR','R'];
   const statuses = {wish:'想看 / 待读',doing:'在看 / 在读',done:'已完成',hold:'搁置',dropped:'放弃'};
-  const mediaNames = {anime:'动画',manga:'漫画',novel:'小说'};
-  const seriesKinds = {main:'正篇',season:'季度 / 续作',ova:'OVA',oad:'OAD',special:'番外 / 特别篇',movie:'剧场版',part:'上 / 下部',arc:'篇章',mv:'MV / 短片',original:'原作',adaptation:'改编',spinoff:'外传 / 衍生',other:'其他'};
+  const mediaNames = {anime:'动画',manga:'漫画',novel:'小说',other:'其他'};
+  const seriesKinds = {main:'正篇',prequel:'前传',sequel:'续作',ona:'ONA',summary:'总集篇',season:'季度 / 续作',ova:'OVA',oad:'OAD',special:'番外 / 特别篇',movie:'剧场版',part:'上 / 下部',arc:'篇章',mv:'MV / 短片',original:'原作',adaptation:'改编',spinoff:'外传 / 衍生',other:'其他'};
   const gradeBands = [
     {id:'9.6',min:9.6,max:10,label:'9.6–10.0'},
     {id:'9.0',min:9,max:9.5,label:'9.0–9.5'},
@@ -50,7 +50,10 @@
     if(/\bMV\b|音乐视频|ミュージックビデオ/i.test(name))return 'mv';
     if(/\bOAD\b/i.test(name))return 'oad';
     if(/\bOVA\b/i.test(name))return 'ova';
-    if(/剧场版|劇場版|映画|总集篇|総集編/.test(name))return 'movie';
+    if(/总集篇|総集編/.test(name))return 'summary';
+    if(/\bONA\b/i.test(name))return 'ona';
+    if(/前传|前傳|prequel/i.test(name))return 'prequel';
+    if(/剧场版|劇場版|映画/.test(name))return 'movie';
     if(/番外|特别篇|特別編|\bSP\b|特典/i.test(name))return 'special';
     if(/外传|外傳|スピンオフ/.test(name))return 'spinoff';
     if(/第[\d一二三四五六七八九十]+[季期]|\b(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season)\b/i.test(name))return 'season';
@@ -61,10 +64,11 @@
     if(/剧场版|劇場版/.test(meta))return 'movie';
     return 'main';
   }
-  function seriesLabel(i) {return str(i.seriesLabel,80).trim()||str(i.title).match(/第[\d一二三四五六七八九十]+[季期]|第\d+部分|[上中下前后後][篇編部]/)?.[0]||seriesKinds[seriesKind(i)];}
+  function seriesLabel(i) {return str(i.seriesLabel,80).trim()||str(i.title).match(/第[\d一二三四五六七八九十]+[季期]|第\d+部分|[上中下前后後][篇編部]|season\s*\d+|\d+(?:st|nd|rd|th)\s+season|part[.\s]*\d+/i)?.[0]||seriesKinds[seriesKind(i)];}
   function seriesOrder(items) {return [...items].sort((a,b)=>{
+    const date=i=>/^\d{4}-\d{2}-\d{2}$/.test(i.date||'')?i.date:(yearOf(i)||'9999')+'-12-31';
     const order=i=>i.seriesOrder!==''&&i.seriesOrder!=null&&Number.isFinite(Number(i.seriesOrder))?Number(i.seriesOrder):Infinity;
-    return order(a)-order(b)||(Number(yearOf(a))||9999)-(Number(yearOf(b))||9999)||a.title.localeCompare(b.title,'zh-CN',{numeric:true});
+    return order(a)-order(b)||date(a).localeCompare(date(b))||a.title.localeCompare(b.title,'zh-CN',{numeric:true});
   });}
   function seriesMembers(items,name) {const key=seriesKey(name);return key?items.filter(i=>seriesKey(i.series)===key):[];}
   function groupSeries(items,all=items) {
@@ -93,9 +97,11 @@
     name=seriesName(name);if(!name)throw new Error('请填写系列名称');const selected=new Set(ids||[]);
     if(!selected.size)throw new Error('请至少选择一部作品');if([...selected].some(id=>!items.some(i=>i.id===id)))throw new Error('部分作品已变动，请重新打开整理页面');
     const sourceKey=seriesKey(source),targetKey=seriesKey(name),stamp=now();
+    const same=items.find(i=>seriesKey(i.series)===targetKey),sourceItems=items.filter(i=>sourceKey&&seriesKey(i.series)===sourceKey),renamed=sourceItems.length&&sourceItems.every(i=>selected.has(i.id));
+    const targetId=same?.seriesId||(renamed?sourceItems[0]?.seriesId:'')||'manual-'+uid();
     return items.map(i=>{
-      if(selected.has(i.id)){const p=parts[i.id]||{};return normalize({...i,series:name,seriesKind:p.kind??i.seriesKind,seriesLabel:p.label??i.seriesLabel,seriesOrder:p.order??i.seriesOrder,seriesCover:coverId!==undefined?i.id===coverId:i.seriesCover,updatedAt:stamp});}
-      if(sourceKey&&seriesKey(i.series)===sourceKey)return normalize({...i,series:'',seriesCover:false,updatedAt:stamp});
+      if(selected.has(i.id)){const p=parts[i.id]||{};return normalize({...i,series:name,seriesId:targetId,seriesSource:'manual',seriesLocked:true,seriesKind:p.kind??i.seriesKind,seriesLabel:p.label??i.seriesLabel,seriesOrder:p.order??i.seriesOrder,seriesCover:coverId!==undefined?i.id===coverId:i.seriesCover,updatedAt:stamp});}
+      if(sourceKey&&seriesKey(i.series)===sourceKey)return normalize({...i,series:'',seriesId:'',seriesSource:'manual',seriesLocked:true,seriesCover:false,updatedAt:stamp});
       if(coverId!==undefined&&seriesKey(i.series)===targetKey&&i.seriesCover)return normalize({...i,seriesCover:false,updatedAt:stamp});
       return i;
     });
@@ -120,7 +126,7 @@
   function applyImportOptions(raw,options={}) {
     const original=normalize(raw),media=options.media&&options.media!=='auto'?options.media:original.media;
     const type=media==='anime'?(options.type&&options.type!=='keep'?options.type:original.media==='anime'?original.type:'binge'):media;
-    const result=normalize({...original,media,type,unit:media===original.media?original.unit:media==='anime'?'集':media==='manga'?'话':'卷'});
+    const result=normalize({...original,media,type,unit:media===original.media?original.unit:media==='anime'?'集':media==='manga'?'话':media==='other'?'部':'卷'});
     if(options.status&&options.status!=='keep'){result.status=options.status;if(result.status==='done'&&result.total!=='')result.current=result.total;}
     if(options.placement==='library')result.inWatchlist=false;
     if(options.placement==='watch')result.inWatchlist=true;
@@ -128,13 +134,13 @@
     if(priorities.includes(options.priority))result.priority=options.priority;
     if(weekdays.includes(options.weekday)&&result.type==='daily')result.weekday=options.weekday;
     result.personalTags=tags([...result.personalTags,...tags(options.personalTags||[])]);
-    if(seriesName(options.series))result.series=seriesName(options.series);
+    if(seriesName(options.series)){result.series=seriesName(options.series);result.seriesSource='manual';result.seriesLocked=true;}
     return normalize(result);
   }
   function normalize(raw={}) {
     if(!raw || typeof raw!=='object' || Array.isArray(raw))throw new Error('作品记录格式不正确');
-    let type=['daily','binge','manga','novel'].includes(raw.type)?raw.type:'binge';
-    let media=['anime','manga','novel'].includes(raw.media)?raw.media: (type==='manga'?'manga':type==='novel'?'novel':'anime');
+    let type=['daily','binge','manga','novel','other'].includes(raw.type)?raw.type:'binge';
+    let media=['anime','manga','novel','other'].includes(raw.media)?raw.media: (type==='manga'?'manga':type==='novel'?'novel':type==='other'?'other':'anime');
     if(media!=='anime')type=media;else if(!['daily','binge'].includes(type))type='binge';
     const current=number(raw.current);
     const total=raw.total==='' || raw.total==null || Number(raw.total)===0?'':number(raw.total,'');
@@ -146,11 +152,12 @@
     return {
       ...raw, id:str(raw.id||uid(),120),title:str(raw.title||raw.name_cn||raw.name||'未命名作品',300),
       originalTitle:str(raw.originalTitle,300),media,type,weekday,priority,subtype:type==='daily'?weekday:priority,
-      status,current,total,inWatchlist:typeof raw.inWatchlist==='boolean'?raw.inWatchlist:!['done','dropped'].includes(status),unit:['集','话','卷','章'].includes(raw.unit)?raw.unit:media==='anime'?'集':media==='manga'?'话':'卷',
+      status,current,total,inWatchlist:typeof raw.inWatchlist==='boolean'?raw.inWatchlist:!['done','dropped'].includes(status),unit:['集','话','卷','章','部'].includes(raw.unit)?raw.unit:media==='anime'?'集':media==='manga'?'话':media==='other'?'部':'卷',
       score:score(raw.score),bgmScore:score(raw.bgmScore),favorite:raw.favorite===true,
       image:safeURL(raw.image,true),tags:tags(raw.tags),personalTags:tags(raw.personalTags),
       sourceUrl:safeURL(raw.sourceUrl)||(bangumiId?'https://bgm.tv/subject/'+bangumiId:''),bangumiId,
       note:str(raw.note),review:str(raw.review),summary:str(raw.summary),series:seriesName(raw.series),
+      seriesId:str(raw.seriesId,160),seriesSource:['auto','manual'].includes(raw.seriesSource)?raw.seriesSource:(raw.series?'manual':''),seriesLocked:typeof raw.seriesLocked==='boolean'?raw.seriesLocked:!!raw.series,aliases:tags(raw.aliases),
       seriesKind:Object.hasOwn(seriesKinds,raw.seriesKind)?raw.seriesKind:'',seriesLabel:str(raw.seriesLabel,80).trim(),seriesOrder:raw.seriesOrder==null||raw.seriesOrder===''?'':number(raw.seriesOrder),seriesCover:raw.seriesCover===true,
       year:str(raw.year,4),date:str(raw.date,20),createdAt:str(raw.createdAt||raw.importedAt||''),updatedAt:date,
       importedAt:str(raw.importedAt),finishedAt:str(raw.finishedAt),
@@ -165,7 +172,7 @@
     if(!Array.isArray(list))throw new Error('未找到作品数组；请使用旧版或新版导出的 JSON 备份');
     if(list.length>20000)throw new Error('一次最多导入 20000 部作品');
     const ids=new Set();const items=list.map(normalize).map(i=>{if(ids.has(i.id))i.id=uid();ids.add(i.id);return i;});
-    return {version:VERSION,title:str(!p.title||p.title==='HHD 的作品库'?'王之宝库':p.title,80),publishedAt:str(p.publishedAt),items};
+    return {seriesSchema:Number(p.seriesSchema)||0,seriesScan:p.seriesScan&&typeof p.seriesScan==='object'?p.seriesScan:{},version:VERSION,title:str(!p.title||p.title==='HHD 的作品库'?'王之宝库':p.title,80),publishedAt:str(p.publishedAt),items};
   }
   function duplicate(items, item) {
     return items.find(i=> i.id===item.id || (item.bangumiId&&i.bangumiId===item.bangumiId) || (!item.bangumiId&&!i.bangumiId&&i.media===item.media&&i.title===item.title));
@@ -209,16 +216,16 @@
     });
   }
   function bgmSubject(s,collection=null) {
-    if(!s||![1,2].includes(Number(s.type)))throw new Error('只支持动画、漫画和小说条目');
+    if(!s||![1,2,3,4,6].includes(Number(s.type)))throw new Error('Bangumi 作品类型无法识别');
     const tagList=tags([...(s.meta_tags||[]),...(s.tags||[])]);
     const novelTag=[s.platform,...tagList].some(t=>/^(?:小说|小說|轻小说|輕小說|Novel|Light Novel)$/i.test(str(t).trim()));
-    let media=Number(s.type)===2?'anime':/漫画|漫畫|Manga/i.test(s.platform||'')?'manga':novelTag?'novel':'manga';
+    let media=![1,2].includes(Number(s.type))?'other':Number(s.type)===2?'anime':/漫画|漫畫|Manga/i.test(s.platform||'')?'manga':novelTag?'novel':'manga';
     const info=(keys)=>{const row=(s.infobox||[]).find(x=>keys.includes(x.key));return row?typeof row.value==='string'?row.value:'':'';};
     const dayText=info(['放送星期','放送日']);const digit=dayText.replace(/星期|周|曜日/g,'').match(/[一二三四五六日天月火水木金土]/)?.[0];
     const weekday=({'一':'周一','二':'周二','三':'周三','四':'周四','五':'周五','六':'周六','日':'周日','天':'周日','月':'周一','火':'周二','水':'周三','木':'周四','金':'周五','土':'周六'})[digit]||'';
     const status=collection?({1:'wish',2:'done',3:'doing',4:'hold',5:'dropped'})[collection.type]||'wish':'wish';
-    return normalize({id:'bgm-'+s.id,bangumiId:String(s.id),title:s.name_cn||s.name,originalTitle:s.name,media,
-      type:media==='anime'?(status==='doing'&&weekday?'daily':'binge'):media,weekday,status,
+    return normalize({id:'bgm-'+s.id,bangumiId:String(s.id),title:s.name_cn||s.name,originalTitle:s.name,subjectType:Number(s.type),aliases:(s.infobox||[]).filter(x=>/别名|別名/.test(x.key)).flatMap(x=>Array.isArray(x.value)?x.value.map(a=>a.v||a):[x.value]).filter(x=>typeof x==='string'),media,
+      type:media==='anime'?(status==='doing'&&weekday?'daily':'binge'):media,weekday,status,...(media==='other'?{inWatchlist:false}:{}),
       current:collection?(media==='novel'?collection.vol_status:collection.ep_status):0,
       total:media==='novel'?(s.volumes||''):(s.eps||s.total_episodes||''),
       image:s.images?.common||s.images?.large||s.images?.medium||'',tags:tagList,personalTags:collection?.tags||[],
