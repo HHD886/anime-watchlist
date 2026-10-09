@@ -47,15 +47,18 @@
   function seriesKind(i) {
     if(Object.hasOwn(seriesKinds,i.seriesKind))return i.seriesKind;
     const name=[i.title,i.originalTitle].join(' '),meta=tags(i.tags).join(' ');
-    if(/\bOAD\b/i.test(name+' '+meta))return 'oad';
-    if(/\bOVA\b/i.test(name+' '+meta))return 'ova';
-    if(/剧场版|劇場版|映画|总集篇|総集編/.test(name)||/剧场版|劇場版/.test(meta))return 'movie';
-    if(/(?:^|\s)MV(?:\s|$)|音乐视频|ミュージックビデオ/i.test(name))return 'mv';
+    if(/\bMV\b|音乐视频|ミュージックビデオ/i.test(name))return 'mv';
+    if(/\bOAD\b/i.test(name))return 'oad';
+    if(/\bOVA\b/i.test(name))return 'ova';
+    if(/剧场版|劇場版|映画|总集篇|総集編/.test(name))return 'movie';
     if(/番外|特别篇|特別編|\bSP\b|特典/i.test(name))return 'special';
     if(/外传|外傳|スピンオフ/.test(name))return 'spinoff';
     if(/第[\d一二三四五六七八九十]+[季期]|\b(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season)\b/i.test(name))return 'season';
     if(/(?:[上中下前后後][篇編部])|第\d+部分|\bpart\s*\d+/i.test(name))return 'part';
     if(/篇(?:章)?$|編$/.test(i.title))return 'arc';
+    if(/\bOAD\b/i.test(meta))return 'oad';
+    if(/\bOVA\b/i.test(meta))return 'ova';
+    if(/剧场版|劇場版/.test(meta))return 'movie';
     return 'main';
   }
   function seriesLabel(i) {return str(i.seriesLabel,80).trim()||str(i.title).match(/第[\d一二三四五六七八九十]+[季期]|第\d+部分|[上中下前后後][篇編部]/)?.[0]||seriesKinds[seriesKind(i)];}
@@ -86,14 +89,14 @@
       if(!groups.has(key))groups.set(key,{name:names.get(key)||seriesBase(i.title),ids:[]});groups.get(key).ids.push(i.id);}
     return [...groups.values()].filter(g=>g.name&&(g.ids.length>1||seriesMembers(items,g.name).length)).sort((a,b)=>b.ids.length-a.ids.length||a.name.localeCompare(b.name,'zh-CN'));
   }
-  function assignSeries(items,{name,ids,source='',coverId='',parts={}}={}) {
+  function assignSeries(items,{name,ids,source='',coverId,parts={}}={}) {
     name=seriesName(name);if(!name)throw new Error('请填写系列名称');const selected=new Set(ids||[]);
     if(!selected.size)throw new Error('请至少选择一部作品');if([...selected].some(id=>!items.some(i=>i.id===id)))throw new Error('部分作品已变动，请重新打开整理页面');
     const sourceKey=seriesKey(source),targetKey=seriesKey(name),stamp=now();
     return items.map(i=>{
-      if(selected.has(i.id)){const p=parts[i.id]||{};return normalize({...i,series:name,seriesKind:p.kind||i.seriesKind,seriesLabel:p.label??i.seriesLabel,seriesOrder:p.order??i.seriesOrder,seriesCover:coverId?i.id===coverId:i.seriesCover,updatedAt:stamp});}
+      if(selected.has(i.id)){const p=parts[i.id]||{};return normalize({...i,series:name,seriesKind:p.kind??i.seriesKind,seriesLabel:p.label??i.seriesLabel,seriesOrder:p.order??i.seriesOrder,seriesCover:coverId!==undefined?i.id===coverId:i.seriesCover,updatedAt:stamp});}
       if(sourceKey&&seriesKey(i.series)===sourceKey)return normalize({...i,series:'',seriesCover:false,updatedAt:stamp});
-      if(coverId&&seriesKey(i.series)===targetKey&&i.seriesCover)return normalize({...i,seriesCover:false,updatedAt:stamp});
+      if(coverId!==undefined&&seriesKey(i.series)===targetKey&&i.seriesCover)return normalize({...i,seriesCover:false,updatedAt:stamp});
       return i;
     });
   }

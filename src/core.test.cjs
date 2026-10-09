@@ -113,6 +113,7 @@ test('系列归类、改名和移出只改变整理资料；个人记录、来�
  for(let n=0;n<input.length;n++)for(const k of ['id','title','score','review','current','total','media','comments','scoreHistory','bangumiId','inWatchlist'])assert.deepEqual(result[n][k],input[n][k],k);
  assert.throws(()=>C.assignSeries(input,{name:'空',ids:[]}),/至少/);assert.throws(()=>C.assignSeries(input,{name:'合',ids:['missing']}),/变动/);
  assert.equal(C.merge(result,[{id:'a',series:'误覆盖',seriesLabel:'错误版本'}]).items[0].series,'新合集');
+ const auto=C.assignSeries(result,{name:'新合集',source:'新合集',ids:['a','c'],coverId:'',parts:{a:{kind:''}}});assert.ok(auto.every(i=>!i.seriesCover));assert.equal(auto[0].seriesKind,'');
 });
 test('系列收起跨媒体只占一格，筛选命中一季仍能展开全部成员，未评分不当作零分',()=>{
  const items=[{id:'a',title:'第一季',series:'合集',year:'2014',score:9.8,media:'anime',tags:['奇幻'],seriesOrder:2},{id:'b',title:'小说',series:'合集',year:'2012',score:null,media:'novel',seriesKind:'original',seriesOrder:1},{id:'c',title:'OVA',series:'合集',year:'2015',score:9.1,tags:['日常']},{id:'single',title:'独立'}].map(C.normalize);
@@ -123,6 +124,7 @@ test('系列收起跨媒体只占一格，筛选命中一季仍能展开全部�
 test('系列类型覆盖季度、OVA、OAD、剧场版、特别篇、上下部、篇章与 MV，手填优先',()=>{
  for(const [title,want] of [['作品 第三季','season'],['作品 OVA','ova'],['作品OAD','oad'],['剧场版 作品','movie'],['作品 特别篇','special'],['作品 上篇','part'],['作品 最终篇','arc'],['作品 MV','mv']])assert.equal(C.seriesKind({title}),want,title);
  assert.equal(C.seriesKind({title:'作品 OVA',seriesKind:'other'}),'other');assert.equal(C.seriesLabel({title:'作品 第三季',seriesLabel:'第 25–48 话'}),'第 25–48 话');
+ assert.equal(C.seriesKind({title:'「ray 超かぐや姫！Version」MV',tags:['OVA','2026']}),'mv');assert.equal(C.seriesKind({title:'作品 OVA',tags:['OAD']}),'ova');
 });
 test('名称建议只返回待确认清单，不修改作品，不用未匹配数字创建错误合集',()=>{
  const items=[{id:'a',title:'好故事'},{id:'b',title:'好故事 第二季'},{id:'c',title:'好故事 OVA'},{id:'d',title:'好故事',media:'novel'},{id:'f',title:'另一个故事',series:'已整理'},{id:'g',title:'86'},{id:'h',title:'87'}].map(C.normalize),before=JSON.stringify(items);
