@@ -3,12 +3,12 @@
   "base_commit": "b939a35ce3554f48779bf0d2215d572b9703957d",
   "implementation": "complete",
   "automated_tests": {
-    "passed": 83,
+    "passed": 85,
     "failed": 0
   },
   "production_data_blob_preserved": "ed6b3bf863cd3459a887f989d2b4e12b6a8253fa",
   "production_records": 474,
-  "browser_verification": "after publication; see final delivery notes",
+  "browser_verification": "HTTPS v4.5 loaded 474 records and performed real Bangumi series scanning; final count/review fixes covered by regression tests",
   "user_device_extension_installation": "not performed",
   "entrypoints": [
     "src/core.js",
@@ -18,5 +18,10 @@
     "Bangumi-Watchlist-Importer-v2/background.js",
     "Bangumi-Watchlist-Importer-v2/file-bridge.js",
     "Bangumi-Watchlist-Importer-v2/status.js"
-  ]
+  ],
+  "final_fixes": [
+    "count unique automatically managed works",
+    "stable review IDs and live refresh while scanning"
+  ],
+  "production_data_modified": false
 }
