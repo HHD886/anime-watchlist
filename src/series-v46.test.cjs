@@ -30,3 +30,9 @@ test('仅有单作品系列时实际合并数必须为零',()=>{const result=S.a
 test('自动系列标志兼容旧导出；顶层偏好、评论扩展字段和评分历史不丢失',()=>{
  const raw={items:[{id:'a',title:'作品',series:'自动系列',seriesId:'bgm-series-1',seriesSource:'auto',comments:[{id:'c',text:'评论',at:'2026',color:'blue'}],scoreHistory:[{score:9,at:'2026',source:'myself'}]}],customPreferences:{coverFit:'contain'}};const p=C.parsePayload(raw);assert.equal(p.items[0].seriesLocked,false);assert.deepEqual(p.customPreferences,raw.customPreferences);assert.equal(p.items[0].comments[0].color,'blue');assert.equal(p.items[0].scoreHistory[0].source,'myself');
 });
+
+test('电影、剧场版等通用前缀不能让无关作品进入待确认；完整作品名称保留',()=>{
+ const rows=['电影 中二病也要谈恋爱！ -Take On Me-','电影 五等分的新娘','电影 摇曳露营△','电影 黑色五叶草 魔法帝之剑'].map((title,n)=>C.normalize({id:'film-'+n,title}));
+ const result=S.analyse(rows);assert.equal(C.groupSeries(result.items).length,4);assert.equal(result.review.length,0);
+ assert.ok(S.signatures(C.normalize({id:'a',title:'电影少女'})).some(s=>s.base==='电影少女'));
+});

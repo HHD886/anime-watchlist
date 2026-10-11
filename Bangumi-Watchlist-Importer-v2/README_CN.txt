@@ -1,4 +1,4 @@
-王之宝库 Bangumi 导入助手 v4.6.0
+王之宝库 Bangumi 导入助手 v4.6.1
 
 更新：把本文件夹内文件覆盖到原插件目录；在 chrome://extensions 或 edge://extensions 点击此扩展的重新加载；刷新 Bangumi 和作品库页面。保留原扩展 ID 才能保留旧队列，不要先卸载。
 首次安装：开发者模式 → 加载已解压的扩展程序 → 选择有 manifest.json 的本目录。

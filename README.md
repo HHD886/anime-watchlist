@@ -1,6 +1,6 @@
 # anime-watchlist
 
-**当前 v4.6：[系列修复与升级说明](UPGRADE-v4.6.md) · [下载 Bangumi 插件 v4.6](Bangumi-Importer-v4.6.zip)**
+**当前 v4.6.1：[系列修复与升级说明](UPGRADE-v4.6.md) · [下载 Bangumi 插件 v4.6](Bangumi-Importer-v4.6.zip)**
 
 v4.6 修复旧单作品系列没有真正合并、失败被计为成功、旧扫描结果阻止重新分析和搜索结果不及时更新。结合 Bangumi 关系、双语标题、别名和版本信息分析全部已有作品，保留个人记录与手动决定。更新程序请使用浏览器刷新；网页右上角“刷新”读取 GitHub 数据。
 

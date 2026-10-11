@@ -1,13 +1,13 @@
 {
-  "version": "4.6.0",
+  "version": "4.6.1",
   "updated": "2026-10-11",
-  "phase": "ready_for_deployment",
+  "phase": "implementation_and_tests_complete",
   "base_commit": "771bd2878f2965e9ca168da9adb9b61f98b9b95f",
   "data_blob_preserved": "ed6b3bf863cd3459a887f989d2b4e12b6a8253fa",
   "data_json_modified": false,
   "tests": {
-    "total": 107,
-    "passed": 107,
+    "total": 108,
+    "passed": 108,
     "failed": 0
   },
   "cases": {
@@ -37,7 +37,15 @@
     "real_user_browser_853_accessed": false
   },
   "remaining": [
-    "GitHub Pages deployment",
-    "Live HTTPS cache/UI verification"
-  ]
+    "Verify v4.6.1 generic-prefix correction in live browser"
+  ],
+  "code_commit_v46": "b149dee24b688829b7a3e92043089de5ecd9c924",
+  "pages_v46": {
+    "run_id": 38150654011,
+    "conclusion": "success",
+    "browser_version": "4.6",
+    "live_kaguya_works": 3,
+    "live_kaguya_cards": 1,
+    "live_total_records": 474
+  }
 }

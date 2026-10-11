@@ -19,9 +19,9 @@
   // Full names stay available; roots are evidence, never a fuzzy edit-distance match.
   function signatures(i,subjects={}){
     const out=new Map();
-    function add(base,kind){base=C.seriesName(base).replace(/[!?！？'′’°.。·・:：~～〜—–\-\s]+$/g,'');const root=compact(base);if(root.length<2)return;const old=out.get(root);if(!old||old.kind==='exact')out.set(root,{root,base,kind});}
+    function add(base,kind){base=C.seriesName(base).replace(/[!?！？'′’°.。·・:：~～〜—–\-\s]+$/g,'');const root=compact(base);if(root.length<2||/^(?:电影|電影|剧场版|劇場版|映画|ova|oad|sp|special|movie)$/i.test(root))return;const old=out.get(root);if(!old||old.kind==='exact')out.set(root,{root,base,kind});}
     for(const raw of namesOf(i,subjects)){
-      const title=C.seriesName(raw).normalize('NFKC'),bare=title.replace(/^(?:(?:剧场版|劇場版|映画|OVA|OAD)\s*|(?:续|続)\s+)/i,'');
+      const title=C.seriesName(raw).normalize('NFKC'),bare=title.replace(/^(?:(?:剧场版|劇場版|映画|OVA|OAD)\s*|(?:电影|電影|续|続)\s+)/i,'');
       add(bare,/['′’°.。!?！？]$/.test(bare)?'punct':'exact');
       const version=bare.replace(/\s*(?:第[\d一二三四五六七八九十百]+(?:季|期|部|部分|クール)|\b(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season|part\s*\d+|OVA|OAD|SP|SPECIAL|THE\s+(?:SEMI-)?FINAL)\b|剧场版|劇場版|总集篇|総集編|特别篇|特別編|番外|外传|外傳|完结篇|完結編|[上中下前后後][篇編部]).*$/i,'').trim();
       if(version!==bare)add(version,'version');
