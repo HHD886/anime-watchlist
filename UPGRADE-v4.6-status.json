@@ -1,7 +1,7 @@
 {
   "version": "4.6.1",
   "updated": "2026-10-11",
-  "phase": "implementation_and_tests_complete",
+  "phase": "completed",
   "base_commit": "771bd2878f2965e9ca168da9adb9b61f98b9b95f",
   "data_blob_preserved": "ed6b3bf863cd3459a887f989d2b4e12b6a8253fa",
   "data_json_modified": false,
@@ -36,9 +36,7 @@
     "synthetic_total_records": 853,
     "real_user_browser_853_accessed": false
   },
-  "remaining": [
-    "Verify v4.6.1 generic-prefix correction in live browser"
-  ],
+  "remaining": [],
   "code_commit_v46": "b149dee24b688829b7a3e92043089de5ecd9c924",
   "pages_v46": {
     "run_id": 38150654011,
@@ -47,5 +45,27 @@
     "live_kaguya_works": 3,
     "live_kaguya_cards": 1,
     "live_total_records": 474
-  }
+  },
+  "code_commit": "edff89ae40e1da5687e49facf357ed15f20160aa",
+  "pages_v461": {
+    "run_id": 38150991253,
+    "conclusion": "success",
+    "browser_version": "4.6.1",
+    "local_records_preserved": 474,
+    "successful_reads": 472,
+    "failed_reads": 2,
+    "grouped_works": 249,
+    "multi_work_series": 96,
+    "merged_cards": 153,
+    "review_works": 11,
+    "review_groups": 8,
+    "generic_prefix_false_suggestions": 0,
+    "kaguya_works": 3,
+    "kaguya_cards": 1
+  },
+  "live_assets_match_build": true,
+  "not_verified": [
+    "Actual 853 unpublished records on user computer",
+    "Physical Chrome/Edge extension installation and file:// permission"
+  ]
 }
