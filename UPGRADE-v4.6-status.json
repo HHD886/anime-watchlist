@@ -1,0 +1,43 @@
+{
+  "version": "4.6.0",
+  "updated": "2026-10-11",
+  "phase": "ready_for_deployment",
+  "base_commit": "771bd2878f2965e9ca168da9adb9b61f98b9b95f",
+  "data_blob_preserved": "ed6b3bf863cd3459a887f989d2b4e12b6a8253fa",
+  "data_json_modified": false,
+  "tests": {
+    "total": 107,
+    "passed": 107,
+    "failed": 0
+  },
+  "cases": {
+    "kaguya": {
+      "works": 7,
+      "groups": 1,
+      "merged_cards": 6
+    },
+    "gintama": {
+      "works": 9,
+      "groups": 1,
+      "merged_cards": 8
+    },
+    "natsume": {
+      "works": 11,
+      "groups": 1
+    },
+    "conan": {
+      "works": 20,
+      "main_group_works": 19,
+      "review_works": 1
+    }
+  },
+  "safety_test": {
+    "published_source_records": 474,
+    "synthetic_total_records": 853,
+    "real_user_browser_853_accessed": false
+  },
+  "remaining": [
+    "GitHub Pages deployment",
+    "Live HTTPS cache/UI verification"
+  ]
+}

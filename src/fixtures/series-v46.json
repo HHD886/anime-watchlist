@@ -1,0 +1,4192 @@
+{
+  "capturedAt": "2026-10-10",
+  "source": "https://api.bgm.tv/v0/subjects/{id} and /subjects; extra names from existing published library",
+  "cases": {
+    "kaguya": [
+      248175,
+      293049,
+      317613,
+      317614,
+      389474,
+      425211,
+      565802
+    ],
+    "gintama": [
+      247,
+      11834,
+      193298,
+      47576,
+      120791,
+      232884,
+      240811,
+      425208,
+      276641
+    ]
+  },
+  "subjects": {
+    "247": {
+      "id": 247,
+      "name": "銀魂",
+      "name_cn": "银魂",
+      "type": 2,
+      "date": "2006-04-04",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/3c/ec/247_MnPPU.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/3c/ec/247_MnPPU.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/3c/ec/247_MnPPU.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/3c/ec/247_MnPPU.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/3c/ec/247_MnPPU.jpg"
+      },
+      "infobox": [
+        {
+          "key": "原作",
+          "value": "空知英秋（集英社「週刊少年ジャンプ」連載）"
+        }
+      ]
+    },
+    "2852": {
+      "id": 2852,
+      "name": "3年Z組銀八先生",
+      "name_cn": "3年Z班银八老师",
+      "type": 1,
+      "date": "2006-02-03",
+      "platform": "小说",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/88/1c/2852_4eRyu.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/88/1c/2852_4eRyu.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/88/1c/2852_4eRyu.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/88/1c/2852_4eRyu.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/88/1c/2852_4eRyu.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "三年Z组银八先生"
+            }
+          ]
+        },
+        {
+          "key": "作者",
+          "value": "大崎知仁"
+        }
+      ]
+    },
+    "4705": {
+      "id": 4705,
+      "name": "銀魂",
+      "name_cn": "银魂",
+      "type": 1,
+      "date": "2004-04-02",
+      "platform": "漫画",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/d3/31/4705_S7P06.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/d3/31/4705_S7P06.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/d3/31/4705_S7P06.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/d3/31/4705_S7P06.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/d3/31/4705_S7P06.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "Gintama"
+            },
+            {
+              "v": "銀魂-ぎんたま-"
+            }
+          ]
+        },
+        {
+          "key": "作者",
+          "value": "空知英秋"
+        }
+      ]
+    },
+    "11834": {
+      "id": 11834,
+      "name": "銀魂'",
+      "name_cn": "银魂'",
+      "type": 2,
+      "date": "2011-04-04",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/e1/36/11834_fEZvv.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/e1/36/11834_fEZvv.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/e1/36/11834_fEZvv.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/e1/36/11834_fEZvv.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/e1/36/11834_fEZvv.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "银魂 第2期"
+            },
+            {
+              "v": "銀魂 第2期"
+            },
+            {
+              "v": "GINTAMA(season2)"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "空知英秋（集英社「週刊少年ジャンプ」連載）"
+        }
+      ]
+    },
+    "47576": {
+      "id": 47576,
+      "name": "銀魂' 延長戦",
+      "name_cn": "银魂' 延长战",
+      "type": 2,
+      "date": "2012-10-04",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/5a/dc/47576_5gU11.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/5a/dc/47576_5gU11.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/5a/dc/47576_5gU11.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/5a/dc/47576_5gU11.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/5a/dc/47576_5gU11.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "金魂'"
+            },
+            {
+              "v": "银魂 第二期延长战"
+            },
+            {
+              "v": "銀魂' 延長戦"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "空知英秋（集英社「週刊少年ジャンプ」連載）"
+        }
+      ]
+    },
+    "120791": {
+      "id": 120791,
+      "name": "銀魂°",
+      "name_cn": "银魂°",
+      "type": 2,
+      "date": "2015-04-08",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/92/f6/120791_0Sfdz.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/92/f6/120791_0Sfdz.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/92/f6/120791_0Sfdz.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/92/f6/120791_0Sfdz.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/92/f6/120791_0Sfdz.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "銀魂゜"
+            },
+            {
+              "v": "银魂 第3期"
+            },
+            {
+              "v": "銀魂 第3期"
+            },
+            {
+              "v": "Gintama°"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "空知英秋（集英社「週刊少年ジャンプ」連載）"
+        }
+      ]
+    },
+    "135218": {
+      "id": 135218,
+      "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+      "name_cn": "辉夜大小姐想让我告白 ~天才们的恋爱头脑战~",
+      "type": 1,
+      "date": "2016-03-18",
+      "platform": "漫画",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/15/c9/135218_YYbSq.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/15/c9/135218_YYbSq.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/15/c9/135218_YYbSq.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/15/c9/135218_YYbSq.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/15/c9/135218_YYbSq.jpg"
+      },
+      "infobox": [
+        {
+          "key": "作者",
+          "value": "赤坂アカ"
+        }
+      ]
+    },
+    "193298": {
+      "id": 193298,
+      "name": "銀魂.",
+      "name_cn": "银魂.",
+      "type": 2,
+      "date": "2017-01-08",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/ba/ec/193298_d3A2D.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/ba/ec/193298_d3A2D.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/ba/ec/193298_d3A2D.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/ba/ec/193298_d3A2D.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/ba/ec/193298_d3A2D.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "銀魂. 烙陽決戦篇"
+            },
+            {
+              "v": "银魂 第4期"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "空知英秋（集英社「週刊少年ジャンプ」連載）"
+        }
+      ]
+    },
+    "232884": {
+      "id": 232884,
+      "name": "銀魂. 銀ノ魂篇",
+      "name_cn": "银魂. 银之魂篇",
+      "type": 2,
+      "date": "2018-01-07",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/1d/7c/232884_OIoro.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/1d/7c/232884_OIoro.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/1d/7c/232884_OIoro.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/1d/7c/232884_OIoro.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/1d/7c/232884_OIoro.jpg"
+      },
+      "infobox": [
+        {
+          "key": "原作",
+          "value": "空知英秋（集英社「週刊少年ジャンプ」連載）"
+        }
+      ]
+    },
+    "240811": {
+      "id": 240811,
+      "name": "銀魂. 銀ノ魂篇 第2クール",
+      "name_cn": "银魂. 银之魂篇 第二季",
+      "type": 2,
+      "date": "2018-07-08",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/26/3f/240811_T320d.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/26/3f/240811_T320d.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/26/3f/240811_T320d.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/26/3f/240811_T320d.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/26/3f/240811_T320d.jpg"
+      },
+      "infobox": [
+        {
+          "key": "原作",
+          "value": "空知英秋（集英社「週刊少年ジャンプ」連載）"
+        }
+      ]
+    },
+    "248175": {
+      "id": 248175,
+      "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+      "name_cn": "辉夜大小姐想让我告白～天才们的恋爱头脑战～",
+      "type": 2,
+      "date": "2019-01-12",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/2a/f7/248175_2w4zT.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/2a/f7/248175_2w4zT.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/2a/f7/248175_2w4zT.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/2a/f7/248175_2w4zT.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/2a/f7/248175_2w4zT.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "Kaguya-sama wa Kokurasetai: Tensai-tachi no Ren`ai Zunousen"
+            },
+            {
+              "v": "Kaguya-sama: Love Is War"
+            },
+            {
+              "v": "辉夜姬想让人告白～天才们的恋爱头脑战～"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "赤坂アカ（集英社「週刊ヤングジャンプ」連載）"
+        }
+      ]
+    },
+    "276641": {
+      "id": 276641,
+      "name": "銀魂 THE FINAL",
+      "name_cn": "银魂 THE FINAL",
+      "type": 2,
+      "date": "2021-01-08",
+      "platform": "剧场版",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/89/5b/276641_Z3H84.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/89/5b/276641_Z3H84.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/89/5b/276641_Z3H84.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/89/5b/276641_Z3H84.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/89/5b/276641_Z3H84.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "银魂 最终篇"
+            },
+            {
+              "v": "Gintama: THE FINAL"
+            },
+            {
+              "v": "Gintama: THE VERY FINAL"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "空知英秋（集英社ジャンプコミックス刊）"
+        }
+      ]
+    },
+    "293049": {
+      "id": 293049,
+      "name": "かぐや様は告らせたい?～天才たちの恋愛頭脳戦～",
+      "name_cn": "辉夜大小姐想让我告白?～天才们的恋爱头脑战～",
+      "type": 2,
+      "date": "2020-04-11",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/36/16/293049_0e0re.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/36/16/293049_0e0re.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/36/16/293049_0e0re.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/36/16/293049_0e0re.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/36/16/293049_0e0re.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "Kaguya-sama wa Kokurasetai? Tensai-tachi no Ren`ai Zunousen"
+            },
+            {
+              "v": "Kaguya-sama: Love is War? Season 2"
+            },
+            {
+              "v": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ 第2期"
+            },
+            {
+              "v": "辉夜大小姐想让我告白～天才们的恋爱头脑战～ 第二季"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "赤坂アカ（集英社「週刊ヤングジャンプ」連載）"
+        }
+      ]
+    },
+    "317613": {
+      "id": 317613,
+      "name": "かぐや様は告らせたい-ウルトラロマンティック-",
+      "name_cn": "辉夜大小姐想让我告白-超级浪漫-",
+      "type": 2,
+      "date": "2022-04-08",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/cf/9c/317613_bpGX4.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/cf/9c/317613_bpGX4.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/cf/9c/317613_bpGX4.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/cf/9c/317613_bpGX4.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/cf/9c/317613_bpGX4.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ 第3期"
+            },
+            {
+              "v": "辉夜大小姐想让我告白～天才们的恋爱头脑战～ 第三季"
+            },
+            {
+              "v": "Kaguya-sama: Love is War Season 3"
+            },
+            {
+              "v": "Kaguya-sama wa Kokurasetai: Ultra Romantic"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "赤坂アカ（集英社「週刊ヤングジャンプ」連載）"
+        }
+      ]
+    },
+    "317614": {
+      "id": 317614,
+      "name": "かぐや様は告らせたい？～天才たちの恋愛頭脳戦～ OVA",
+      "name_cn": "辉夜大小姐想让我告白？～天才们的恋爱头脑战～ OVA",
+      "type": 2,
+      "date": "2021-05-19",
+      "platform": "OVA",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/18/a5/317614_eBkp0.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/18/a5/317614_eBkp0.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/18/a5/317614_eBkp0.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/18/a5/317614_eBkp0.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/18/a5/317614_eBkp0.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "Kaguya OVA, Kaguya-Sama OVA"
+            },
+            {
+              "v": "Kaguya-sama wa Kokurasetai? Tensai-tachi no Ren`ai Zunousen (2021)"
+            },
+            {
+              "v": "Kaguya-sama: Love is War OVA"
+            },
+            {
+              "v": "Кагуя: В любви как на войне OVA"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "赤坂アカ（集英社「週刊ヤングジャンプ」連載）"
+        }
+      ]
+    },
+    "389474": {
+      "id": 389474,
+      "name": "かぐや様は告らせたい-ファーストキッスは終わらない- 映画",
+      "name_cn": "辉夜大小姐想让我告白-初吻不会结束- 电影",
+      "type": 2,
+      "date": "2022-12-17",
+      "platform": "剧场版",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/ca/b6/389474_tzbrl.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/ca/b6/389474_tzbrl.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/ca/b6/389474_tzbrl.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/ca/b6/389474_tzbrl.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/ca/b6/389474_tzbrl.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "Kaguya-sama wa Kokurasetai: First Kiss wa Owaranai"
+            },
+            {
+              "v": "Kaguya-sama: Love Is War - The First Kiss That Never Ends"
+            },
+            {
+              "v": "辉夜大小姐想让我告白-初吻永不结束-"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "赤坂アカ（集英社「週刊ヤングジャンプ」連載）"
+        }
+      ]
+    },
+    "425208": {
+      "id": 425208,
+      "name": "3年Z組銀八先生",
+      "name_cn": "3年Z班银八老师",
+      "type": 2,
+      "date": "2025-10-06",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/14/25/425208_I2233.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/14/25/425208_I2233.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/14/25/425208_I2233.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/14/25/425208_I2233.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/14/25/425208_I2233.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "3-nen Z-gumi Ginpachi-sensei"
+            },
+            {
+              "v": "GINTAMA - Mr. Ginpachi's Zany Class"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "空知英秋；大崎知仁（集英社JUMP j BOOKS刊）"
+        }
+      ]
+    },
+    "425211": {
+      "id": 425211,
+      "name": "かぐや様は告らせたい-ファーストキッスは終わらない-",
+      "name_cn": "辉夜大小姐想让我告白-初吻不会结束-",
+      "type": 2,
+      "date": "2023-03-31",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/ca/79/425211_bPbra.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/ca/79/425211_bPbra.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/ca/79/425211_bPbra.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/ca/79/425211_bPbra.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/ca/79/425211_bPbra.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "Kaguya-sama wa Kokurasetai: First Kiss wa Owaranai"
+            },
+            {
+              "v": "Kaguya-sama: Love Is War - The First Kiss That Never Ends"
+            },
+            {
+              "v": "辉夜大小姐想让我告白-初吻永不结束-"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "赤坂アカ（集英社「週刊ヤングジャンプ」連載）"
+        }
+      ]
+    },
+    "565802": {
+      "id": 565802,
+      "name": "かぐや様は告らせたい 大人への階段",
+      "name_cn": "辉夜大小姐想让我告白 通往大人的阶梯",
+      "type": 2,
+      "date": "2025-12-31",
+      "platform": "TV",
+      "images": {
+        "small": "https://lain.bgm.tv/r/200/pic/cover/l/9b/f5/565802_PRfRL.jpg",
+        "grid": "https://lain.bgm.tv/r/100/pic/cover/l/9b/f5/565802_PRfRL.jpg",
+        "large": "https://lain.bgm.tv/pic/cover/l/9b/f5/565802_PRfRL.jpg",
+        "medium": "https://lain.bgm.tv/r/800/pic/cover/l/9b/f5/565802_PRfRL.jpg",
+        "common": "https://lain.bgm.tv/r/400/pic/cover/l/9b/f5/565802_PRfRL.jpg"
+      },
+      "infobox": [
+        {
+          "key": "别名",
+          "value": [
+            {
+              "v": "Kaguya-sama wa Kokurasetai: Otona e no Kaidan"
+            },
+            {
+              "v": "Kaguya-sama: Love Is War -Stairway to Adulthood-"
+            },
+            {
+              "v": "輝夜姬想讓人告白 邁向大人的階梯"
+            },
+            {
+              "v": "Kaguya-sama wa Kokurasetai - Otona e no Kaidan"
+            }
+          ]
+        },
+        {
+          "key": "原作",
+          "value": "赤坂アカ（集英社ヤングジャンプコミックス刊）"
+        }
+      ]
+    }
+  },
+  "relations": {
+    "247": [
+      {
+        "id": 181777,
+        "type": 1,
+        "name": "オフィシャルアニメーションガイド 銀魂あにめパラパラ館",
+        "name_cn": "",
+        "relation": "画集"
+      },
+      {
+        "id": 7050,
+        "type": 3,
+        "name": "アナタMAGIC",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 7051,
+        "type": 3,
+        "name": "Stairway Generation",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 7052,
+        "type": 3,
+        "name": "Light Infection",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 914,
+        "type": 3,
+        "name": "曇天",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 7054,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック",
+        "name_cn": "银魂 OST",
+        "relation": "原声集"
+      },
+      {
+        "id": 7055,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック2",
+        "name_cn": "银魂 OST 2",
+        "relation": "原声集"
+      },
+      {
+        "id": 7551,
+        "type": 3,
+        "name": "DOES SINGLES",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 11834,
+        "type": 2,
+        "name": "銀魂'",
+        "name_cn": "银魂'",
+        "relation": "续集"
+      },
+      {
+        "id": 19110,
+        "type": 3,
+        "name": "銀魂BEST2",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 34737,
+        "type": 3,
+        "name": "银さんのオールナイト大江戸！",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 41589,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック 4",
+        "name_cn": "《银魂》OST4",
+        "relation": "原声集"
+      },
+      {
+        "id": 60915,
+        "type": 4,
+        "name": "ジェイスターズ ビクトリーバーサス",
+        "name_cn": "J明星胜利对决",
+        "relation": "角色出演"
+      },
+      {
+        "id": 162688,
+        "type": 2,
+        "name": "劇場版 銀魂 〜白夜叉降誕〜 予告篇",
+        "name_cn": "银魂剧场版 白夜叉降诞 预告",
+        "relation": "番外篇"
+      },
+      {
+        "id": 7053,
+        "type": 3,
+        "name": "サヨナラの空 銀魂盤",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 181779,
+        "type": 1,
+        "name": "オフィシャルアニメーションガイド 銀魂あにめガヤガヤ箱",
+        "name_cn": "",
+        "relation": "画集"
+      },
+      {
+        "id": 186071,
+        "type": 6,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "不同演绎"
+      },
+      {
+        "id": 192010,
+        "type": 4,
+        "name": "阴阳师",
+        "name_cn": "阴阳师",
+        "relation": "游戏"
+      },
+      {
+        "id": 218963,
+        "type": 2,
+        "name": "よりぬき銀魂さんオンシアター2D",
+        "name_cn": "银魂总集篇 ON THEATER 2D",
+        "relation": "总集篇"
+      },
+      {
+        "id": 229512,
+        "type": 2,
+        "name": "アニメ銀魂大反省会",
+        "name_cn": "",
+        "relation": "衍生"
+      },
+      {
+        "id": 250372,
+        "type": 4,
+        "name": "雀魂麻将",
+        "name_cn": "雀魂麻将",
+        "relation": "联动"
+      },
+      {
+        "id": 256076,
+        "type": 4,
+        "name": "梦幻模拟战手游",
+        "name_cn": "梦幻模拟战手游",
+        "relation": "联动"
+      },
+      {
+        "id": 270214,
+        "type": 4,
+        "name": "THE KING OF FIGHTERS ALLSTAR",
+        "name_cn": "拳皇 全明星",
+        "relation": "联动"
+      },
+      {
+        "id": 425208,
+        "type": 2,
+        "name": "3年Z組銀八先生",
+        "name_cn": "3年Z班银八老师",
+        "relation": "不同世界观"
+      },
+      {
+        "id": 532778,
+        "type": 4,
+        "name": "UNION ARENA",
+        "name_cn": "携战之境",
+        "relation": "游戏"
+      },
+      {
+        "id": 561073,
+        "type": 6,
+        "name": "銀魂後祭り2023",
+        "name_cn": "银魂后祭2023",
+        "relation": "其他"
+      },
+      {
+        "id": 578766,
+        "type": 2,
+        "name": "新劇場版 銀魂 -吉原大炎上-",
+        "name_cn": "新剧场版 银魂 -吉原大炎上-",
+        "relation": "不同演绎"
+      },
+      {
+        "id": 7048,
+        "type": 3,
+        "name": "sanagi",
+        "name_cn": "蛹",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 915,
+        "type": 3,
+        "name": "修羅",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 1865,
+        "type": 3,
+        "name": "朝ANSWER",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 2852,
+        "type": 1,
+        "name": "3年Z組銀八先生",
+        "name_cn": "3年Z班银八老师",
+        "relation": "单行本"
+      },
+      {
+        "id": 2944,
+        "type": 3,
+        "name": "ウォーアイニー",
+        "name_cn": "我爱你",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 3068,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック 3",
+        "name_cn": "银魂 OST 3",
+        "relation": "原声集"
+      },
+      {
+        "id": 3153,
+        "type": 2,
+        "name": "銀魂 〜何事も最初が肝心なので多少背伸びするくらいが丁度良い〜",
+        "name_cn": "银魂 〜无论什么事开始虽然重要但伸个懒腰的话也不错〜",
+        "relation": "番外篇"
+      },
+      {
+        "id": 3247,
+        "type": 3,
+        "name": "ワンダフルデイズ",
+        "name_cn": "Wonderful Days",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 4475,
+        "type": 2,
+        "name": "劇場版 銀魂 新訳紅桜篇",
+        "name_cn": "银魂剧场版 新译红樱篇",
+        "relation": "总集篇"
+      },
+      {
+        "id": 4705,
+        "type": 1,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "书籍"
+      },
+      {
+        "id": 4857,
+        "type": 3,
+        "name": "寺門通ファーストアルバム 『浮世のことなんて今日は忘れて楽しんでいってネクロマンサー』",
+        "name_cn": "",
+        "relation": "插入歌"
+      },
+      {
+        "id": 7034,
+        "type": 3,
+        "name": "銀魂BEST",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 7035,
+        "type": 3,
+        "name": "銀色の空",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 7036,
+        "type": 3,
+        "name": "雪のツバサ",
+        "name_cn": "雪之翼",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 7037,
+        "type": 3,
+        "name": "かさなる影",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 7040,
+        "type": 3,
+        "name": "風船ガム",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 7049,
+        "type": 3,
+        "name": "This world is yours",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 7047,
+        "type": 3,
+        "name": "Speed of flow",
+        "name_cn": "暗夜激流",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 7046,
+        "type": 3,
+        "name": "Astral Lamp",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 7045,
+        "type": 3,
+        "name": "奇跡",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 7044,
+        "type": 3,
+        "name": "キャンディ・ライン",
+        "name_cn": "Candy Line",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 7043,
+        "type": 3,
+        "name": "遠い匂い",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 7042,
+        "type": 3,
+        "name": "MR.RAINDROP",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 7041,
+        "type": 3,
+        "name": "pray",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 7039,
+        "type": 3,
+        "name": "I、愛、会い",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 7038,
+        "type": 3,
+        "name": "輝いた",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 34739,
+        "type": 3,
+        "name": "銀魂マナー講座 大人の階段上る君はマダオになっちゃだめだ!シリーズ",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 34740,
+        "type": 3,
+        "name": "変わったことに挑戦してみてもあまり良い事がないと悟るだけ",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 34741,
+        "type": 3,
+        "name": "反省文なんか書いたところで何も変わることはないんですよ先生",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 132387,
+        "type": 3,
+        "name": "人生に正解などない",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 132371,
+        "type": 3,
+        "name": "俺たちの戦いはこれから始まるって言っとけば最終回としてまとまる",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 132367,
+        "type": 3,
+        "name": "時には行き詰まって泣きたくなる時もある",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 132391,
+        "type": 3,
+        "name": "既成事実を作っても愛は愛",
+        "name_cn": "",
+        "relation": "广播剧"
+      }
+    ],
+    "2852": [
+      {
+        "id": 247,
+        "type": 2,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "动画"
+      },
+      {
+        "id": 4705,
+        "type": 1,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "不同世界观"
+      },
+      {
+        "id": 425208,
+        "type": 2,
+        "name": "3年Z組銀八先生",
+        "name_cn": "3年Z班银八老师",
+        "relation": "动画"
+      },
+      {
+        "id": 592452,
+        "type": 1,
+        "name": "銀魂 3年Z組銀八先生 とぅぅぅんん!!",
+        "name_cn": "银魂 3年Z班银八老师（条漫版）",
+        "relation": "书籍"
+      },
+      {
+        "id": 29693,
+        "type": 1,
+        "name": "銀魂 3年Z組銀八先生",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 29694,
+        "type": 1,
+        "name": "銀魂 3年Z組銀八先生 2 修学旅行だよ！全員集合！！",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 29696,
+        "type": 1,
+        "name": "銀魂 3年Z組銀八先生 3 生徒相談室へ行こう！",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 29695,
+        "type": 1,
+        "name": "銀魂 3年Z組銀八先生 4 あんなことこんなことあったでしょーがァァ！！",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 29691,
+        "type": 1,
+        "name": "銀魂 帰ってきた3年Z組銀八先生リターンズ 冷血硬派高杉くん",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 168209,
+        "type": 1,
+        "name": "銀魂 帰ってきた3年Z組銀八先生フェニックス ファンキーモンキーティーチャーズ",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 168210,
+        "type": 1,
+        "name": "銀魂 帰ってきた3年Z組銀八先生フォーエバ- さらば、愛しき3Zたちよ",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 579742,
+        "type": 1,
+        "name": "銀魂 帰ってきた3年Z組銀八先生もっとリターンズ 冷血硬派高杉くん",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 540728,
+        "type": 1,
+        "name": "銀魂 3年Z組銀八先生 すぺしゃる それゆけ大球技大会",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 602095,
+        "type": 1,
+        "name": "銀魂 3年Z組銀八先生 でらっくす おいでよ林間学校",
+        "name_cn": "银魂 3年Z班银八老师 DELUXE 欢迎来到林间学校",
+        "relation": "单行本"
+      }
+    ],
+    "4705": [
+      {
+        "id": 270,
+        "type": 4,
+        "name": "ジャンプスーパースターズ",
+        "name_cn": "Jump明星大乱斗",
+        "relation": "游戏"
+      },
+      {
+        "id": 2852,
+        "type": 1,
+        "name": "3年Z組銀八先生",
+        "name_cn": "3年Z班银八老师",
+        "relation": "不同世界观"
+      },
+      {
+        "id": 22888,
+        "type": 4,
+        "name": "銀魂でぃ〜えす・万事屋大騒動!",
+        "name_cn": "银魂DS 万事屋大騒动!",
+        "relation": "游戏"
+      },
+      {
+        "id": 22889,
+        "type": 4,
+        "name": "銀魂 銀時vs土方!? かぶき町銀玉大争奪戦!!",
+        "name_cn": "银魂 银时对土方!? 歌舞伎町银玉争夺戦!!",
+        "relation": "游戏"
+      },
+      {
+        "id": 22890,
+        "type": 4,
+        "name": "銀魂 銀さんと一緒! ボクのかぶき町日記",
+        "name_cn": "银魂 和阿银一起!我的歌舞伎町日记",
+        "relation": "游戏"
+      },
+      {
+        "id": 22891,
+        "type": 4,
+        "name": "銀魂 銀玉くえすと 銀さんが転職したり世界を救ったり",
+        "name_cn": "银魂 一吃银玉的话～银桑边转职便拯救地球～",
+        "relation": "游戏"
+      },
+      {
+        "id": 22892,
+        "type": 4,
+        "name": "銀魂 万事屋ちゅ〜ぶ ツッコマブル動画",
+        "name_cn": "银魂万事屋中部可吐槽动画",
+        "relation": "游戏"
+      },
+      {
+        "id": 40555,
+        "type": 1,
+        "name": "SKET DANCE",
+        "name_cn": "学园救援团",
+        "relation": "角色出演"
+      },
+      {
+        "id": 60382,
+        "type": 4,
+        "name": "銀魂のすごろく",
+        "name_cn": "银魂的双六",
+        "relation": "游戏"
+      },
+      {
+        "id": 61246,
+        "type": 4,
+        "name": "ジャンプアルティメットスターズ",
+        "name_cn": "JUMP究极明星大乱斗",
+        "relation": "游戏"
+      },
+      {
+        "id": 103372,
+        "type": 4,
+        "name": "GRANBLUE FANTASY",
+        "name_cn": "碧蓝幻想",
+        "relation": "游戏"
+      },
+      {
+        "id": 161051,
+        "type": 4,
+        "name": "テイルズ オブ ザ レイズ",
+        "name_cn": "镜光传说",
+        "relation": "联动"
+      },
+      {
+        "id": 186071,
+        "type": 6,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "三次元"
+      },
+      {
+        "id": 190911,
+        "type": 4,
+        "name": "銀魂かぶき町大活劇",
+        "name_cn": "银时之魂",
+        "relation": "游戏"
+      },
+      {
+        "id": 215886,
+        "type": 6,
+        "name": "銀魂 -ミツバ篇-",
+        "name_cn": "银魂 三叶篇",
+        "relation": "三次元"
+      },
+      {
+        "id": 219878,
+        "type": 4,
+        "name": "銀魂乱舞",
+        "name_cn": "银魂乱舞",
+        "relation": "游戏"
+      },
+      {
+        "id": 230094,
+        "type": 6,
+        "name": "銀魂2 掟は破るためにこそある",
+        "name_cn": "银魂2 规定就是为了被打破而存在的",
+        "relation": "三次元"
+      },
+      {
+        "id": 253821,
+        "type": 6,
+        "name": "銀魂2 世にも奇妙な銀魂ちゃん",
+        "name_cn": "银魂2 世界奇妙银魂物语",
+        "relation": "三次元"
+      },
+      {
+        "id": 610400,
+        "type": 1,
+        "name": "銀魂 キャラクターリミックス 坂田銀時",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 631963,
+        "type": 2,
+        "name": "だんでらいおん",
+        "name_cn": "蒲公英",
+        "relation": "动画"
+      },
+      {
+        "id": 247,
+        "type": 2,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "动画"
+      },
+      {
+        "id": 4706,
+        "type": 1,
+        "name": "銀魂 (01) 天然パーマに悪い奴はいない",
+        "name_cn": "銀魂 (01) 凡是自然捲的都是好人",
+        "relation": "单行本"
+      },
+      {
+        "id": 4707,
+        "type": 1,
+        "name": "銀魂 (02) 粘り強さとしつこさは紙一重",
+        "name_cn": "銀魂 (02) 堅持立場與死纏爛打只是一線之隔",
+        "relation": "单行本"
+      },
+      {
+        "id": 162688,
+        "type": 2,
+        "name": "劇場版 銀魂 〜白夜叉降誕〜 予告篇",
+        "name_cn": "银魂剧场版 白夜叉降诞 预告",
+        "relation": "动画"
+      },
+      {
+        "id": 3153,
+        "type": 2,
+        "name": "銀魂 〜何事も最初が肝心なので多少背伸びするくらいが丁度良い〜",
+        "name_cn": "银魂 〜无论什么事开始虽然重要但伸个懒腰的话也不错〜",
+        "relation": "动画"
+      },
+      {
+        "id": 4709,
+        "type": 1,
+        "name": "銀魂 (03) 考えたら人生ってオッさんになってからの方が長いじゃ",
+        "name_cn": "銀魂 (03) 仔細想想，人生是從你成為大叔之後才會變得更加漫長的！好可怕！！",
+        "relation": "单行本"
+      },
+      {
+        "id": 4710,
+        "type": 1,
+        "name": "銀魂 (04) 親子ってのは嫌なとこばかり似るもんだ",
+        "name_cn": "銀魂 (04) 父子就只有在討厭的東西上很像",
+        "relation": "单行本"
+      },
+      {
+        "id": 11834,
+        "type": 2,
+        "name": "銀魂'",
+        "name_cn": "银魂'",
+        "relation": "动画"
+      },
+      {
+        "id": 4711,
+        "type": 1,
+        "name": "銀魂 (05) ベルトコンベアには気を付けろ",
+        "name_cn": "銀魂 (05) 大家要小心輸送帶",
+        "relation": "单行本"
+      },
+      {
+        "id": 47576,
+        "type": 2,
+        "name": "銀魂' 延長戦",
+        "name_cn": "银魂' 延长战",
+        "relation": "动画"
+      },
+      {
+        "id": 4712,
+        "type": 1,
+        "name": "銀魂 (06) 刀じゃ斬れないものがある",
+        "name_cn": "銀魂 (06) 有些東西是刀子斬不斷的",
+        "relation": "单行本"
+      },
+      {
+        "id": 114391,
+        "type": 2,
+        "name": "銀魂 〜布団に入ってから拭き残しに気付いて寝るに寝れない時もある〜",
+        "name_cn": "银魂 〜偶尔也会有钻进被子发现屁股没擦干净想睡也睡不着的时候〜",
+        "relation": "动画"
+      },
+      {
+        "id": 4713,
+        "type": 1,
+        "name": "銀魂 (07) どうでもいいことに限ってなかなか忘れない",
+        "name_cn": "銀魂 (07) 唯獨那些無所謂的事反而很難忘記",
+        "relation": "单行本"
+      },
+      {
+        "id": 120791,
+        "type": 2,
+        "name": "銀魂°",
+        "name_cn": "银魂°",
+        "relation": "动画"
+      },
+      {
+        "id": 4714,
+        "type": 1,
+        "name": "銀魂 (08) 娘の彼氏はとりあえず殴っとけ",
+        "name_cn": "銀魂 (08) 先把你女兒的男朋友打一頓再說",
+        "relation": "单行本"
+      },
+      {
+        "id": 161710,
+        "type": 2,
+        "name": "銀魂 愛染香篇",
+        "name_cn": "银魂 爱染香篇",
+        "relation": "动画"
+      },
+      {
+        "id": 4715,
+        "type": 1,
+        "name": "銀魂 (09) キャバクラ遊びは２０歳になってから",
+        "name_cn": "銀魂 (09) 等你20歲再上酒店玩吧",
+        "relation": "单行本"
+      },
+      {
+        "id": 193298,
+        "type": 2,
+        "name": "銀魂.",
+        "name_cn": "银魂.",
+        "relation": "动画"
+      },
+      {
+        "id": 4716,
+        "type": 1,
+        "name": "銀魂 (10) 一寸の虫にも五分の魂",
+        "name_cn": "銀魂 (10) 匹夫不可奪志",
+        "relation": "单行本"
+      },
+      {
+        "id": 218740,
+        "type": 2,
+        "name": "銀魂. ポロリ篇",
+        "name_cn": "银魂. 走光篇",
+        "relation": "动画"
+      },
+      {
+        "id": 4717,
+        "type": 1,
+        "name": "銀魂 (11) 陽はまた昇る",
+        "name_cn": "銀魂 (11) 太陽依然還會升起",
+        "relation": "单行本"
+      },
+      {
+        "id": 232884,
+        "type": 2,
+        "name": "銀魂. 銀ノ魂篇",
+        "name_cn": "银魂. 银之魂篇",
+        "relation": "动画"
+      },
+      {
+        "id": 4718,
+        "type": 1,
+        "name": "銀魂 (12) 急がば回れ",
+        "name_cn": "銀魂 (12) 欲速則不達",
+        "relation": "单行本"
+      },
+      {
+        "id": 240811,
+        "type": 2,
+        "name": "銀魂. 銀ノ魂篇 第2クール",
+        "name_cn": "银魂. 银之魂篇 第二季",
+        "relation": "动画"
+      },
+      {
+        "id": 4719,
+        "type": 1,
+        "name": "銀魂 (13) 昨日の敵は今日もなんやかんやで敵",
+        "name_cn": "銀魂 (13) 昨天的敵人到了今天還是敵人",
+        "relation": "单行本"
+      },
+      {
+        "id": 276641,
+        "type": 2,
+        "name": "銀魂 THE FINAL",
+        "name_cn": "银魂 THE FINAL",
+        "relation": "动画"
+      },
+      {
+        "id": 4720,
+        "type": 1,
+        "name": "銀魂 (14) 四人揃えばいろんな知惠",
+        "name_cn": "銀魂 (14) 四個臭皮匠勝過一個諸葛亮",
+        "relation": "单行本"
+      },
+      {
+        "id": 4737,
+        "type": 1,
+        "name": "銀魂 (15) 女の一番の化粧は笑顔",
+        "name_cn": "銀魂 (15) 女性最好的化妝就是笑容",
+        "relation": "单行本"
+      },
+      {
+        "id": 4738,
+        "type": 1,
+        "name": "銀魂 (16) 私と仕事どっちが大事なのとかいう女にはジャーマンスープレックス",
+        "name_cn": "銀魂 (16) 用原爆固定來對付那些會問你究竟我跟工作哪個重要的女人",
+        "relation": "单行本"
+      },
+      {
+        "id": 4739,
+        "type": 1,
+        "name": "銀魂 (17) ゲームは一日一時間",
+        "name_cn": "銀魂 (17) 打電動每天只限一個小時",
+        "relation": "单行本"
+      },
+      {
+        "id": 4740,
+        "type": 1,
+        "name": "銀魂 (18) 男達よマダオであれ",
+        "name_cn": "銀魂 (18) 是男人就要當個無用男",
+        "relation": "单行本"
+      },
+      {
+        "id": 4741,
+        "type": 1,
+        "name": "銀魂 (19) 策士 策に溺れる",
+        "name_cn": "銀魂 (19) 策士容易被計策所影響",
+        "relation": "单行本"
+      },
+      {
+        "id": 4742,
+        "type": 1,
+        "name": "銀魂 (20) 夏休みは始まる前が一番楽しい",
+        "name_cn": "銀魂 (20) 暑假在開始之前是最有趣的",
+        "relation": "单行本"
+      },
+      {
+        "id": 4743,
+        "type": 1,
+        "name": "銀魂 (21) 腰は曲がってもまっすぐに",
+        "name_cn": "銀魂 (21) 就算要為五斗米折腰也要堅持理想",
+        "relation": "单行本"
+      },
+      {
+        "id": 4744,
+        "type": 1,
+        "name": "銀魂 (22) いつも心に一本のドライバー",
+        "name_cn": "銀魂 (22) 每個人的心中都有一把螺絲起子",
+        "relation": "单行本"
+      },
+      {
+        "id": 4745,
+        "type": 1,
+        "name": "銀魂 (23) 旅行先ではだいたいケンカする",
+        "name_cn": "銀魂 (23) 去旅行難免會發生爭吵",
+        "relation": "单行本"
+      },
+      {
+        "id": 4746,
+        "type": 1,
+        "name": "銀魂 (24) 会ってもわからないこともある",
+        "name_cn": "銀魂 (24) 有些事情就算見了面也不見得能夠搞懂",
+        "relation": "单行本"
+      },
+      {
+        "id": 4747,
+        "type": 1,
+        "name": "銀魂 (25) 見開きを使うとジャンプっぽい",
+        "name_cn": "銀魂 (25) 使用跨頁感覺就像是JUMP",
+        "relation": "单行本"
+      },
+      {
+        "id": 4748,
+        "type": 1,
+        "name": "銀魂 (26) 昼間に飲む酒は一味違う",
+        "name_cn": "銀魂 (26) 白天喝酒別有一番滋味",
+        "relation": "单行本"
+      },
+      {
+        "id": 4749,
+        "type": 1,
+        "name": "銀魂 (27) 天は人の上に人をつくらず髷をつくりました",
+        "name_cn": "銀魂 (27) 老天爺在人之上並非再安排了人，而是弄了個髮髻",
+        "relation": "单行本"
+      },
+      {
+        "id": 4750,
+        "type": 1,
+        "name": "銀魂 (28) 屋台に入るには微妙に勇気がいる",
+        "name_cn": "銀魂 (28) 坐上路邊攤販其實還蠻需要勇氣的",
+        "relation": "单行本"
+      },
+      {
+        "id": 4751,
+        "type": 1,
+        "name": "銀魂 (29) 夜の蜘蛛は縁起が悪い",
+        "name_cn": "銀魂 (29) 晚上看到蜘蛛是不吉利的",
+        "relation": "单行本"
+      },
+      {
+        "id": 4752,
+        "type": 1,
+        "name": "銀魂 (30) 乳輪のデカさと人間のデカさは比例する",
+        "name_cn": "銀魂 (30) 乳暈大小和人的器量成正比",
+        "relation": "单行本"
+      },
+      {
+        "id": 4753,
+        "type": 1,
+        "name": "銀魂 (31) 人気投票なんて糞食らえ",
+        "name_cn": "銀魂 (31) 人氣投票去吃屎吧！",
+        "relation": "单行本"
+      },
+      {
+        "id": 4754,
+        "type": 1,
+        "name": "銀魂 (32) かぶき町野良猫ブルース",
+        "name_cn": "銀魂 (32) 歌舞伎町野貓哀歌",
+        "relation": "单行本"
+      },
+      {
+        "id": 4755,
+        "type": 1,
+        "name": "銀魂 (33) ソンナ強ク美シイモノニ私ハナリタイ",
+        "name_cn": "銀魂 (33) 我想成為那樣既堅強又美麗的人",
+        "relation": "单行本"
+      },
+      {
+        "id": 13441,
+        "type": 1,
+        "name": "銀魂 (34) 無法の街に集うはキャッホーな奴ばかり",
+        "name_cn": "銀魂 (34) 聚集在不法地帶的全是些海盜般的傢伙",
+        "relation": "单行本"
+      },
+      {
+        "id": 13443,
+        "type": 1,
+        "name": "銀魂 (35) お控えなすって!!",
+        "name_cn": "銀魂 (35) 聽我道來！！",
+        "relation": "单行本"
+      },
+      {
+        "id": 39440,
+        "type": 1,
+        "name": "銀魂 (36) 寿限無",
+        "name_cn": "銀魂 (36) 萬壽無疆",
+        "relation": "单行本"
+      },
+      {
+        "id": 39437,
+        "type": 1,
+        "name": "銀魂 (37) 夏休みあけは皆ちょっと大人に見える",
+        "name_cn": "銀魂 (37) 暑假結束後，大家看起來都會變的比較成熟",
+        "relation": "单行本"
+      },
+      {
+        "id": 39439,
+        "type": 1,
+        "name": "銀魂 (38) おっさんの家庭事情は大分ハード",
+        "name_cn": "銀魂 (38) 大叔的家庭狀況通常都很棘手",
+        "relation": "单行本"
+      },
+      {
+        "id": 39438,
+        "type": 1,
+        "name": "銀魂 (39) 忘年会でも忘れちゃいけないものがある",
+        "name_cn": "銀魂 (39) 就算是尾牙也不能忘記的事",
+        "relation": "单行本"
+      },
+      {
+        "id": 39436,
+        "type": 1,
+        "name": "銀魂 (40) 渡る世間は愛ばかり",
+        "name_cn": "銀魂 (40) 這人間充滿了愛",
+        "relation": "单行本"
+      },
+      {
+        "id": 39435,
+        "type": 1,
+        "name": "銀魂 (41) さよなライオンなんか言わせない",
+        "name_cn": "銀魂 (41) 才不讓你說再見獅呢",
+        "relation": "单行本"
+      },
+      {
+        "id": 39434,
+        "type": 1,
+        "name": "銀魂 (42) バラガキからの手紙",
+        "name_cn": "銀魂 (42) 來自荊棘惡童的信",
+        "relation": "单行本"
+      },
+      {
+        "id": 39433,
+        "type": 1,
+        "name": "銀魂 (43) ストレートパーマに悪い奴はいない",
+        "name_cn": "銀魂 (43) 凡是離子燙的傢伙都是好人",
+        "relation": "单行本"
+      },
+      {
+        "id": 39432,
+        "type": 1,
+        "name": "銀魂 (44) 傾城逆転",
+        "name_cn": "銀魂 (44) 傾城逆轉",
+        "relation": "单行本"
+      },
+      {
+        "id": 63406,
+        "type": 1,
+        "name": "銀魂 (45) 心中立て",
+        "name_cn": "銀魂 (45) 遵守誓約",
+        "relation": "单行本"
+      },
+      {
+        "id": 63407,
+        "type": 1,
+        "name": "銀魂 (46) ビームという響きはあらゆる者のハートを射抜く",
+        "name_cn": "銀魂 (46) 光束這字眼能夠射穿任何人的心",
+        "relation": "单行本"
+      },
+      {
+        "id": 63408,
+        "type": 1,
+        "name": "銀魂 (47) 担当編集は一人で足りる",
+        "name_cn": "銀魂 (47)",
+        "relation": "单行本"
+      },
+      {
+        "id": 63409,
+        "type": 1,
+        "name": "銀魂 (48) ハートに火をつけて",
+        "name_cn": "銀魂 (48)",
+        "relation": "单行本"
+      },
+      {
+        "id": 72523,
+        "type": 1,
+        "name": "銀魂 (49) 一杯のラーメン",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 77307,
+        "type": 1,
+        "name": "銀魂 (50) ９＋１＝柳生十兵衛",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 82798,
+        "type": 1,
+        "name": "銀魂 (51) アイドルの勲章",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 89737,
+        "type": 1,
+        "name": "銀魂 (52) 朝と夜の死神",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 128321,
+        "type": 1,
+        "name": "銀魂 (53) さらば死神",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 103251,
+        "type": 1,
+        "name": "銀魂 (54) バッグは常に五千万入るようにあけておけ",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 107701,
+        "type": 1,
+        "name": "銀魂 (55) 春も冬も",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 119488,
+        "type": 1,
+        "name": "銀魂 (56) 光と影の将軍",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 128310,
+        "type": 1,
+        "name": "銀魂 (57) 万事を護る者達",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 130196,
+        "type": 1,
+        "name": "銀魂 (58) さらばダチ公",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 134062,
+        "type": 1,
+        "name": "銀魂 (59) 3杯の盃",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 142156,
+        "type": 1,
+        "name": "銀魂 (60) 真の道",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 150783,
+        "type": 1,
+        "name": "銀魂 (61) さらば真選組",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 164098,
+        "type": 1,
+        "name": "銀魂 (62) あの頃の惡ガキ",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 170687,
+        "type": 1,
+        "name": "銀魂 (63) まんじゅうと朝飯",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 181549,
+        "type": 1,
+        "name": "銀魂 (64) 旧き友と今の友",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 188742,
+        "type": 1,
+        "name": "銀魂 (65) 兄妹",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 196767,
+        "type": 1,
+        "name": "銀魂 (66) 天然パーマはグニャグニャ曲がっても戻ってくる",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 203003,
+        "type": 1,
+        "name": "銀魂 (67) ハチマキ巻いたら受験生に見える",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 210412,
+        "type": 1,
+        "name": "銀魂 (68) 次男坊は忘れられがち",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 215885,
+        "type": 1,
+        "name": "銀魂 (69) 昔の武勇伝は自分で話すと嫌われるので他人に話させろ",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 224295,
+        "type": 1,
+        "name": "銀魂 (70) 悪事をはたらきながら善事をはたらくいきもの",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 228876,
+        "type": 1,
+        "name": "銀魂 (71) おもしろきこともなき世をおもしろく",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 240213,
+        "type": 1,
+        "name": "銀魂 (72) 手を借りるのは肉球のある獣にしておけ",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 247800,
+        "type": 1,
+        "name": "銀魂 (73) 命の灯",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 252670,
+        "type": 1,
+        "name": "銀魂 (74) あばよ",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 262661,
+        "type": 1,
+        "name": "銀魂 (75) 救い",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 275778,
+        "type": 1,
+        "name": "銀魂 (76) あの日常",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 287913,
+        "type": 1,
+        "name": "銀魂 (77) 天然パーマにロクな奴はいない",
+        "name_cn": "",
+        "relation": "单行本"
+      }
+    ],
+    "11834": [
+      {
+        "id": 26990,
+        "type": 3,
+        "name": "ジレンマ",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 453179,
+        "type": 2,
+        "name": "銀魂オンシアター2D バラガキ篇",
+        "name_cn": "银魂ON THEATER 2D 荆棘流氓篇",
+        "relation": "总集篇"
+      },
+      {
+        "id": 256076,
+        "type": 4,
+        "name": "梦幻模拟战手游",
+        "name_cn": "梦幻模拟战手游",
+        "relation": "游戏"
+      },
+      {
+        "id": 228849,
+        "type": 3,
+        "name": "人生に卒業はない。留年と停学はある。",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 181776,
+        "type": 1,
+        "name": "オフィシャルアニメーションガイド 銀魂あにめサンサン録",
+        "name_cn": "",
+        "relation": "画集"
+      },
+      {
+        "id": 147877,
+        "type": 3,
+        "name": "キャバ嬢の誕生日は男たちにとってちょっとした天下一武道会",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 88040,
+        "type": 3,
+        "name": "銀魂BEST3",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 53678,
+        "type": 3,
+        "name": "ムーンウォーク",
+        "name_cn": "Moon Walk",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 47576,
+        "type": 2,
+        "name": "銀魂' 延長戦",
+        "name_cn": "银魂' 延长战",
+        "relation": "续集"
+      },
+      {
+        "id": 35855,
+        "type": 3,
+        "name": "仲間",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 34255,
+        "type": 3,
+        "name": "ワンダーランド",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 247,
+        "type": 2,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "前传"
+      },
+      {
+        "id": 26988,
+        "type": 3,
+        "name": "アナグラ",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 23308,
+        "type": 3,
+        "name": "バランスドール",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 17748,
+        "type": 3,
+        "name": "桃源郷エイリアン",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 15078,
+        "type": 3,
+        "name": "サムライハート(Some Like It Hot!!)",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 10338,
+        "type": 2,
+        "name": "SKET DANCE",
+        "name_cn": "学园救援团",
+        "relation": "角色出演"
+      },
+      {
+        "id": 8628,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック 8BIT VER.",
+        "name_cn": "银魂 OST 8位机音效",
+        "relation": "原声集"
+      },
+      {
+        "id": 7036,
+        "type": 3,
+        "name": "雪のツバサ",
+        "name_cn": "雪之翼",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 4857,
+        "type": 3,
+        "name": "寺門通ファーストアルバム 『浮世のことなんて今日は忘れて楽しんでいってネクロマンサー』",
+        "name_cn": "",
+        "relation": "插入歌"
+      },
+      {
+        "id": 4705,
+        "type": 1,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "书籍"
+      }
+    ],
+    "47576": [
+      {
+        "id": 4475,
+        "type": 2,
+        "name": "劇場版 銀魂 新訳紅桜篇",
+        "name_cn": "银魂剧场版 新译红樱篇",
+        "relation": "衍生"
+      },
+      {
+        "id": 4705,
+        "type": 1,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "书籍"
+      },
+      {
+        "id": 11834,
+        "type": 2,
+        "name": "銀魂'",
+        "name_cn": "银魂'",
+        "relation": "前传"
+      },
+      {
+        "id": 48388,
+        "type": 3,
+        "name": "LET’S GO OUT",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 53678,
+        "type": 3,
+        "name": "ムーンウォーク",
+        "name_cn": "Moon Walk",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 61969,
+        "type": 3,
+        "name": "エクスペクト",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 62784,
+        "type": 3,
+        "name": "サクラミツツキ",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 67217,
+        "type": 2,
+        "name": "劇場版 銀魂 完結篇 万事屋よ永遠なれ",
+        "name_cn": "银魂剧场版 完结篇 万事屋永不落",
+        "relation": "番外篇"
+      },
+      {
+        "id": 71951,
+        "type": 3,
+        "name": "銀魂' 延長戦 03 特典CD オリジナル・サウンドトラック",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 88040,
+        "type": 3,
+        "name": "銀魂BEST3",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 120791,
+        "type": 2,
+        "name": "銀魂°",
+        "name_cn": "银魂°",
+        "relation": "续集"
+      },
+      {
+        "id": 229426,
+        "type": 3,
+        "name": "恋なんて言わばエロとリア充のシーソーゲーム",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 480096,
+        "type": 2,
+        "name": "銀魂オンシアター2D 一国傾城篇",
+        "name_cn": "银魂ON THEATER 2D 一国倾城篇",
+        "relation": "总集篇"
+      },
+      {
+        "id": 500060,
+        "type": 2,
+        "name": "銀魂オンシアター2D 金魂篇",
+        "name_cn": "银魂ON THEATER 2D 金魂篇",
+        "relation": "总集篇"
+      },
+      {
+        "id": 528372,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック 6",
+        "name_cn": "",
+        "relation": "原声集"
+      }
+    ],
+    "120791": [
+      {
+        "id": 159902,
+        "type": 3,
+        "name": "あっちむいて",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 528372,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック 6",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 467502,
+        "type": 2,
+        "name": "銀魂 〜美味いモノは後回しにすると横取りされるからやっぱり先に食え〜",
+        "name_cn": "银魂 第297.5话 银魂动画史上最大的事件",
+        "relation": "番外篇"
+      },
+      {
+        "id": 229432,
+        "type": 3,
+        "name": "銀魂BEST4",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 193298,
+        "type": 2,
+        "name": "銀魂.",
+        "name_cn": "银魂.",
+        "relation": "续集"
+      },
+      {
+        "id": 181775,
+        "type": 1,
+        "name": "オフィシャルアニメーションガイド 銀魂あにめイロイロ生",
+        "name_cn": "",
+        "relation": "画集"
+      },
+      {
+        "id": 168086,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック 5",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 161710,
+        "type": 2,
+        "name": "銀魂 愛染香篇",
+        "name_cn": "银魂 爱染香篇",
+        "relation": "番外篇"
+      },
+      {
+        "id": 4705,
+        "type": 1,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "书籍"
+      },
+      {
+        "id": 159901,
+        "type": 3,
+        "name": "KNOW KNOW KNOW",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 154627,
+        "type": 3,
+        "name": "グロリアスデイズ",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 154626,
+        "type": 3,
+        "name": "Beautiful Days",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 139042,
+        "type": 3,
+        "name": "最後までII",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 139041,
+        "type": 3,
+        "name": "プライド革命",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 129693,
+        "type": 3,
+        "name": "DESTINY",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 129396,
+        "type": 3,
+        "name": "DAY×DAY",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 114391,
+        "type": 2,
+        "name": "銀魂 〜布団に入ってから拭き残しに気付いて寝るに寝れない時もある〜",
+        "name_cn": "银魂 〜偶尔也会有钻进被子发现屁股没擦干净想睡也睡不着的时候〜",
+        "relation": "番外篇"
+      },
+      {
+        "id": 47576,
+        "type": 2,
+        "name": "銀魂' 延長戦",
+        "name_cn": "银魂' 延长战",
+        "relation": "前传"
+      },
+      {
+        "id": 229428,
+        "type": 3,
+        "name": "ジャンク真選組",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 229427,
+        "type": 3,
+        "name": "3年Z組　銀八先生～学園祭ではしゃいで骨折する奴は絶対イイ奴～",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 229429,
+        "type": 3,
+        "name": "多毛さんアワー「笑ってよきかな？」",
+        "name_cn": "",
+        "relation": "广播剧"
+      }
+    ],
+    "135218": [
+      {
+        "id": 172302,
+        "type": 1,
+        "name": "手品先輩",
+        "name_cn": "魔术学姐",
+        "relation": "联动"
+      },
+      {
+        "id": 303186,
+        "type": 1,
+        "name": "【推しの子】",
+        "name_cn": "【我推的孩子】",
+        "relation": "相同世界观"
+      },
+      {
+        "id": 324629,
+        "type": 6,
+        "name": "かぐや様は告らせたい ～天才たちの恋愛頭脳戦～ ファイナル",
+        "name_cn": "辉夜大小姐想让我告白～天才们的恋爱头脑战～ Final",
+        "relation": "三次元"
+      },
+      {
+        "id": 336888,
+        "type": 4,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白 ~天才们的恋爱头脑战~",
+        "relation": "游戏"
+      },
+      {
+        "id": 279250,
+        "type": 1,
+        "name": "かぐや様は告らせたい 公式ファンブック ~天才たちの恋愛戦術~",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 406359,
+        "type": 1,
+        "name": "『かぐや様は告らせたい』ラスト公式ファンブック【秀知院学園卒業パーティー~かぐや様は祝われたい~】",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 275397,
+        "type": 6,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白～天才们的恋爱头脑战～",
+        "relation": "三次元"
+      },
+      {
+        "id": 429627,
+        "type": 1,
+        "name": "恋愛代行",
+        "name_cn": "恋爱代理",
+        "relation": "相同世界观"
+      },
+      {
+        "id": 262233,
+        "type": 1,
+        "name": "かぐや様は告らせたい 同人版",
+        "name_cn": "辉夜大小姐想让我告白 同人版",
+        "relation": "不同世界观"
+      },
+      {
+        "id": 261016,
+        "type": 1,
+        "name": "かぐや様は告らせたい 小説版 ~秀知院学園七不思議~",
+        "name_cn": "辉夜大小姐想让我告白～秀知院学园的七大不可思议～",
+        "relation": "番外篇"
+      },
+      {
+        "id": 461336,
+        "type": 1,
+        "name": "かぐや様は告らせたい 小説版 ~天才たちの恋愛人狼戦~",
+        "name_cn": "",
+        "relation": "番外篇"
+      },
+      {
+        "id": 257333,
+        "type": 1,
+        "name": "かぐや様を語りたい",
+        "name_cn": "想和你讲一讲辉夜大小姐的事",
+        "relation": "番外篇"
+      },
+      {
+        "id": 479677,
+        "type": 1,
+        "name": "竹取物語",
+        "name_cn": "竹取物语",
+        "relation": "其他"
+      },
+      {
+        "id": 144466,
+        "type": 1,
+        "name": "寄宿学校のジュリエット",
+        "name_cn": "寄宿学校的朱丽叶",
+        "relation": "联动"
+      },
+      {
+        "id": 248175,
+        "type": 2,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白～天才们的恋爱头脑战～",
+        "relation": "动画"
+      },
+      {
+        "id": 174260,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (1)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 293049,
+        "type": 2,
+        "name": "かぐや様は告らせたい?～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白?～天才们的恋爱头脑战～",
+        "relation": "动画"
+      },
+      {
+        "id": 188488,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (2)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 317614,
+        "type": 2,
+        "name": "かぐや様は告らせたい？～天才たちの恋愛頭脳戦～ OVA",
+        "name_cn": "辉夜大小姐想让我告白？～天才们的恋爱头脑战～ OVA",
+        "relation": "动画"
+      },
+      {
+        "id": 195510,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (3)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 317613,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ウルトラロマンティック-",
+        "name_cn": "辉夜大小姐想让我告白-超级浪漫-",
+        "relation": "动画"
+      },
+      {
+        "id": 206792,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (4)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 389474,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない- 映画",
+        "name_cn": "辉夜大小姐想让我告白-初吻不会结束- 电影",
+        "relation": "动画"
+      },
+      {
+        "id": 215435,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (5)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 425211,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない-",
+        "name_cn": "辉夜大小姐想让我告白-初吻不会结束-",
+        "relation": "动画"
+      },
+      {
+        "id": 220390,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (6)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 230490,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (7)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 565802,
+        "type": 2,
+        "name": "かぐや様は告らせたい 大人への階段",
+        "name_cn": "辉夜大小姐想让我告白 通往大人的阶梯",
+        "relation": "动画"
+      },
+      {
+        "id": 619013,
+        "type": 2,
+        "name": "かぐや様は告らせたい 完結編",
+        "name_cn": "辉夜大小姐想让我告白 完结篇",
+        "relation": "动画"
+      },
+      {
+        "id": 236615,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (8)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 246071,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (9)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 246072,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (10)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 261015,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (11)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 268549,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (12)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 272060,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (13)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 278492,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (14)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 287060,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (15)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 291278,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (16)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 298372,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (17)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 303845,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (18)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 310126,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (19)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 319242,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (20)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 327355,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (21)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 336713,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (22)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 346820,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (23)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 354578,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (24)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 367583,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ (25)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 381228,
+        "type": 1,
+        "name": "かぐや様は告らせたい ~天才たちの恋愛頭脳戦~ (26)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 396588,
+        "type": 1,
+        "name": "かぐや様は告らせたい ~天才たちの恋愛頭脳戦~ (27)",
+        "name_cn": "",
+        "relation": "单行本"
+      },
+      {
+        "id": 405431,
+        "type": 1,
+        "name": "かぐや様は告らせたい ~天才たちの恋愛頭脳戦~ (28)",
+        "name_cn": "",
+        "relation": "单行本"
+      }
+    ],
+    "193298": [
+      {
+        "id": 4705,
+        "type": 1,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "书籍"
+      },
+      {
+        "id": 120791,
+        "type": 2,
+        "name": "銀魂°",
+        "name_cn": "银魂°",
+        "relation": "前传"
+      },
+      {
+        "id": 161051,
+        "type": 4,
+        "name": "テイルズ オブ ザ レイズ",
+        "name_cn": "镜光传说",
+        "relation": "游戏"
+      },
+      {
+        "id": 205510,
+        "type": 3,
+        "name": "カゲロウ",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 209696,
+        "type": 3,
+        "name": "SILVER",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 213121,
+        "type": 3,
+        "name": "今日もサクラ舞う暁に",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 218740,
+        "type": 2,
+        "name": "銀魂. ポロリ篇",
+        "name_cn": "银魂. 走光篇",
+        "relation": "续集"
+      },
+      {
+        "id": 423783,
+        "type": 3,
+        "name": "銀魂BEST5",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 528372,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック 6",
+        "name_cn": "",
+        "relation": "原声集"
+      }
+    ],
+    "232884": [
+      {
+        "id": 4705,
+        "type": 1,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "书籍"
+      },
+      {
+        "id": 204027,
+        "type": 2,
+        "name": "斉木楠雄のΨ難 第2期",
+        "name_cn": "齐木楠雄的灾难 第二季",
+        "relation": "角色出演"
+      },
+      {
+        "id": 218740,
+        "type": 2,
+        "name": "銀魂. ポロリ篇",
+        "name_cn": "银魂. 走光篇",
+        "relation": "前传"
+      },
+      {
+        "id": 234886,
+        "type": 3,
+        "name": "勝手にMY SOUL",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 234887,
+        "type": 3,
+        "name": "花一匁",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 240811,
+        "type": 2,
+        "name": "銀魂. 銀ノ魂篇 第2クール",
+        "name_cn": "银魂. 银之魂篇 第二季",
+        "relation": "续集"
+      },
+      {
+        "id": 423783,
+        "type": 3,
+        "name": "銀魂BEST5",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 528372,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック 6",
+        "name_cn": "",
+        "relation": "原声集"
+      }
+    ],
+    "240811": [
+      {
+        "id": 4705,
+        "type": 1,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "书籍"
+      },
+      {
+        "id": 232884,
+        "type": 2,
+        "name": "銀魂. 銀ノ魂篇",
+        "name_cn": "银魂. 银之魂篇",
+        "relation": "前传"
+      },
+      {
+        "id": 252946,
+        "type": 3,
+        "name": "ヒカリ証明論",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 252947,
+        "type": 3,
+        "name": "I Wanna Be...",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 276641,
+        "type": 2,
+        "name": "銀魂 THE FINAL",
+        "name_cn": "银魂 THE FINAL",
+        "relation": "续集"
+      },
+      {
+        "id": 309002,
+        "type": 2,
+        "name": "銀魂 THE SEMI-FINAL",
+        "name_cn": "银魂 THE SEMI-FINAL",
+        "relation": "续集"
+      },
+      {
+        "id": 423783,
+        "type": 3,
+        "name": "銀魂BEST5",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 528372,
+        "type": 3,
+        "name": "銀魂 オリジナル・サウンドトラック 6",
+        "name_cn": "",
+        "relation": "原声集"
+      }
+    ],
+    "248175": [
+      {
+        "id": 135218,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白 ~天才们的恋爱头脑战~",
+        "relation": "书籍"
+      },
+      {
+        "id": 267564,
+        "type": 3,
+        "name": "センチメンタルクライシス",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 270919,
+        "type": 3,
+        "name": "ラブ・ドラマティック",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 273433,
+        "type": 3,
+        "name": "チカっとチカ千花っ♡",
+        "name_cn": "千花啊千花千花",
+        "relation": "插入歌"
+      },
+      {
+        "id": 273435,
+        "type": 3,
+        "name": "かぐや様はよく知らない / 藤原千花は食べられたい",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 275397,
+        "type": 6,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白～天才们的恋爱头脑战～",
+        "relation": "不同演绎"
+      },
+      {
+        "id": 293049,
+        "type": 2,
+        "name": "かぐや様は告らせたい?～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白?～天才们的恋爱头脑战～",
+        "relation": "续集"
+      },
+      {
+        "id": 371339,
+        "type": 3,
+        "name": "KAGUYA ♡ ULTRA BEST",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 508557,
+        "type": 6,
+        "name": "平成最後の告RADIO〜powered by 四宮グループ〜",
+        "name_cn": "",
+        "relation": "衍生"
+      },
+      {
+        "id": 508560,
+        "type": 6,
+        "name": "告RADIO ROAD TO 2020",
+        "name_cn": "",
+        "relation": "衍生"
+      },
+      {
+        "id": 273432,
+        "type": 3,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ オリジナルサウンドトラック vol.1",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 273437,
+        "type": 3,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～ オリジナルサウンドトラック vol.2",
+        "name_cn": "",
+        "relation": "原声集"
+      }
+    ],
+    "276641": [
+      {
+        "id": 4705,
+        "type": 1,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "书籍"
+      },
+      {
+        "id": 240811,
+        "type": 2,
+        "name": "銀魂. 銀ノ魂篇 第2クール",
+        "name_cn": "银魂. 银之魂篇 第二季",
+        "relation": "前传"
+      },
+      {
+        "id": 309002,
+        "type": 2,
+        "name": "銀魂 THE SEMI-FINAL",
+        "name_cn": "银魂 THE SEMI-FINAL",
+        "relation": "前传"
+      },
+      {
+        "id": 320736,
+        "type": 3,
+        "name": "映画「銀魂 THE FINAL」オリジナル・サウンドトラック",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 322033,
+        "type": 3,
+        "name": "轍~Wadachi~",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 322034,
+        "type": 3,
+        "name": "道楽心情",
+        "name_cn": "",
+        "relation": "插入歌"
+      },
+      {
+        "id": 354505,
+        "type": 1,
+        "name": "銀魂 THE FINAL アニメコミックス",
+        "name_cn": "",
+        "relation": "书籍"
+      },
+      {
+        "id": 423783,
+        "type": 3,
+        "name": "銀魂BEST5",
+        "name_cn": "",
+        "relation": "其他"
+      }
+    ],
+    "293049": [
+      {
+        "id": 135218,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白 ~天才们的恋爱头脑战~",
+        "relation": "书籍"
+      },
+      {
+        "id": 248175,
+        "type": 2,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白～天才们的恋爱头脑战～",
+        "relation": "前传"
+      },
+      {
+        "id": 298685,
+        "type": 3,
+        "name": "「かぐや様は告らせたい?~天才たちの恋愛頭脳戦~」キャラクターソング01 四宮かぐや(古賀 葵)",
+        "name_cn": "",
+        "relation": "角色歌"
+      },
+      {
+        "id": 298687,
+        "type": 3,
+        "name": "「かぐや様は告らせたい?~天才たちの恋愛頭脳戦~」キャラクターソング02 藤原千花(小原好美)",
+        "name_cn": "",
+        "relation": "角色歌"
+      },
+      {
+        "id": 298689,
+        "type": 3,
+        "name": "「かぐや様は告らせたい?~天才たちの恋愛頭脳戦~」キャラクターソング03 伊井野ミコ(富田美憂)",
+        "name_cn": "",
+        "relation": "角色歌"
+      },
+      {
+        "id": 303629,
+        "type": 3,
+        "name": "DADDY ! DADDY ! DO ! feat. 鈴木愛理",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 304239,
+        "type": 3,
+        "name": "風に吹かれて",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 317613,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ウルトラロマンティック-",
+        "name_cn": "辉夜大小姐想让我告白-超级浪漫-",
+        "relation": "续集"
+      },
+      {
+        "id": 371339,
+        "type": 3,
+        "name": "KAGUYA ♡ ULTRA BEST",
+        "name_cn": "",
+        "relation": "其他"
+      },
+      {
+        "id": 508559,
+        "type": 6,
+        "name": "告RADIO 3",
+        "name_cn": "",
+        "relation": "衍生"
+      },
+      {
+        "id": 512160,
+        "type": 3,
+        "name": "ラジオCD「告RADIO ROAD TO 2020」",
+        "name_cn": "",
+        "relation": "广播剧"
+      },
+      {
+        "id": 307463,
+        "type": 3,
+        "name": "かぐや様は告らせたい?~天才たちの恋愛頭脳戦~ オリジナルサウンドトラック vol.1",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 312019,
+        "type": 3,
+        "name": "かぐや様は告らせたい?~天才たちの恋愛頭脳戦~ オリジナルサウンドトラック vol.2",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 317614,
+        "type": 2,
+        "name": "かぐや様は告らせたい？～天才たちの恋愛頭脳戦～ OVA",
+        "name_cn": "辉夜大小姐想让我告白？～天才们的恋爱头脑战～ OVA",
+        "relation": "番外篇"
+      },
+      {
+        "id": 316017,
+        "type": 3,
+        "name": "かぐや様は告らせたい?~天才たちの恋愛頭脳戦~ オリジナルサウンドトラック vol.3",
+        "name_cn": "",
+        "relation": "原声集"
+      }
+    ],
+    "317613": [
+      {
+        "id": 135218,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白 ~天才们的恋爱头脑战~",
+        "relation": "书籍"
+      },
+      {
+        "id": 250372,
+        "type": 4,
+        "name": "雀魂麻将",
+        "name_cn": "雀魂麻将",
+        "relation": "角色出演"
+      },
+      {
+        "id": 267564,
+        "type": 3,
+        "name": "センチメンタルクライシス",
+        "name_cn": "",
+        "relation": "插入歌"
+      },
+      {
+        "id": 293049,
+        "type": 2,
+        "name": "かぐや様は告らせたい?～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白?～天才们的恋爱头脑战～",
+        "relation": "前传"
+      },
+      {
+        "id": 377936,
+        "type": 3,
+        "name": "GIRI GIRI",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 378767,
+        "type": 3,
+        "name": "ハートはお手上げ",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 381149,
+        "type": 3,
+        "name": "My Nonfiction",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 389474,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない- 映画",
+        "name_cn": "辉夜大小姐想让我告白-初吻不会结束- 电影",
+        "relation": "续集"
+      },
+      {
+        "id": 425211,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない-",
+        "name_cn": "辉夜大小姐想让我告白-初吻不会结束-",
+        "relation": "续集"
+      },
+      {
+        "id": 508558,
+        "type": 6,
+        "name": "告RADIO",
+        "name_cn": "",
+        "relation": "衍生"
+      },
+      {
+        "id": 377550,
+        "type": 3,
+        "name": "かぐや様は告らせたい-ウルトラロマンティック- オリジナル・サウンドトラック vol.1",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 399022,
+        "type": 3,
+        "name": "かぐや様は告らせたい-ウルトラロマンティック- オリジナル・サウンドトラック vol.2",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 406439,
+        "type": 3,
+        "name": "かぐや様は告らせたい-ウルトラロマンティック- オリジナル・サウンドトラック vol.3",
+        "name_cn": "",
+        "relation": "原声集"
+      }
+    ],
+    "317614": [
+      {
+        "id": 135218,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白 ~天才们的恋爱头脑战~",
+        "relation": "书籍"
+      },
+      {
+        "id": 293049,
+        "type": 2,
+        "name": "かぐや様は告らせたい?～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白?～天才们的恋爱头脑战～",
+        "relation": "主线故事"
+      },
+      {
+        "id": 303629,
+        "type": 3,
+        "name": "DADDY ! DADDY ! DO ! feat. 鈴木愛理",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 304239,
+        "type": 3,
+        "name": "風に吹かれて",
+        "name_cn": "",
+        "relation": "片尾曲"
+      }
+    ],
+    "389474": [
+      {
+        "id": 135218,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白 ~天才们的恋爱头脑战~",
+        "relation": "书籍"
+      },
+      {
+        "id": 317613,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ウルトラロマンティック-",
+        "name_cn": "辉夜大小姐想让我告白-超级浪漫-",
+        "relation": "前传"
+      },
+      {
+        "id": 409051,
+        "type": 3,
+        "name": "nolca solca",
+        "name_cn": "",
+        "relation": "插入歌"
+      },
+      {
+        "id": 411159,
+        "type": 3,
+        "name": "Love is Show",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 411564,
+        "type": 3,
+        "name": "heart notes",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 425211,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない-",
+        "name_cn": "辉夜大小姐想让我告白-初吻不会结束-",
+        "relation": "全集"
+      },
+      {
+        "id": 427514,
+        "type": 3,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない- オリジナル・サウンドトラック",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 565802,
+        "type": 2,
+        "name": "かぐや様は告らせたい 大人への階段",
+        "name_cn": "辉夜大小姐想让我告白 通往大人的阶梯",
+        "relation": "续集"
+      }
+    ],
+    "425208": [
+      {
+        "id": 247,
+        "type": 2,
+        "name": "銀魂",
+        "name_cn": "银魂",
+        "relation": "不同世界观"
+      },
+      {
+        "id": 2852,
+        "type": 1,
+        "name": "3年Z組銀八先生",
+        "name_cn": "3年Z班银八老师",
+        "relation": "书籍"
+      },
+      {
+        "id": 581019,
+        "type": 3,
+        "name": "桜風",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 584993,
+        "type": 3,
+        "name": "Underclass HERO",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 592677,
+        "type": 3,
+        "name": "3年Z組銀八先生 オリジナル・サウンドトラック",
+        "name_cn": "",
+        "relation": "原声集"
+      }
+    ],
+    "425211": [
+      {
+        "id": 135218,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白 ~天才们的恋爱头脑战~",
+        "relation": "书籍"
+      },
+      {
+        "id": 317613,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ウルトラロマンティック-",
+        "name_cn": "辉夜大小姐想让我告白-超级浪漫-",
+        "relation": "前传"
+      },
+      {
+        "id": 389474,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない- 映画",
+        "name_cn": "辉夜大小姐想让我告白-初吻不会结束- 电影",
+        "relation": "总集篇"
+      },
+      {
+        "id": 409051,
+        "type": 3,
+        "name": "nolca solca",
+        "name_cn": "",
+        "relation": "插入歌"
+      },
+      {
+        "id": 411159,
+        "type": 3,
+        "name": "Love is Show",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 411564,
+        "type": 3,
+        "name": "heart notes",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 427514,
+        "type": 3,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない- オリジナル・サウンドトラック",
+        "name_cn": "",
+        "relation": "原声集"
+      },
+      {
+        "id": 565802,
+        "type": 2,
+        "name": "かぐや様は告らせたい 大人への階段",
+        "name_cn": "辉夜大小姐想让我告白 通往大人的阶梯",
+        "relation": "续集"
+      }
+    ],
+    "565802": [
+      {
+        "id": 135218,
+        "type": 1,
+        "name": "かぐや様は告らせたい～天才たちの恋愛頭脳戦～",
+        "name_cn": "辉夜大小姐想让我告白 ~天才们的恋爱头脑战~",
+        "relation": "书籍"
+      },
+      {
+        "id": 389474,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない- 映画",
+        "name_cn": "辉夜大小姐想让我告白-初吻不会结束- 电影",
+        "relation": "前传"
+      },
+      {
+        "id": 425211,
+        "type": 2,
+        "name": "かぐや様は告らせたい-ファーストキッスは終わらない-",
+        "name_cn": "辉夜大小姐想让我告白-初吻不会结束-",
+        "relation": "前传"
+      },
+      {
+        "id": 614390,
+        "type": 3,
+        "name": "アブナイキオク",
+        "name_cn": "",
+        "relation": "片头曲"
+      },
+      {
+        "id": 619013,
+        "type": 2,
+        "name": "かぐや様は告らせたい 完結編",
+        "name_cn": "辉夜大小姐想让我告白 完结篇",
+        "relation": "续集"
+      },
+      {
+        "id": 619034,
+        "type": 3,
+        "name": "赤と青",
+        "name_cn": "",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 630138,
+        "type": 3,
+        "name": "かぐや様は告らせたい 大人への階段 Blu-ray & DVD 特典CD",
+        "name_cn": "",
+        "relation": "原声集"
+      }
+    ],
+    "6776": [
+      {
+        "id": 899,
+        "type": 2,
+        "name": "名探偵コナン",
+        "name_cn": "名侦探柯南",
+        "relation": "角色出演"
+      },
+      {
+        "id": 5468,
+        "type": 2,
+        "name": "剣勇伝説YAIBA",
+        "name_cn": "剑勇传说 铁刃",
+        "relation": "角色出演"
+      },
+      {
+        "id": 38126,
+        "type": 2,
+        "name": "名探偵コナン 16人の容疑者!?",
+        "name_cn": "名侦探柯南 16名嫌疑犯！？",
+        "relation": "续集"
+      },
+      {
+        "id": 46903,
+        "type": 3,
+        "name": "夏の幻",
+        "name_cn": "夏之幻",
+        "relation": "片尾曲"
+      },
+      {
+        "id": 63160,
+        "type": 1,
+        "name": "YAIBA",
+        "name_cn": "城市风云儿",
+        "relation": "书籍"
+      },
+      {
+        "id": 492881,
+        "type": 2,
+        "name": "真･侍伝 YAIBA",
+        "name_cn": "真･武士传 剑勇传说",
+        "relation": "角色出演"
+      }
+    ]
+  },
+  "extra": {
+    "鬼灭之刃": [
+      {
+        "id": "bgm-327414",
+        "bangumiId": "327414",
+        "title": "鬼灭之刃 初高一体!!鬼灭学园物语",
+        "originalTitle": "鬼滅の刃 中高一貫!! キメツ学園物語",
+        "media": "anime",
+        "year": "2021"
+      },
+      {
+        "id": "bgm-501958",
+        "bangumiId": "501958",
+        "title": "剧场版 鬼灭之刃 无限城篇 第一章 猗窝座再袭",
+        "originalTitle": "劇場版 鬼滅の刃 無限城編 第一章 猗窩座再来",
+        "media": "anime",
+        "year": "2025"
+      }
+    ],
+    "进击的巨人": [
+      {
+        "id": "bgm-415779",
+        "bangumiId": "415779",
+        "title": "进击的巨人 最终季 完结篇 后篇",
+        "originalTitle": "進撃の巨人 The Final Season 完結編 後編",
+        "media": "anime",
+        "year": "2023"
+      },
+      {
+        "id": "bgm-508708",
+        "bangumiId": "508708",
+        "title": "剧场版 进击的巨人 完结篇 THE LAST ATTACK",
+        "originalTitle": "劇場版 進撃の巨人 完結編 THE LAST ATTACK",
+        "media": "anime",
+        "year": "2024"
+      },
+      {
+        "id": "bgm-263750",
+        "bangumiId": "263750",
+        "title": "进击的巨人 第三季 Part.2",
+        "originalTitle": "進撃の巨人 Season 3 Part.2",
+        "media": "anime",
+        "year": "2019"
+      }
+    ],
+    "无职转生": [
+      {
+        "id": "bgm-373247",
+        "bangumiId": "373247",
+        "title": "无职转生 第二季 ～到了异世界就拿出真本事～",
+        "originalTitle": "無職転生Ⅱ ～異世界行ったら本気だす～",
+        "media": "anime",
+        "year": "2023"
+      },
+      {
+        "id": "bgm-444557",
+        "bangumiId": "444557",
+        "title": "无职转生 第二季 ～到了异世界就拿出真本事～ 第2部分",
+        "originalTitle": "無職転生Ⅱ ～異世界行ったら本気だす～ 第2クール",
+        "media": "anime",
+        "year": "2024"
+      },
+      {
+        "id": "bgm-325585",
+        "bangumiId": "325585",
+        "title": "无职转生～到了异世界就拿出真本事～ 第2部分",
+        "originalTitle": "無職転生 ～異世界行ったら本気だす～ 第2クール",
+        "media": "anime",
+        "year": "2021"
+      }
+    ],
+    "轻音": [
+      {
+        "id": "bgm-3774",
+        "bangumiId": "3774",
+        "title": "轻音少女 第二季",
+        "originalTitle": "けいおん！！",
+        "media": "anime",
+        "year": "2010"
+      },
+      {
+        "id": "bgm-12426",
+        "bangumiId": "12426",
+        "title": "轻音少女 剧场版",
+        "originalTitle": "映画けいおん！",
+        "media": "anime",
+        "year": "2011"
+      }
+    ],
+    "夏目友人帐": [
+      {
+        "id": "bgm-259",
+        "bangumiId": "259",
+        "title": "夏目友人帐",
+        "originalTitle": "夏目友人帳",
+        "aliases": [
+          "Natsume Yuujinchou",
+          "Natsume's Book of Friends"
+        ],
+        "media": "anime",
+        "year": "2008",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      },
+      {
+        "id": "bgm-12536",
+        "bangumiId": "12536",
+        "title": "夏目友人帐 叁",
+        "originalTitle": "夏目友人帳 参",
+        "aliases": [
+          "夏目友人帐 三",
+          "Natsume Yuujinchou San",
+          "Natsume's Book of Friends Season 3"
+        ],
+        "media": "anime",
+        "year": "2011",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      },
+      {
+        "id": "bgm-23495",
+        "bangumiId": "23495",
+        "title": "夏目友人帐 肆",
+        "originalTitle": "夏目友人帳 肆",
+        "aliases": [
+          "夏目友人帐 四",
+          "Natsume Yuujinchou Shi",
+          "Natsume's Book of Friends Season 4"
+        ],
+        "media": "anime",
+        "year": "2012",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      },
+      {
+        "id": "bgm-174638",
+        "bangumiId": "174638",
+        "title": "夏目友人帐 伍",
+        "originalTitle": "夏目友人帳 伍",
+        "aliases": [
+          "夏目友人帐 五",
+          "Natsume Yuujinchou Go",
+          "Natsume's Book of Friends Season 5"
+        ],
+        "media": "anime",
+        "year": "2016",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      },
+      {
+        "id": "bgm-203387",
+        "bangumiId": "203387",
+        "title": "夏目友人帐 陆",
+        "originalTitle": "夏目友人帳 陸",
+        "aliases": [
+          "夏目友人帐 六",
+          "Natsume Yuujinchou Roku",
+          "Natsume's Book of Friends Season 6"
+        ],
+        "media": "anime",
+        "year": "2017",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      },
+      {
+        "id": "bgm-443676",
+        "bangumiId": "443676",
+        "title": "夏目友人帐 柒",
+        "originalTitle": "夏目友人帳 漆",
+        "aliases": [
+          "夏目友人帐 七",
+          "Natsume Yuujinchou Shichi",
+          "Natsume's Book of Friends Season 7"
+        ],
+        "media": "anime",
+        "year": "2024",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき「夏目友人帳」"
+          ]
+        }
+      },
+      {
+        "id": "bgm-84501",
+        "bangumiId": "84501",
+        "title": "夏目友人帐 曾几何时下雪之日",
+        "originalTitle": "夏目友人帳 いつかゆきのひに",
+        "aliases": [
+          "Natsume Yuujinchou: Itsuka Yuki no Hi ni",
+          "Natsume’s Book of Friends: On a Certain Snowy Day",
+          "夏目友人帳 OVA"
+        ],
+        "media": "anime",
+        "year": "2014",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      },
+      {
+        "id": "bgm-92627",
+        "bangumiId": "92627",
+        "title": "夏目友人帐 和猫老师的第一次跑腿",
+        "originalTitle": "夏目友人帳 ニャンコ先生とはじめてのおつかい",
+        "aliases": [
+          "夏目友人帐 猫咪老师首次变身使者",
+          "Natsume Yuujinchou: Nyanko-sensei to Hajimete no Otsukai",
+          "Natsume’s Book of Friends: Nyanko-Sensei and the First Errand"
+        ],
+        "media": "anime",
+        "year": "2013",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      },
+      {
+        "id": "bgm-315779",
+        "bangumiId": "315779",
+        "title": "夏目友人帐 唤石者与怪异的访客",
+        "originalTitle": "夏目友人帳 石起こしと怪しき来訪者",
+        "aliases": [
+          "夏目友人帳特別上映版：喚石與可疑訪客",
+          "Natsume Yuujinchou: Ishi Okoshi to Ayashiki Raihousha",
+          "Natsume's Book of Friends: The Waking Rock and the Strange Visitor"
+        ],
+        "media": "anime",
+        "year": "2021",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      },
+      {
+        "id": "bgm-891",
+        "bangumiId": "891",
+        "title": "续 夏目友人帐",
+        "originalTitle": "続 夏目友人帳",
+        "aliases": [
+          "夏目友人帐 二",
+          "Zoku Natsume Yuujinchou",
+          "Natsume's Book of Friends Season 2"
+        ],
+        "media": "anime",
+        "year": "2009",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      },
+      {
+        "id": "bgm-227392",
+        "bangumiId": "227392",
+        "title": "剧场版 夏目友人帐 ～缘结空蝉～",
+        "originalTitle": "劇場版 夏目友人帳 ～うつせみに結ぶ～",
+        "aliases": [
+          "Natsume Yuujinchou Movie: Utsusemi ni Musubu",
+          "Natsume's Book of Friends Movie: Ephemeral Bond"
+        ],
+        "media": "anime",
+        "year": "2018",
+        "seriesMetadata": {
+          "creators": [
+            "緑川ゆき"
+          ]
+        }
+      }
+    ],
+    "名侦探柯南": [
+      {
+        "id": "bgm-899",
+        "bangumiId": "899",
+        "title": "名侦探柯南",
+        "originalTitle": "名探偵コナン",
+        "aliases": [],
+        "media": "anime",
+        "year": "1996",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案协力：奥山丰彦",
+            "浅井认[浅井認]",
+            "都筑伸一郎",
+            "三上信一",
+            "铃木翼",
+            "鸟光裕",
+            "石川昌彦",
+            "林正人",
+            "近藤秀峰",
+            "小仓功雅",
+            "町田尚太",
+            "安达佑斗",
+            "吉田有里",
+            "市原武法",
+            "松本敬天",
+            "舟本理亚瑠",
+            "大岛一范",
+            "堂本强介",
+            "薄谷正和",
+            "小笠原僚也"
+          ]
+        }
+      },
+      {
+        "id": "bgm-823",
+        "bangumiId": "823",
+        "title": "名侦探柯南 瞳孔中的暗杀者",
+        "originalTitle": "名探偵コナン 瞳の中の暗殺者",
+        "aliases": [
+          "名侦探柯南剧场版M4"
+        ],
+        "media": "anime",
+        "year": "2000",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "浅井認"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2783",
+        "bangumiId": "2783",
+        "title": "名侦探柯南 漆黑的追迹者",
+        "originalTitle": "名探偵コナン 漆黒の追跡者",
+        "aliases": [
+          "名侦探柯南剧场版M13",
+          "Meitantei Conan: Shikkoku no Chaser",
+          "Detective Conan: The Raven Chaser"
+        ],
+        "media": "anime",
+        "year": "2009",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "都築伸一郎",
+            "林正人",
+            "近藤秀峰"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2968",
+        "bangumiId": "2968",
+        "title": "名侦探柯南 计时引爆摩天楼",
+        "originalTitle": "名探偵コナン 時計じかけの摩天楼",
+        "aliases": [
+          "名侦探柯南 引爆摩天楼",
+          "名侦探柯南M1",
+          "Meitantei Conan: Tokei Jikake no Matenrou",
+          "Case Closed Movie: The Time-Bombed Skyscraper"
+        ],
+        "media": "anime",
+        "year": "1997",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案协力：奥山豊彦",
+            "浅井認"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2969",
+        "bangumiId": "2969",
+        "title": "名侦探柯南 第14号目标",
+        "originalTitle": "名探偵コナン 14番目の標的",
+        "aliases": [
+          "Detective Conan: The Fourteenth Target",
+          "Meitantei Conan: Juuyonbanme no Target",
+          "名侦探柯南M2",
+          "第十四个目标"
+        ],
+        "media": "anime",
+        "year": "1998",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "浅井認"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2970",
+        "bangumiId": "2970",
+        "title": "名侦探柯南 世纪末的魔术师",
+        "originalTitle": "名探偵コナン 世紀末の魔術師",
+        "aliases": [
+          "名侦探柯南M3"
+        ],
+        "media": "anime",
+        "year": "1999",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "浅井認"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2971",
+        "bangumiId": "2971",
+        "title": "名侦探柯南 通往天国的倒数计时",
+        "originalTitle": "名探偵コナン 天国へのカウントダウン",
+        "aliases": [
+          "名侦探柯南剧场版M5"
+        ],
+        "media": "anime",
+        "year": "2001",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "都築伸一郎",
+            "浅井認",
+            "鈴木翼"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2972",
+        "bangumiId": "2972",
+        "title": "名侦探柯南 贝克街的亡灵",
+        "originalTitle": "名探偵コナン ベイカー街の亡霊",
+        "aliases": [
+          "Case Closed: The Phantom of Baker Street"
+        ],
+        "media": "anime",
+        "year": "2002",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "都築伸一郎",
+            "三上信一",
+            "鳥光裕"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2973",
+        "bangumiId": "2973",
+        "title": "名侦探柯南 迷宫的十字路口",
+        "originalTitle": "名探偵コナン 迷宮の十字路",
+        "aliases": [
+          "名侦探柯南剧场版M7"
+        ],
+        "media": "anime",
+        "year": "2003",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "都築伸一郎",
+            "三上信一",
+            "鳥光裕"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2974",
+        "bangumiId": "2974",
+        "title": "名侦探柯南 银翼的魔术师",
+        "originalTitle": "名探偵コナン 銀翼の奇術師",
+        "aliases": [
+          "名侦探柯南 银翼的奇术师",
+          "名侦探柯南剧场版M8"
+        ],
+        "media": "anime",
+        "year": "2004",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "都築伸一郎",
+            "三上信一",
+            "鳥光裕"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2975",
+        "bangumiId": "2975",
+        "title": "名侦探柯南 水平线上的阴谋",
+        "originalTitle": "名探偵コナン 水平線上の陰謀",
+        "aliases": [
+          "名侦探柯南剧场版M9"
+        ],
+        "media": "anime",
+        "year": "2005",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "都築伸一郎",
+            "林正人",
+            "石川昌彦"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2976",
+        "bangumiId": "2976",
+        "title": "名侦探柯南 侦探们的镇魂歌",
+        "originalTitle": "名探偵コナン 探偵たちの鎮魂歌",
+        "aliases": [
+          "名侦探柯南剧场版M10",
+          "Meitantei Conan: Tantei-tachi no Requiem",
+          "Detective Conan: The Private Eyes' Requiem"
+        ],
+        "media": "anime",
+        "year": "2006",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "都築伸一郎",
+            "林正人",
+            "石川昌彦"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2977",
+        "bangumiId": "2977",
+        "title": "名侦探柯南 绀碧之棺",
+        "originalTitle": "名探偵コナン 紺碧の棺",
+        "aliases": [
+          "名侦探柯南剧场版M11",
+          "Meitantei Conan: Konpeki no Jorî Rojâ"
+        ],
+        "media": "anime",
+        "year": "2007",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "都築伸一郎",
+            "林正人",
+            "近藤秀峰"
+          ]
+        }
+      },
+      {
+        "id": "bgm-2978",
+        "bangumiId": "2978",
+        "title": "名侦探柯南 战栗的乐谱",
+        "originalTitle": "名探偵コナン 戦慄の楽譜",
+        "aliases": [
+          "名侦探柯南剧场版M12"
+        ],
+        "media": "anime",
+        "year": "2008",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "都築伸一郎",
+            "林正人",
+            "近藤秀峰"
+          ]
+        }
+      },
+      {
+        "id": "bgm-3628",
+        "bangumiId": "3628",
+        "title": "名侦探柯南 天空的遇难船",
+        "originalTitle": "名探偵コナン 天空の難破船",
+        "aliases": [
+          "名侦探柯南剧场版M14",
+          "Meitantei Conan: Tenkuu no Lost Ship",
+          "名侦探柯南 天空的迷航船",
+          "Detective Conan: The Lost ship in the Sky"
+        ],
+        "media": "anime",
+        "year": "2010",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：奥山豊彦",
+            "横田清",
+            "縄田正樹",
+            "近藤秀峰"
+          ]
+        }
+      },
+      {
+        "id": "bgm-6776",
+        "bangumiId": "6776",
+        "title": "柯南对基德对铁剑 宝刀争夺大决战",
+        "originalTitle": "名探偵コナン コナンvsキッドvsヤイバ 宝刀争奪大決戦!!",
+        "aliases": [
+          "名侦探柯南OVA1",
+          "Conan vs Kid vs Yaiba: The Decisive Battle over the Treasured Sword"
+        ],
+        "media": "anime",
+        "year": "2000",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌"
+          ]
+        }
+      },
+      {
+        "id": "bgm-10308",
+        "bangumiId": "10308",
+        "title": "名侦探柯南 沉默的15分钟",
+        "originalTitle": "名探偵コナン 沈黙の15分",
+        "aliases": [
+          "名侦探柯南剧场版M15",
+          "Meitantei Conan: Chinmoku no Quarter",
+          "めいたんていコナン ちんもくのクォーター",
+          "Detective Conan 2011: Quarter of Silence"
+        ],
+        "media": "anime",
+        "year": "2011",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌",
+            "原案協力：横田清",
+            "林正人",
+            "縄田正樹",
+            "近藤秀峰",
+            "小倉功雅"
+          ]
+        }
+      },
+      {
+        "id": "bgm-15871",
+        "bangumiId": "15871",
+        "title": "名侦探柯南 MAGIC FILE 2011 ～新泻·东京 礼物狂想曲～",
+        "originalTitle": "名探偵コナン MAGIC FILE2011 新潟～東京 おみやげ狂騒曲",
+        "aliases": [
+          "Meitantei Conan Magic File 2011: Niigata - Tokyo Omiyage Capriccio"
+        ],
+        "media": "anime",
+        "year": "2011",
+        "seriesMetadata": {
+          "creators": []
+        }
+      },
+      {
+        "id": "bgm-18361",
+        "bangumiId": "18361",
+        "title": "名侦探柯南 来自伦敦的秘密指令",
+        "originalTitle": "名探偵コナン ロンドンからの秘指令",
+        "aliases": [
+          "名探偵コナン ロンドンからの㊙指令",
+          "Meitantei Conan: London kara no Maru Hi Shirei",
+          "名侦探柯南 来自伦敦的绝密指令"
+        ],
+        "media": "anime",
+        "year": "2011",
+        "seriesMetadata": {
+          "creators": []
+        }
+      },
+      {
+        "id": "bgm-38118",
+        "bangumiId": "38118",
+        "title": "名侦探柯南 怪盗基德孤岛决战",
+        "originalTitle": "名探偵コナン KID in TRAP ISLAND",
+        "aliases": [
+          "名探偵コナン ~KID in TRAP ISLAND~",
+          "Meitantei Conan: Kid in Trap Island"
+        ],
+        "media": "anime",
+        "year": "2010",
+        "seriesMetadata": {
+          "creators": [
+            "青山剛昌"
+          ]
+        }
+      }
+    ]
+  }
+}
