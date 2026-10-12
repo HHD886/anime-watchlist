@@ -48,3 +48,9 @@ node --test src/core.test.cjs src/series.test.cjs src/series-v46.test.cjs src/se
 ```
 
 主要修改：`src/series.js`、`src/automation.js`、`src/core.js`、`src/app.js`、`src/style.css`、`src/sw.js`；对应生成页面、插件共享文件/版本/ZIP，以及 `src/series-v47.test.cjs` 和公共 API 快照 `src/fixtures/series-v47.json`。其他模块保持原有结构。
+
+### 部署与浏览器验收
+
+代码提交 `bcd20000` 的 Pages 构建部署成功。线上 HTML、Service Worker 和插件包与测试产物逐字节一致。原编辑器网址正常载入 v4.7；浏览器验证副本仍有 474 条、2 部已评分、1 部心头好。实际搜索“傷物語 II”仅显示对应子作品封面，点击打开正确详情，系列入口高亮该作品；卡片封面实际宽 112px、标题 16px。
+
+全库网络扫描仍在后台运行，未标记为“浏览器全量扫描完成”。手机断点样式已实现，未进行手机浏览器视觉验收。详见 [完成状态](UPGRADE-v4.7-status.json)。
