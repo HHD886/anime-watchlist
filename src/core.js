@@ -84,6 +84,7 @@
   }
   function seriesBase(title) {
     let base=seriesName(title).normalize('NFKC').replace(/^(?:(?:剧场版|劇場版|映画)\s*|(?:续|続)\s+)/,'').replace(/\s*(?:第[\d一二三四五六七八九十百]+(?:季|期|部分|クール)|\b(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season|OVA|OAD|SP|part\s*\d+|THE\s+(?:SEMI-)?FINAL)\b|番外|特别篇|特別編|[上中下前后後][篇編部]).*$/i,'');
+    base=base.replace(/[〈<（(\[]\s*(?:[IVX]+|\d+)(?:\s|[〉>）)\]]).*$/i,'');
     const subtitle=base.match(/^(.{4,}?)[~～〜—–:：-].+$/),space=base.match(/^([^\s]{4,})\s+.+$/);
     if(subtitle)base=subtitle[1];else if(space&&/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(space[1]))base=space[1];
     return base.replace(/[\s!?！？'′’°.。·・:：~～〜\-—]+$/,'').trim();
@@ -201,13 +202,14 @@
   function grade(i) {return i.score==null?'unrated':gradeBands.find(b=>i.score>=b.min&&i.score<=b.max)?.id||'unrated';}
   function isWatching(i) {return i.inWatchlist!==false&&!['done','dropped'].includes(i.status);}
   function filter(items,f={}) {
-    const words=str(f.query).toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+    const searchText=v=>str(v).normalize('NFKC').toLocaleLowerCase();
+    const words=searchText(f.query).trim().split(/\s+/).filter(Boolean);
     const selected=tags([...(Array.isArray(f.tags)?f.tags:[]),...(f.tag?[f.tag]:[])]);
     const years=tags(Array.isArray(f.years)?f.years:[]);
     return items.filter(i=>{
       const own=[...i.tags,...i.personalTags];
       const tagged=!selected.length||(f.tagMode==='any'?selected.some(t=>own.includes(t)):selected.every(t=>own.includes(t)));
-      return (!f.media||f.media==='all'||i.media===f.media)&&(!f.status||i.status===f.status)&&(!f.grade||grade(i)===f.grade)&&(!f.favorite||i.favorite)&&(!years.length||years.includes(yearOf(i)||'unknown'))&&tagged&&words.every(w=>`${i.title} ${i.originalTitle} ${yearOf(i)} ${i.tags.join(' ')} ${i.personalTags.join(' ')} ${i.note} ${i.review} ${i.series}`.toLocaleLowerCase().includes(w));
+      return (!f.media||f.media==='all'||i.media===f.media)&&(!f.status||i.status===f.status)&&(!f.grade||grade(i)===f.grade)&&(!f.favorite||i.favorite)&&(!years.length||years.includes(yearOf(i)||'unknown'))&&tagged&&words.every(w=>{const text=searchText(`${i.title} ${i.originalTitle} ${(i.aliases||[]).join(' ')} ${(i.seriesSearchNames||[]).join(' ')} ${yearOf(i)} ${i.tags.join(' ')} ${i.personalTags.join(' ')} ${i.note} ${i.review} ${i.series}`);return /^[ivx]+$/.test(w)?new RegExp('(^|[^a-z0-9])'+w+'($|[^a-z0-9])').test(text):text.includes(w);});
     });
   }
   function sort(items,by='recent') {
@@ -236,7 +238,7 @@
       score:collection?.rate?collection.rate:null,bgmScore:s.rating?.score??s.score??null,
       summary:s.summary||s.short_summary||'',review:collection?.comment||'',date:s.date||'',year:s.date?.slice(0,4)||'',
       importedAt:now(),sourceUrl:'https://bgm.tv/subject/'+s.id,
-      seriesMetadata:{creators:(s.infobox||[]).filter(x=>/^(?:原作|作者|原作者|原案)$/.test(x.key)).flatMap(x=>(typeof x.value==='string'?x.value:'').replace(/[（(][^）)]*[）)]/g,'').split(/[;；、,，/]/)).map(x=>x.trim()).filter(Boolean)},
+      seriesMetadata:{version:2,creators:(s.infobox||[]).filter(x=>/^(?:原作|作者|原作者|原案)$/.test(x.key)).flatMap(x=>(typeof x.value==='string'?x.value:'').replace(/[「『][^」』]*[」』]/g,'').replace(/[（(][^）)]*[）)]/g,'').split(/[;；、,，/]/)).map(x=>x.trim()).filter(Boolean),sourceTitles:(s.infobox||[]).filter(x=>/^(?:原作|原案)$/.test(x.key)).flatMap(x=>[...(typeof x.value==='string'?x.value:'').matchAll(/[「『]([^」』]+)[」』]/g)].map(m=>m[1])),narrativeBook:Number(s.type)===1&&/^(?:小说|小說|轻小说|輕小說|漫画|漫畫|Novel|Light Novel|Manga)$/i.test(s.platform||'')},
       classificationUncertain:Number(s.type)===1&&!s.platform&&!tagList.some(x=>/漫画|小说/.test(x))
     });
   }

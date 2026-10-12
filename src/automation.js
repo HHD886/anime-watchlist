@@ -2,9 +2,9 @@
 (function(root){'use strict';
   root.ShelfAutomation={create};
   function create(h){
-    const C=root.Shelf,S=root.ShelfSeries,cache={},subjects={},scanKey='series-scan-v2',backupKey='before-series-v2';
+    const C=root.Shelf,S=root.ShelfSeries,cache={},subjects={},scanKey='series-scan-v3',backupKey='before-series-v3';
     const empty=()=>({version:S.VERSION,done:[],failed:{},paused:false,complete:false,finished:false,review:[],bridgeDone:[],bridgeFailed:{},force:false});
-    let job=empty(),running=false,started=false,stopped=false,starting=null,generation=0,imports=Promise.resolve(),timer,applying=false,signature='',attemptedBridges=new Set(),sync={at:'',count:0,error:''};
+    let job=empty(),running=false,started=false,stopped=false,starting=null,generation=0,imports=Promise.resolve(),timer,applying=false,signature='',attemptedBridges=new Set(),metadataReads=new Set(),sync={at:'',count:0,error:''};
     const copy=x=>JSON.parse(JSON.stringify(x)),send=(type,data={})=>h.post(type,data),ids=()=>[...new Set(h.state.payload.items.map(i=>i.bangumiId).filter(Boolean))];
     const fingerprint=()=>JSON.stringify(h.state.payload.items.map(i=>[i.id,i.bangumiId,i.title,i.originalTitle,i.aliases,i.media,i.series,i.seriesId,i.seriesLocked,i.seriesSource]));
     const client=S.createClient({fetch:(...args)=>fetch(...args),get:async k=>h.get('bgm-'+k),set:async(k,v)=>{await h.put('bgm-'+k,v);if(k.startsWith('relations:'))cache[k.slice(10)]=v;else if(k.startsWith('subject:'))subjects[k.slice(8)]=v;}});
@@ -12,27 +12,29 @@
     function stats(){const present=new Set(ids()),done=new Set(job.done),review=reviews(),failed=Object.keys(job.failed).filter(id=>present.has(id)).length;return {running,paused:job.paused,complete:job.complete,finished:job.finished,total:present.size,done:[...present].filter(id=>done.has(id)&&!job.failed[id]).length,failed,bridgeFailed:Object.keys(job.bridgeFailed||{}).length,review,reviewWorks:new Set(review.flatMap(r=>r.ids)).size,assigned:h.state.payload.items.filter(i=>i.seriesSource==='auto'&&i.seriesId).length,...S.metrics(h.state.payload.items),sync};}
     function changed(){h.progress(stats());}
     async function saveJob(){await h.put(scanKey,copy(job));changed();}
-    function snapshot(){if(!started||h.state.locked||h.state.secondary||h.state.unavailable)return;send('LIBRARY_INDEX',{index:S.minimalIndex(h.state.payload.items,{version:h.state.localRevision,scope:location.href.split('#')[0]},cache)});}
+    function snapshot(){if(!started||h.state.locked||h.state.secondary||h.state.unavailable)return;send('LIBRARY_INDEX',{index:S.minimalIndex(h.state.payload.items,{version:h.state.localRevision,scope:location.href.split('#')[0]},cache,subjects)});}
     async function commit(fn,msg='',undo=false){applying=true;try{await h.commit(fn,msg,undo);signature=fingerprint();}finally{applying=false;}}
     async function apply(expected=generation){
       while(h.state.busy&&!stopped)await new Promise(r=>setTimeout(r,250));if(stopped||expected!==generation)return;
       await commit(()=>{if(expected!==generation)return;const result=S.analyse(h.state.payload.items,cache,subjects);job.review=result.review;if(h.state.payload.seriesSchema===S.VERSION&&h.state.payload.seriesScan?.version===S.VERSION&&h.state.payload.seriesScan.complete===!!job.complete&&JSON.stringify(result.items)===JSON.stringify(h.state.payload.items))return false;h.state.payload.items=result.items;h.state.payload.seriesSchema=S.VERSION;h.state.payload.seriesScan={version:S.VERSION,complete:!!job.complete,at:C.now()};});
       await saveJob();snapshot();
     }
-    async function metadata(sid){if(subjects[sid]?.item?.seriesMetadata)return subjects[sid];const value=await client.subject(sid,!!subjects[sid]);subjects[sid]=value;return value;}
+    async function metadata(sid){if(metadataReads.has(sid)||!job.force&&subjects[sid]?.item?.seriesMetadata?.version===2)return subjects[sid];const value=await client.subject(sid,job.force||!!subjects[sid]);subjects[sid]=value;metadataReads.add(sid);return value;}
     async function enrich(sid,expected){
       const rows=cache[sid]?.rows||[],local=new Set(ids());
       // Ambiguous alternate-setting works need official aliases plus creator evidence.
       const worlds=rows.filter(r=>/世界观|Setting/.test(r.relation)&&local.has(r.id)).slice(0,2);
       if(worlds.length){await metadata(sid);for(const r of worlds){if(expected!==generation)return;await metadata(r.id);}}
       // A bounded bridge lookup connects missing middle seasons / original books.
-      const bridges=rows.filter(r=>!local.has(r.id)&&(S.relationLevel(r)==='high'||['书籍','动画','漫画','小说'].includes(r.relation))).slice(0,2);
+      const candidates=rows.filter(r=>S.bridgePriority(r)>=0).sort((a,b)=>S.bridgePriority(b)-S.bridgePriority(a));
+      const bridges=candidates.filter(r=>!local.has(r.id)).slice(0,3);
+      for(const r of candidates.filter(r=>r.type===1&&['书籍','原作','漫画','小说','系列'].includes(r.relation)).slice(0,2)){if(expected!==generation||job.paused||stopped)return;await metadata(sid);await metadata(r.id);}
       for(const r of bridges){if(expected!==generation||job.paused||stopped)return;if(job.bridgeDone.includes(r.id)||attemptedBridges.has(r.id))continue;if(job.bridgeDone.length+attemptedBridges.size>=120)break;attemptedBridges.add(r.id);
         try{cache[r.id]=await client.relations(r.id,job.force);delete job.bridgeFailed[r.id];job.bridgeDone.push(r.id);}catch(e){job.bridgeFailed[r.id]=e.message;}
       }
     }
     async function scan(){
-      if(running||job.paused||stopped||!started)return;running=true;attemptedBridges=new Set();const expected=generation;changed();
+      if(running||job.paused||stopped||!started)return;running=true;attemptedBridges=new Set();metadataReads=new Set();const expected=generation;changed();
       try{
         // Always analyse all records, even if all network requests were completed earlier.
         await apply(expected);if(expected!==generation)return;
@@ -59,13 +61,13 @@
     async function initialize(){
       if(started||h.state.locked||h.state.secondary||h.state.unavailable)return;
       if(!await h.get(backupKey))await h.put(backupKey,{at:C.now(),payload:copy(h.state.payload)});
-      const old=await h.get(scanKey),legacy=old?null:await h.get('series-scan-v1');
+      const old=await h.get(scanKey),legacy=old?null:(await h.get('series-scan-v2')||await h.get('series-scan-v1'));
       const published=h.state.payload.seriesSchema===S.VERSION&&h.state.payload.seriesScan?.version===S.VERSION&&h.state.payload.seriesScan.complete;
-      job=old?{...empty(),...old}:legacy?{...empty(),done:(legacy.done||[]).filter(id=>!legacy.failed?.[id]),failed:legacy.failed||{}}:published?{...empty(),done:ids(),complete:true,finished:true}:empty();
+      job=old?{...empty(),...old}:legacy?{...empty(),done:[],failed:legacy.failed||{},bridgeDone:legacy.bridgeDone||[],paused:!!legacy.paused}:published?{...empty(),done:ids(),complete:true,finished:true}:empty();
       const all=[...new Set([...ids(),...job.bridgeDone])];for(let n=0;n<all.length;n+=32)await Promise.all(all.slice(n,n+32).map(async sid=>{const [r,s]=await Promise.all([h.get('bgm-relations:'+sid),h.get('bgm-subject:'+sid)]);if(r)cache[sid]=r;if(s)subjects[sid]=s;}));
-      // v1 "done" may include failed/empty responses, and did not inspect bridge/alias data.
+      // Re-evaluate older rules, including previously completed and wrongly grouped works.
       if(!old&&!published)job.done=[];
-      for(const i of h.state.payload.items){if(cache[i.bangumiId]||!i.seriesEvidence?.length)continue;cache[i.bangumiId]={at:0,partial:true,rows:i.seriesEvidence.filter(e=>e.level==='high'&&e.source!=='titles').map(e=>({id:e.from===i.bangumiId?e.to:e.from,relation:e.relation,type:2}))};}
+      for(const i of h.state.payload.items){if(cache[i.bangumiId]||i.seriesAnalysisVersion!==S.VERSION||!i.seriesEvidence?.length)continue;cache[i.bangumiId]={at:0,partial:true,rows:i.seriesEvidence.filter(e=>e.version===S.VERSION&&e.level==='high'&&e.source!=='titles'&&e.rawRelation).map(e=>({id:e.from===i.bangumiId?e.to:e.from,relation:e.rawRelation,type:2}))};}
       started=true;if(!job.paused)await apply();else signature=fingerprint();changed();snapshot();if(!job.paused&&!job.complete)schedule();
     }
     function saved(){if(!started)return;snapshot();if(applying)return;if(fingerprint()!==signature){job.complete=false;job.finished=false;schedule();}}
@@ -80,7 +82,7 @@
       imports=imports.catch(()=>{}).then(async()=>{const request=message.job;if(!request?.item?.bangumiId||!request.receipt)return;if(h.state.busy){send('IMPORT_RESULT',{receipt:request.receipt,error:'作品库正在发布或读取，请稍后重试'});return;}
         try{const sid=C.subjectId(request.item.bangumiId);if(request.relations){const entry={at:Date.now(),rows:S.cleanRelations(request.relations)};await h.put('bgm-relations:'+sid,entry);cache[sid]=entry;}
           await commit(()=>{const merged=C.merge(h.state.payload.items,[request.item],'fill'),result=S.analyse(merged.items,cache,subjects);h.state.payload.items=result.items;job.review=result.review;},'已从 Bangumi 收录「'+request.item.title+'」');
-          send('IMPORT_RESULT',{receipt:request.receipt,index:S.minimalIndex(h.state.payload.items,{version:h.state.localRevision,scope:location.href.split('#')[0]},cache)});job.complete=false;job.finished=false;await saveJob();schedule();
+          send('IMPORT_RESULT',{receipt:request.receipt,index:S.minimalIndex(h.state.payload.items,{version:h.state.localRevision,scope:location.href.split('#')[0]},cache,subjects)});job.complete=false;job.finished=false;await saveJob();schedule();
         }catch(e){send('IMPORT_RESULT',{receipt:request.receipt,error:e.message});sync.error=e.message;changed();}
       });
     }

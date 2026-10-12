@@ -1,3 +1,5 @@
+> 最新修复：**[v4.7 系列证据、子作品搜索与插件更新](UPGRADE-v4.7.md)**。保留本机数据；更新程序请用浏览器 Ctrl + F5。
+
 # anime-watchlist
 
 **当前 v4.6.1：[系列修复与升级说明](UPGRADE-v4.6.md) · [下载 Bangumi 插件 v4.6](Bangumi-Importer-v4.6.zip)**

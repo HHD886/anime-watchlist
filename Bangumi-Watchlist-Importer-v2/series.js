@@ -1,9 +1,9 @@
 /* Shared, conservative Bangumi relationship engine. Never edits personal fields. */
 (function(root,factory){const value=factory(typeof module==='object'&&module.exports?require('./core.js'):root.Shelf);if(typeof module==='object'&&module.exports)module.exports=value;else root.ShelfSeries=value;})(typeof globalThis!=='undefined'?globalThis:this,function(C){
   'use strict';
-  const VERSION=2, TTL=30*86400000;
-  const strong=new Set(['前传','续集','续作','总集篇','全集','番外篇','番外','主线故事','改编','原作','系列','单行本','外传','衍生','Prequel','Sequel','Summary','Full Story','Side Story','Parent Story','Adaptation','Series','Offprint','Spin-off']);
-  const medium=new Set(['相同世界观','不同世界观','不同演绎','不同版本','Same Setting','Same setting','Alternative Setting','Alternative Version','Version']);
+  const VERSION=3, TTL=30*86400000;
+  const strong=new Set(['前传','续集','续作','总集篇','全集','番外篇','番外','主线故事','改编','原作','系列','外传','衍生','Prequel','Sequel','Summary','Full Story','Side Story','Parent Story','Adaptation','Series','Spin-off']);
+  const medium=new Set(['单行本','Offprint','相同世界观','不同世界观','不同演绎','不同版本','Same Setting','Same setting','Alternative Setting','Alternative Version','Version']);
   const crossMedia=new Set(['书籍','書籍','动画','動畫','漫画','漫畫','小说','小說','游戏','遊戲','Book','Anime','Manga','Novel','Game']);
   const id=v=>C.subjectId(v), key=v=>C.seriesKey(v), clone=v=>JSON.parse(JSON.stringify(v));
   function stableId(name){let h=2166136261;for(const ch of key(name)){h^=ch.codePointAt(0);h=Math.imul(h,16777619);}return 'manual-'+(h>>>0).toString(36);}
@@ -23,6 +23,7 @@
     for(const raw of namesOf(i,subjects)){
       const title=C.seriesName(raw).normalize('NFKC'),bare=title.replace(/^(?:(?:剧场版|劇場版|映画|OVA|OAD)\s*|(?:电影|電影|续|続)\s+)/i,'');
       add(bare,/['′’°.。!?！？]$/.test(bare)?'punct':'exact');
+      const bracket=bare.match(/^(.{2,}?)[〈<（(\[]\s*(?:[IVX]+|\d+)(?:\s|[〉>）)\]])/i);if(bracket)add(bracket[1],'version');
       const version=bare.replace(/\s*(?:第[\d一二三四五六七八九十百]+(?:季|期|部|部分|クール)|\b(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season|part\s*\d+|OVA|OAD|SP|SPECIAL|THE\s+(?:SEMI-)?FINAL)\b|剧场版|劇場版|总集篇|総集編|特别篇|特別編|番外|外传|外傳|完结篇|完結編|[上中下前后後][篇編部]).*$/i,'').trim();
       if(version!==bare)add(version,'version');
       for(const candidate of [bare,version]){
@@ -44,7 +45,26 @@
     if(linked){for(const n of namesOf(a,subjects))for(const m of namesOf(b,subjects)){const u=compact(n),v=compact(m);if(Math.min(u.length,v.length)>=6&&(u.includes(v)||v.includes(u)))return {level:'high',relation:'跨媒介关联包含完整作品名'};}}
     return matches.length?{level:'medium',relation:'名称相关但缺少足够的版本或双语依据'}:null;
   }
-  function sharedCreator(a,b,subjects={}){const get=i=>[...(i.seriesMetadata?.creators||[]),...(subjects[i.bangumiId]?.item?.seriesMetadata?.creators||[])].map(compact).filter(Boolean);const x=get(a),y=get(b);return x.some(n=>y.includes(n));}
+  function metadataOf(i,subjects={}){return subjects[i?.bangumiId]?.item?.seriesMetadata||i?.seriesMetadata||{};}
+  function sharedCreator(a,b,subjects={}){const get=i=>(metadataOf(i,subjects).creators||[]).map(n=>compact(n.replace(/[「『][^」』]*[」』]/g,''))).filter(Boolean);const x=get(a),y=get(b);return x.some(n=>y.includes(n));}
+  function referenceBook(i,subjects={}){return ['manga','novel'].includes(i?.media)&&/KEY ANIMATION|PRODUCTION NOTE|ガイド|guide.?book|画集|畫集|插画集|原画集|設定資料|设定集|分镜集|絵コンテ|クロニクル|CHRONICLE|インタビュー|访谈|对谈|対談|アンソロジー|anthology|ヒロイン本|女性角色本/i.test(namesOf(i,subjects).join(' '));}
+  function canonicalBook(i,subjects={}){return metadataOf(i,subjects).narrativeBook&&!referenceBook(i,subjects)&&namesOf(i,subjects).some(n=>/系列|シリーズ|\bseries\b/i.test(n));}
+  function sourceMatches(a,b,subjects={}){const names=namesOf(b,subjects).map(compact);return (metadataOf(a,subjects).sourceTitles||[]).some(n=>names.includes(compact(n)));}
+  // A shared guidebook/anthology is not a shared story. General book links need identity evidence.
+  function relationProof(a,b,r,subjects={}){
+    let level=relationLevel(r);if(!a||!b)return {level,relation:r.relation};
+    if(referenceBook(a,subjects)||referenceBook(b,subjects))return {level:'low',relation:r.relation};
+    if(crossMedia.has(r.relation)||['单行本','Offprint'].includes(r.relation)){
+      const proof=titleProof(a,b,subjects,true),book=metadataOf(a,subjects).narrativeBook||metadataOf(b,subjects).narrativeBook;
+      if(sourceMatches(a,b,subjects)||sourceMatches(b,a,subjects)||book&&['anime','manga','novel'].includes(a.media)&&['anime','manga','novel'].includes(b.media)&&sharedCreator(a,b,subjects))return {level:'high',relation:r.relation+' · 原作名称或作者与叙事书籍相互印证'};
+      if(proof?.level==='high')return {level:'high',relation:r.relation+' · '+proof.relation};
+      level='medium';
+    }
+    return {level,relation:r.relation};
+  }
+  function relationNodes(items,cache={},subjects={}){const nodes=new Map(items.filter(i=>i.bangumiId).map(i=>[i.bangumiId,i]));for(const [sid,e] of Object.entries(subjects))if(e?.item&&!nodes.has(sid))nodes.set(sid,e.item);for(const e of Object.values(cache))for(const r of e?.rows||[])if(!nodes.has(id(r.id)))nodes.set(id(r.id),{bangumiId:id(r.id),title:r.name_cn||r.name,originalTitle:r.name,media:Number(r.type)===2?'anime':Number(r.type)===1?'manga':'other'});return nodes;}
+  function bridgePriority(r){if(/画集|插画|KEY ANIMATION|PRODUCTION NOTE|ガイド|CHRONICLE|クロニクル|アンソロジー/i.test(r.name+' '+r.name_cn))return -1;if(Number(r.type)===1&&/系列|シリーズ|\bseries\b/i.test(r.name+' '+r.name_cn)&&['书籍','原作','系列'].includes(r.relation))return 100;if(relationLevel(r)==='high')return 80;if(['书籍','漫画','小说'].includes(r.relation))return 40;return -1;}
+
   function metrics(items){const counts=new Map();for(const i of items){const k=i.seriesId||'local:'+i.id;counts.set(k,(counts.get(k)||0)+1);}const multiple=[...counts.values()].filter(n=>n>1);return {seriesCount:counts.size,groupedSeries:multiple.length,groupedWorks:multiple.reduce((a,b)=>a+b,0),merged:multiple.reduce((a,b)=>a+b-1,0)};}
   function autoName(i){return C.seriesBase(i.title)||i.title;}
   function analyse(input,cache={},subjects={}){
@@ -55,31 +75,36 @@
     const node=i=>i.bangumiId||'local:'+i.id;
     const evidence=e=>{edges.push(e);if(e.level==='high')for(const k of [e.from,e.to]){if(!evidenceById.has(k))evidenceById.set(k,[]);if(evidenceById.get(k).length<16)evidenceById.get(k).push(e);}};
     for(const i of items){add(node(i));if(i.bangumiId)byBgm.set(i.bangumiId,i);if(i.seriesLocked&&!i.series)isolated.add(node(i));}
-    const nodes=new Map(byBgm);for(const [sid,e] of Object.entries(subjects))if(e?.item&&!nodes.has(sid))nodes.set(sid,e.item);
-    for(const [from,entry] of Object.entries(cache)){if(!id(from)||!Array.isArray(entry?.rows))continue;for(const r of entry.rows)if(!nodes.has(id(r.id)))nodes.set(id(r.id),{bangumiId:id(r.id),title:r.name_cn||r.name,originalTitle:r.name,media:Number(r.type)===2?'anime':Number(r.type)===1?'manga':'other'});}
-    for(const [from,entry] of Object.entries(cache)){if(!id(from)||!Array.isArray(entry?.rows))continue;add(from);for(const r of entry.rows){const to=id(r.id);if(!to)continue;add(to);let level=relationLevel(r),relation=r.relation;
-      if(crossMedia.has(relation)&&nodes.has(from)&&nodes.has(to)){const proof=titleProof(nodes.get(from),nodes.get(to),subjects,true);if(proof?.level==='high'){level='high';relation+=' · '+proof.relation;}}
-      const e={from,to,relation,level};evidence(e);if(level==='high'&&!isolated.has(from)&&!isolated.has(to))join(from,to);
+    const nodes=relationNodes(items,cache,subjects);
+    for(const [from,entry] of Object.entries(cache)){if(!id(from)||!Array.isArray(entry?.rows))continue;add(from);for(const r of entry.rows){const to=id(r.id);if(!to)continue;add(to);const {level,relation}=relationProof(nodes.get(from),nodes.get(to),r,subjects);
+      const e={from,to,relation,level,version:VERSION,rawRelation:r.relation};evidence(e);if(level==='high'&&!isolated.has(from)&&!isolated.has(to))join(from,to);
     }}
-    const known=new Map();for(const i of items){if(!i.series||isolated.has(node(i)))continue;const k=i.seriesId||stableId(i.series);if(known.has(k))join(node(i),known.get(k));else known.set(k,node(i));}
+    // Only manual membership is evidence. Recompute old automatic groups, including splits.
+    const known=new Map(),savedGroups=new Map();for(const i of items){if(!i.series||isolated.has(node(i)))continue;const k=i.seriesId||stableId(i.series);if(i.seriesLocked){if(known.has(k))join(node(i),known.get(k));else known.set(k,node(i));}else{if(!savedGroups.has(k))savedGroups.set(k,[]);savedGroups.get(k).push(i);}}
+    // A current-version published group can be displayed offline without trusting old v1/v2 mistakes.
+    for(const group of savedGroups.values())if(group.length>1&&group.every(i=>i.seriesAnalysisVersion===VERSION&&(!cache[i.bangumiId]||cache[i.bangumiId].partial)))for(const i of group.slice(1))join(node(group[0]),node(i));
     const buckets=new Map(),pairs=new Map();for(const i of items){if(isolated.has(node(i)))continue;for(const s of signatures(i,subjects)){if(!buckets.has(s.root))buckets.set(s.root,[]);buckets.get(s.root).push(i);}}
     for(const list of buckets.values()){if(list.length>150)continue;for(let a=0;a<list.length;a++)for(let b=a+1;b<list.length;b++){const x=list[a],y=list[b],k=[x.id,y.id].sort().join(',');if(!pairs.has(k))pairs.set(k,[x,y]);}}
     for(const [a,b] of pairs.values()){
       if(find(node(a))===find(node(b)))continue;const proof=titleProof(a,b,subjects);if(!proof)continue;
       const conflict=edges.some(e=>(e.from===node(a)&&e.to===node(b)||e.to===node(a)&&e.from===node(b))&&/不同世界观|Alternative Setting|角色出演|客串|联动/.test(e.relation));
-      if(proof.level==='high'&&(!conflict||sharedCreator(a,b,subjects))){join(node(a),node(b));evidence({from:node(a),to:node(b),relation:proof.relation,level:'high',source:'titles'});}
+      if(proof.level==='high'&&(!conflict||sharedCreator(a,b,subjects))){join(node(a),node(b));evidence({from:node(a),to:node(b),relation:proof.relation,level:'high',source:'titles',version:VERSION});}
       else review.push({key:'title:'+ [a.id,b.id].sort().join(','),ids:[a.id,b.id],name:proof.root||autoName(a),reason:conflict?'Bangumi 关系存在歧义，请确认':proof.relation});
     }
     const components=new Map();for(const i of items){const k=find(node(i));if(!components.has(k))components.set(k,[]);components.get(k).push(i);}
-    const next=new Map(items.map(i=>[i.id,i])),names=new Map(items.filter(i=>i.seriesLocked&&i.series).map(i=>[key(i.series),i.seriesId]));let assigned=0,created=0;
+    const next=new Map(items.map(i=>[i.id,i])),names=new Map(items.filter(i=>i.seriesLocked&&i.series).map(i=>[key(i.series),i.seriesId]));const usedIds=new Set();let assigned=0,created=0;
     for(const group of components.values()){
       const locks=new Map(group.filter(i=>i.seriesLocked&&i.series).map(i=>[i.seriesId,i]));
       if(locks.size>1||group.length>150){review.push({key:'conflict:'+group.map(i=>i.id).sort().join(','),ids:group.map(i=>i.id),name:autoName(group[0]),reason:locks.size>1?'关联跨越多个手动确认的系列，请决定是否合并':'关联范围过大，需要确认'});continue;}
-      const sorted=arrange(group),manual=sorted.find(i=>i.seriesLocked&&i.series),existing=manual||sorted.find(i=>i.series),anchor=manual||sorted[0];
-      const seriesId=existing?.seriesId||(anchor.bangumiId?'bgm-series-'+anchor.bangumiId:'local-series-'+anchor.id);
-      let name=manual?.series||(group.length===1&&existing?existing.series:autoName(anchor));if(names.has(key(name))&&names.get(key(name))!==seriesId)name+='〔'+(anchor.bangumiId||anchor.id)+'〕';names.set(key(name),seriesId);if(!existing)created++;
-      for(const i of group){if(i.seriesLocked)continue;const own=evidenceById.get(node(i))||i.seriesEvidence||[],entry=cache[i.bangumiId];
-        const fresh={...i,seriesId,series:name,seriesSource:'auto',seriesLocked:false,seriesEvidence:own,seriesConfidence:own.length?'high':entry?'single':'unknown'};
+      const sorted=arrange(group),manual=sorted.find(i=>i.seriesLocked&&i.series),anchor=manual||sorted[0];
+      const owned=sid=>group.some(i=>sid===(i.bangumiId?'bgm-series-'+i.bangumiId:'local-series-'+i.id));
+      const existing=manual||sorted.find(i=>i.seriesId&&owned(i.seriesId)&&!usedIds.has(i.seriesId));
+      const seriesId=existing?.seriesId||(anchor.bangumiId?'bgm-series-'+anchor.bangumiId:'local-series-'+anchor.id);usedIds.add(seriesId);
+      const official=[...nodes.values()].filter(i=>parent.has(i.bangumiId)&&find(i.bangumiId)===find(node(anchor))&&canonicalBook(i,subjects)).sort((a,b)=>a.title.length-b.title.length)[0];
+      const offlineName=group.every(i=>i.seriesAnalysisVersion===VERSION&&i.series===anchor.series&&(!cache[i.bangumiId]||cache[i.bangumiId].partial))?anchor.series:'';
+      let name=manual?.series||official?.title||offlineName||autoName(anchor);if(names.has(key(name))&&names.get(key(name))!==seriesId)name+='〔'+(anchor.bangumiId||anchor.id)+'〕';names.set(key(name),seriesId);if(!existing)created++;
+      for(const i of group){if(i.seriesLocked)continue;const entry=cache[i.bangumiId],own=evidenceById.get(node(i))||(!entry&&i.seriesAnalysisVersion===VERSION?i.seriesEvidence:[])||[];
+        const fresh={...i,seriesId,series:name,seriesSource:'auto',seriesLocked:false,seriesAnalysisVersion:VERSION,...(subjects[i.bangumiId]?.item?{seriesSearchNames:namesOf(i,subjects)}:{}),seriesEvidence:own,seriesConfidence:own.length?'high':entry?'single':'unknown'};
         if(i.series!==name||i.seriesId!==seriesId)assigned++;next.set(i.id,fresh);
       }
     }
@@ -87,17 +112,18 @@
     const unique=[...new Map(review.filter(r=>new Set(r.ids.map(id=>next.get(id)?.seriesId||id)).size>1).map(r=>[r.ids.slice().sort().join(','),r])).values()];
     return {items:[...next.values()],review:unique,assigned,created,...metrics([...next.values()])};
   }
-  function graph(cache,items=[]){
+  function graph(cache,items=[],subjects={}){
     const parent=new Map(),separate=new Set(items.filter(i=>(i.locked||i.seriesLocked)&&!i.seriesId).map(i=>i.bangumiId));
     const find=k=>{if(!parent.has(k))parent.set(k,k);let root=k;while(parent.get(root)!==root)root=parent.get(root);while(parent.get(k)!==k){const next=parent.get(k);parent.set(k,root);k=next;}return root;};
     const join=(a,b)=>{a=find(a);b=find(b);if(a!==b)parent.set(b,a);};
-    for(const [from,e] of Object.entries(cache))for(const r of e?.rows||[])if(relationLevel(r)==='high'&&!separate.has(from)&&!separate.has(r.id))join(from,r.id);
+    const nodes=relationNodes(items,cache,subjects);
+    for(const [from,e] of Object.entries(cache))for(const r of e?.rows||[])if(relationProof(nodes.get(from),nodes.get(r.id),r,subjects).level==='high'&&!separate.has(from)&&!separate.has(r.id))join(from,r.id);
     const groups=new Map();for(const i of items){if(!i.seriesId)continue;const root=find(i.bangumiId);if(!groups.has(root))groups.set(root,new Map());groups.get(root).set(i.seriesId,{seriesId:i.seriesId,series:i.series});}
     return {find,parent,groups};
   }
-  function minimalIndex(items,meta={},cache={}){
+  function minimalIndex(items,meta={},cache={},subjects={}){
     const rows=items.filter(i=>i.bangumiId).map(i=>({id:i.id,bangumiId:i.bangumiId,seriesId:i.seriesId||(i.series?stableId(i.series):''),series:i.series||'',title:i.title,media:i.media,locked:!!i.seriesLocked}));
-    const g=graph(cache,rows),related={};for(const sid of g.parent.keys()){const groups=g.groups.get(g.find(sid));if(groups?.size===1)related[sid]=[...groups.values()][0];else if(groups?.size>1)related[sid]={ambiguous:true};}
+    const g=graph(cache,items,subjects),related={};for(const sid of g.parent.keys()){const groups=g.groups.get(g.find(sid));if(groups?.size===1)related[sid]=[...groups.values()][0];else if(groups?.size>1)related[sid]={ambiguous:true};}
     return {protocol:1,version:Number(meta.version)||0,at:meta.at||C.now(),scope:C.str(meta.scope,500),items:rows,related};
   }
   function classifier(index,cache={},pending=[]){
@@ -126,5 +152,5 @@
     async function load(sid,kind,force=false){sid=id(sid);if(!sid)throw new Error('Bangumi ID 无效');const k=kind+':'+sid,old=await get(k);if(!force&&old&&!old.partial&&Date.now()-old.at<ttl&&(kind==='relations'?Array.isArray(old.rows):old.item?.bangumiId===sid))return old;if(inflight.has(k))return inflight.get(k);const p=tail.catch(()=>{}).then(async()=>{const raw=await request(sid+(kind==='relations'?'/subjects':''));const value={at:Date.now(),...(kind==='relations'?{rows:cleanRelations(raw)}:{item:C.bgmSubject(raw)})};await set(k,value);return value;});tail=p;inflight.set(k,p);try{return await p;}finally{inflight.delete(k);}}
     return {relations:(sid,force)=>load(sid,'relations',force),subject:(sid,force)=>load(sid,'subject',force)};
   }
-  return {VERSION,TTL,stableId,migrate,relationLevel,cleanRelations,position,arrange,signatures,titleProof,sharedCreator,metrics,analyse,minimalIndex,classifier,classify,createClient};
+  return {VERSION,TTL,stableId,migrate,relationLevel,cleanRelations,position,arrange,signatures,titleProof,sharedCreator,referenceBook,canonicalBook,relationProof,bridgePriority,metrics,analyse,minimalIndex,classifier,classify,createClient};
 });
