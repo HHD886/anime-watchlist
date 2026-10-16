@@ -1,6 +1,8 @@
 {
   "version": "4.8.0",
-  "phase": "code_verified_pending_deployment",
+  "phase": "deployed_and_verified",
+  "codeCommit": "187c7ef32ce1c1f4b808614f78255cf257447ee3",
+  "pagesRun": "https://github.com/HHD886/anime-watchlist/actions/runs/38948991360",
   "baseCommit": "1cc1194228eb62660c46471ca9816747e68bb2db",
   "publishedRecords": 853,
   "dataBlobPreserved": "c13c5fb96f52f671227a2792862388e209399085",
@@ -12,8 +14,22 @@
   "buildVerified": true,
   "allPersonalFieldsPreserved": true,
   "seriesOutputMatchesPreviousRules": true,
-  "pages": "pending",
-  "liveBrowser": "pending",
+  "pages": "success",
+  "liveArtifactsMatchBuild": true,
+  "liveDataMatchesBackup": true,
+  "liveBrowser": {
+    "environment": "independent cloud Chrome; user device data not accessed",
+    "verified": [
+      "v4.8 viewer and editor load 853 records",
+      "covers, site icon and personal ranking render",
+      "Chinese and Japanese/Roman numeral search finds child works",
+      "series detail highlights the matched child work",
+      "background scan advances without replacing unrelated visible content",
+      "pause and reload preserves checkpoint at 35/853",
+      "no application-origin errors in inspected console logs"
+    ],
+    "full853NetworkScan": "not rerun to completion; full fixture and production-data logic tests passed"
+  },
   "limitations": [
     "iPhone Safari physical device not tested",
     "Chrome/Edge extension installation tested with mocks, not user installation",
