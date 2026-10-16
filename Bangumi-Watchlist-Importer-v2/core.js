@@ -8,6 +8,7 @@
   const VERSION = 4;
   const weekdays = ['周一','周二','周三','周四','周五','周六','周日'];
   const priorities = ['SSR','SR','R'];
+  const titleOrder=new Intl.Collator('zh-CN'),numericTitleOrder=new Intl.Collator('zh-CN',{numeric:true});
   const statuses = {wish:'想看 / 待读',doing:'在看 / 在读',done:'已完成',hold:'搁置',dropped:'放弃'};
   const mediaNames = {anime:'动画',manga:'漫画',novel:'小说',other:'其他'};
   const seriesKinds = {main:'正篇',prequel:'前传',sequel:'续作',ona:'ONA',summary:'总集篇',season:'季度 / 续作',ova:'OVA',oad:'OAD',special:'番外 / 特别篇',movie:'剧场版',part:'上 / 下部',arc:'篇章',mv:'MV / 短片',original:'原作',adaptation:'改编',spinoff:'外传 / 衍生',other:'其他'};
@@ -206,10 +207,14 @@
     const words=searchText(f.query).trim().split(/\s+/).filter(Boolean);
     const selected=tags([...(Array.isArray(f.tags)?f.tags:[]),...(f.tag?[f.tag]:[])]);
     const years=tags(Array.isArray(f.years)?f.years:[]);
+    const tests=words.map(w=>/^[ivx]+$/.test(w)?text=>new RegExp('(^|[^a-z0-9])'+w+'($|[^a-z0-9])').test(text):text=>text.includes(w));
     return items.filter(i=>{
-      const own=[...i.tags,...i.personalTags];
+      const own=selected.length?[...i.tags,...i.personalTags]:[];
       const tagged=!selected.length||(f.tagMode==='any'?selected.some(t=>own.includes(t)):selected.every(t=>own.includes(t)));
-      return (!f.media||f.media==='all'||i.media===f.media)&&(!f.status||i.status===f.status)&&(!f.grade||grade(i)===f.grade)&&(!f.favorite||i.favorite)&&(!years.length||years.includes(yearOf(i)||'unknown'))&&tagged&&words.every(w=>{const text=searchText(`${i.title} ${i.originalTitle} ${(i.aliases||[]).join(' ')} ${(i.seriesSearchNames||[]).join(' ')} ${yearOf(i)} ${i.tags.join(' ')} ${i.personalTags.join(' ')} ${i.note} ${i.review} ${i.series}`);return /^[ivx]+$/.test(w)?new RegExp('(^|[^a-z0-9])'+w+'($|[^a-z0-9])').test(text):text.includes(w);});
+      if(!((!f.media||f.media==='all'||i.media===f.media)&&(!f.status||i.status===f.status)&&(!f.grade||grade(i)===f.grade)&&(!f.favorite||i.favorite)&&(!years.length||years.includes(yearOf(i)||'unknown'))&&tagged))return false;
+      if(!tests.length)return true;
+      const text=searchText(`${i.title} ${i.originalTitle} ${(i.aliases||[]).join(' ')} ${(i.seriesSearchNames||[]).join(' ')} ${yearOf(i)} ${i.tags.join(' ')} ${i.personalTags.join(' ')} ${i.note} ${i.review} ${i.series}`);
+      return tests.every(test=>test(text));
     });
   }
   function sort(items,by='recent') {

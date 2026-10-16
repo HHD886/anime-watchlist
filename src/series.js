@@ -5,7 +5,8 @@
   const strong=new Set(['前传','续集','续作','总集篇','全集','番外篇','番外','主线故事','改编','原作','系列','外传','衍生','Prequel','Sequel','Summary','Full Story','Side Story','Parent Story','Adaptation','Series','Spin-off']);
   const medium=new Set(['单行本','Offprint','相同世界观','不同世界观','不同演绎','不同版本','Same Setting','Same setting','Alternative Setting','Alternative Version','Version']);
   const crossMedia=new Set(['书籍','書籍','动画','動畫','漫画','漫畫','小说','小說','游戏','遊戲','Book','Anime','Manga','Novel','Game']);
-  const id=v=>C.subjectId(v), key=v=>C.seriesKey(v), clone=v=>JSON.parse(JSON.stringify(v));
+  const id=v=>C.subjectId(v), key=v=>C.seriesKey(v);
+  const titleOrder=new Intl.Collator('zh-CN',{numeric:true});
   function stableId(name){let h=2166136261;for(const ch of key(name)){h^=ch.codePointAt(0);h=Math.imul(h,16777619);}return 'manual-'+(h>>>0).toString(36);}
   function migrate(items){return items.map(i=>({...i,seriesId:i.seriesId||(i.series?stableId(i.series):''),seriesSource:i.seriesSource||(i.series?'manual':''),seriesLocked:typeof i.seriesLocked==='boolean'?i.seriesLocked:!!i.series&&i.seriesSource!=='auto'}));}
   function relationLevel(r){return strong.has(r.relation)?'high':medium.has(r.relation)||crossMedia.has(r.relation)?'medium':'low';}
@@ -13,11 +14,12 @@
   function position(i){const s=[i.title,i.originalTitle].join(' '),num=v=>{if(/^\d+$/.test(v))return Number(v);const c={'一':1,'二':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9,'十':10};return c[v]||0;};
     const season=s.match(/第\s*([\d一二三四五六七八九十]+)\s*[季期]|\bseason\s*(\d+)|\b(\d+)(?:st|nd|rd|th)\s+season/i),part=s.match(/\bpart[.\s]*(\d+)|第\s*(\d+)\s*部分|([上中下前后後])[篇編部]/i);
     return {season:season?num(season[1]||season[2]||season[3]):0,part:part?Number(part[1]||part[2]||({'上':1,'前':1,'中':2,'下':2,'后':2,'後':2})[part[3]]):0};}
-  function arrange(items){return [...items].sort((a,b)=>{const n=i=>i.seriesOrder!==''&&i.seriesOrder!=null?Number(i.seriesOrder):Infinity;const manual=n(a)-n(b);if(manual)return manual;const date=i=>/^\d{4}-\d{2}-\d{2}$/.test(i.date||i.seriesDate||'')?(i.date||i.seriesDate):(C.yearOf(i)||'9999')+'-12-31';const byDate=date(a).localeCompare(date(b));if(byDate)return byDate;const x=position(a),y=position(b);return x.season-y.season||x.part-y.part||a.title.localeCompare(b.title,'zh-CN',{numeric:true});});}
+  function arrange(items){return [...items].sort((a,b)=>{const n=i=>i.seriesOrder!==''&&i.seriesOrder!=null?Number(i.seriesOrder):Infinity;const manual=n(a)-n(b);if(manual)return manual;const date=i=>/^\d{4}-\d{2}-\d{2}$/.test(i.date||i.seriesDate||'')?(i.date||i.seriesDate):(C.yearOf(i)||'9999')+'-12-31';const byDate=date(a).localeCompare(date(b));if(byDate)return byDate;const x=position(a),y=position(b);return x.season-y.season||x.part-y.part||titleOrder.compare(a.title,b.title);});}
   const compact=v=>key(v).replace(/[^\p{L}\p{N}]/gu,'');
   function namesOf(i,subjects={}){const extra=subjects[i.bangumiId]?.item;return [...new Set([i.title,i.originalTitle,...(i.aliases||[]),extra?.title,extra?.originalTitle,...(extra?.aliases||[])].filter(Boolean))];}
   // Full names stay available; roots are evidence, never a fuzzy edit-distance match.
-  function signatures(i,subjects={}){
+  function signatures(i,subjects={},memo){
+    if(memo?.has(i))return memo.get(i);
     const out=new Map();
     function add(base,kind){base=C.seriesName(base).replace(/[!?！？'′’°.。·・:：~～〜—–\-\s]+$/g,'');const root=compact(base);if(root.length<2||/^(?:电影|電影|剧场版|劇場版|映画|ova|oad|sp|special|movie)$/i.test(root))return;const old=out.get(root);if(!old||old.kind==='exact')out.set(root,{root,base,kind});}
     for(const raw of namesOf(i,subjects)){
@@ -33,10 +35,10 @@
       }
       if(bare!==title)add(C.seriesBase(bare),'version');
     }
-    return [...out.values()];
+    const result=[...out.values()];memo?.set(i,result);return result;
   }
-  function titleProof(a,b,subjects={},linked=false){
-    const x=signatures(a,subjects),y=new Map(signatures(b,subjects).map(s=>[s.root,s]));const matches=x.filter(s=>y.has(s.root));
+  function titleProof(a,b,subjects={},linked=false,memo){
+    const x=signatures(a,subjects,memo),y=new Map(signatures(b,subjects,memo).map(s=>[s.root,s]));const matches=x.filter(s=>y.has(s.root));
     const varied=matches.some(s=>s.kind!=='exact'||y.get(s.root).kind!=='exact');
     const longVersion=matches.some(s=>s.root.length>=4&&(s.kind==='version'||y.get(s.root).kind==='version'));
     const bilingual=matches.length>=2;
@@ -51,11 +53,11 @@
   function canonicalBook(i,subjects={}){return metadataOf(i,subjects).narrativeBook&&!referenceBook(i,subjects)&&namesOf(i,subjects).some(n=>/系列|シリーズ|\bseries\b/i.test(n));}
   function sourceMatches(a,b,subjects={}){const names=namesOf(b,subjects).map(compact);return (metadataOf(a,subjects).sourceTitles||[]).some(n=>names.includes(compact(n)));}
   // A shared guidebook/anthology is not a shared story. General book links need identity evidence.
-  function relationProof(a,b,r,subjects={}){
+  function relationProof(a,b,r,subjects={},memo){
     let level=relationLevel(r);if(!a||!b)return {level,relation:r.relation};
     if(referenceBook(a,subjects)||referenceBook(b,subjects))return {level:'low',relation:r.relation};
     if(crossMedia.has(r.relation)||['单行本','Offprint'].includes(r.relation)){
-      const proof=titleProof(a,b,subjects,true),book=metadataOf(a,subjects).narrativeBook||metadataOf(b,subjects).narrativeBook;
+      const proof=titleProof(a,b,subjects,true,memo),book=metadataOf(a,subjects).narrativeBook||metadataOf(b,subjects).narrativeBook;
       if(sourceMatches(a,b,subjects)||sourceMatches(b,a,subjects)||book&&['anime','manga','novel'].includes(a.media)&&['anime','manga','novel'].includes(b.media)&&sharedCreator(a,b,subjects))return {level:'high',relation:r.relation+' · 原作名称或作者与叙事书籍相互印证'};
       if(proof?.level==='high')return {level:'high',relation:r.relation+' · '+proof.relation};
       level='medium';
@@ -67,8 +69,30 @@
 
   function metrics(items){const counts=new Map();for(const i of items){const k=i.seriesId||'local:'+i.id;counts.set(k,(counts.get(k)||0)+1);}const multiple=[...counts.values()].filter(n=>n>1);return {seriesCount:counts.size,groupedSeries:multiple.length,groupedWorks:multiple.reduce((a,b)=>a+b,0),merged:multiple.reduce((a,b)=>a+b-1,0)};}
   function autoName(i){return C.seriesBase(i.title)||i.title;}
+  // Only inputs that can change relationship decisions; progress, reviews and covers are excluded.
+  function analysisInputs(items){return Object.fromEntries(items.map(i=>[i.id,JSON.stringify({id:i.id,bangumiId:i.bangumiId,title:i.title,originalTitle:i.originalTitle,aliases:i.aliases,media:i.media,series:i.series,seriesId:i.seriesId,seriesLocked:i.seriesLocked,seriesSource:i.seriesSource,seriesAnalysisVersion:i.seriesAnalysisVersion,date:i.date,seriesDate:i.seriesDate,year:i.year,seriesOrder:i.seriesOrder,seriesMetadata:i.seriesMetadata})]));}
+  function analyseChanged(items,cache={},subjects={},previous=null,dirty=[],review=[]){
+    if(!previous)return {...analyse(items,cache,subjects),analysed:items.length};
+    const current=analysisInputs(items),changed=new Set([...Object.keys(previous),...Object.keys(current)].filter(k=>previous[k]!==current[k]));
+    if(!changed.size&&!dirty.length)return {items,review,assigned:0,created:0,analysed:0,...metrics(items)};
+    // Candidate connectivity deliberately includes ambiguous links. It bounds the work only;
+    // the conservative analyse() rules still make every merge/split decision.
+    const parent=new Map(),node=i=>i.bangumiId||'local:'+i.id;
+    const find=k=>{if(!parent.has(k))parent.set(k,k);let p=k;while(parent.get(p)!==p)p=parent.get(p);while(parent.get(k)!==k){const next=parent.get(k);parent.set(k,p);k=next;}return p;};
+    const join=(a,b)=>{a=find(a);b=find(b);if(a!==b)parent.set(b,a);};
+    for(const [sid,e] of Object.entries(cache))for(const r of e?.rows||[])join(sid,r.id);
+    const buckets=new Map(),add=(k,n)=>{if(buckets.has(k))join(n,buckets.get(k));else buckets.set(k,n);};
+    const old=Object.values(previous).map(s=>JSON.parse(s));
+    for(const i of [...items,...old]){const n=node(i);find(n);if(i.seriesId)add('group:'+i.seriesId,n);if(i.series)add('name:'+key(i.series),n);add('name:'+key(autoName(i)),n);for(const s of signatures(i,subjects))add('title:'+s.root,n);}
+    const affected=new Set(dirty.map(find));for(const i of [...items,...old])if(changed.has(i.id))affected.add(find(node(i)));
+    const selected=items.filter(i=>affected.has(find(node(i)))),selectedIds=new Set(selected.map(i=>i.id));
+    if(!selected.length)return {items,review:review.filter(r=>r.ids.every(id=>current[id])),assigned:0,created:0,analysed:0,...metrics(items)};
+    const scopedCache=Object.fromEntries(Object.entries(cache).filter(([sid])=>affected.has(find(sid)))),scopedSubjects=Object.fromEntries(Object.entries(subjects).filter(([sid])=>affected.has(find(sid))));
+    const result=analyse(selected,scopedCache,scopedSubjects),next=new Map(result.items.map(i=>[i.id,i])),all=items.map(i=>next.get(i.id)||i);
+    return {...result,items:all,review:[...review.filter(r=>r.ids.every(id=>current[id]&&!selectedIds.has(id))),...result.review],analysed:selected.length,...metrics(all)};
+  }
   function analyse(input,cache={},subjects={}){
-    const items=migrate(input),parent=new Map(),edges=[],evidenceById=new Map(),review=[],byBgm=new Map(),isolated=new Set();
+    const items=migrate(input),parent=new Map(),edges=[],evidenceById=new Map(),review=[],byBgm=new Map(),isolated=new Set(),memo=new Map(),conflicts=new Set();
     const add=k=>{if(!parent.has(k))parent.set(k,k);};
     const find=k=>{let p=parent.get(k);if(p!==k){p=find(p);parent.set(k,p);}return p;};
     const join=(a,b)=>{add(a);add(b);const x=find(a),y=find(b);if(x!==y)parent.set(y,x);};
@@ -76,31 +100,33 @@
     const evidence=e=>{edges.push(e);if(e.level==='high')for(const k of [e.from,e.to]){if(!evidenceById.has(k))evidenceById.set(k,[]);if(evidenceById.get(k).length<16)evidenceById.get(k).push(e);}};
     for(const i of items){add(node(i));if(i.bangumiId)byBgm.set(i.bangumiId,i);if(i.seriesLocked&&!i.series)isolated.add(node(i));}
     const nodes=relationNodes(items,cache,subjects);
-    for(const [from,entry] of Object.entries(cache)){if(!id(from)||!Array.isArray(entry?.rows))continue;add(from);for(const r of entry.rows){const to=id(r.id);if(!to)continue;add(to);const {level,relation}=relationProof(nodes.get(from),nodes.get(to),r,subjects);
+    for(const [from,entry] of Object.entries(cache)){if(!id(from)||!Array.isArray(entry?.rows))continue;add(from);for(const r of entry.rows){const to=id(r.id);if(!to)continue;add(to);const {level,relation}=relationProof(nodes.get(from),nodes.get(to),r,subjects,memo);
+      if(/不同世界观|Alternative Setting|角色出演|客串|联动/.test(relation))conflicts.add([from,to].sort().join(','));
       const e={from,to,relation,level,version:VERSION,rawRelation:r.relation};evidence(e);if(level==='high'&&!isolated.has(from)&&!isolated.has(to))join(from,to);
     }}
     // Only manual membership is evidence. Recompute old automatic groups, including splits.
     const known=new Map(),savedGroups=new Map();for(const i of items){if(!i.series||isolated.has(node(i)))continue;const k=i.seriesId||stableId(i.series);if(i.seriesLocked){if(known.has(k))join(node(i),known.get(k));else known.set(k,node(i));}else{if(!savedGroups.has(k))savedGroups.set(k,[]);savedGroups.get(k).push(i);}}
     // A current-version published group can be displayed offline without trusting old v1/v2 mistakes.
     for(const group of savedGroups.values())if(group.length>1&&group.every(i=>i.seriesAnalysisVersion===VERSION&&(!cache[i.bangumiId]||cache[i.bangumiId].partial)))for(const i of group.slice(1))join(node(group[0]),node(i));
-    const buckets=new Map(),pairs=new Map();for(const i of items){if(isolated.has(node(i)))continue;for(const s of signatures(i,subjects)){if(!buckets.has(s.root))buckets.set(s.root,[]);buckets.get(s.root).push(i);}}
+    const buckets=new Map(),pairs=new Map();for(const i of items){if(isolated.has(node(i)))continue;for(const s of signatures(i,subjects,memo)){if(!buckets.has(s.root))buckets.set(s.root,[]);buckets.get(s.root).push(i);}}
     for(const list of buckets.values()){if(list.length>150)continue;for(let a=0;a<list.length;a++)for(let b=a+1;b<list.length;b++){const x=list[a],y=list[b],k=[x.id,y.id].sort().join(',');if(!pairs.has(k))pairs.set(k,[x,y]);}}
     for(const [a,b] of pairs.values()){
-      if(find(node(a))===find(node(b)))continue;const proof=titleProof(a,b,subjects);if(!proof)continue;
-      const conflict=edges.some(e=>(e.from===node(a)&&e.to===node(b)||e.to===node(a)&&e.from===node(b))&&/不同世界观|Alternative Setting|角色出演|客串|联动/.test(e.relation));
+      if(find(node(a))===find(node(b)))continue;const proof=titleProof(a,b,subjects,false,memo);if(!proof)continue;
+      const conflict=conflicts.has([node(a),node(b)].sort().join(','));
       if(proof.level==='high'&&(!conflict||sharedCreator(a,b,subjects))){join(node(a),node(b));evidence({from:node(a),to:node(b),relation:proof.relation,level:'high',source:'titles',version:VERSION});}
       else review.push({key:'title:'+ [a.id,b.id].sort().join(','),ids:[a.id,b.id],name:proof.root||autoName(a),reason:conflict?'Bangumi 关系存在歧义，请确认':proof.relation});
     }
     const components=new Map();for(const i of items){const k=find(node(i));if(!components.has(k))components.set(k,[]);components.get(k).push(i);}
+    const officialNames=new Map();for(const i of nodes.values())if(parent.has(i.bangumiId)&&canonicalBook(i,subjects)){const k=find(i.bangumiId),old=officialNames.get(k);if(!old||i.title.length<old.title.length)officialNames.set(k,i);}
     const next=new Map(items.map(i=>[i.id,i])),names=new Map(items.filter(i=>i.seriesLocked&&i.series).map(i=>[key(i.series),i.seriesId]));const usedIds=new Set();let assigned=0,created=0;
     for(const group of components.values()){
       const locks=new Map(group.filter(i=>i.seriesLocked&&i.series).map(i=>[i.seriesId,i]));
       if(locks.size>1||group.length>150){review.push({key:'conflict:'+group.map(i=>i.id).sort().join(','),ids:group.map(i=>i.id),name:autoName(group[0]),reason:locks.size>1?'关联跨越多个手动确认的系列，请决定是否合并':'关联范围过大，需要确认'});continue;}
       const sorted=arrange(group),manual=sorted.find(i=>i.seriesLocked&&i.series),anchor=manual||sorted[0];
-      const owned=sid=>group.some(i=>sid===(i.bangumiId?'bgm-series-'+i.bangumiId:'local-series-'+i.id));
+      const ownIds=new Set(group.map(i=>i.bangumiId?'bgm-series-'+i.bangumiId:'local-series-'+i.id)),owned=sid=>ownIds.has(sid);
       const existing=manual||sorted.find(i=>i.seriesId&&owned(i.seriesId)&&!usedIds.has(i.seriesId));
       const seriesId=existing?.seriesId||(anchor.bangumiId?'bgm-series-'+anchor.bangumiId:'local-series-'+anchor.id);usedIds.add(seriesId);
-      const official=[...nodes.values()].filter(i=>parent.has(i.bangumiId)&&find(i.bangumiId)===find(node(anchor))&&canonicalBook(i,subjects)).sort((a,b)=>a.title.length-b.title.length)[0];
+      const official=officialNames.get(find(node(anchor)));
       const offlineName=group.every(i=>i.seriesAnalysisVersion===VERSION&&i.series===anchor.series&&(!cache[i.bangumiId]||cache[i.bangumiId].partial))?anchor.series:'';
       let name=manual?.series||official?.title||offlineName||autoName(anchor);if(names.has(key(name))&&names.get(key(name))!==seriesId)name+='〔'+(anchor.bangumiId||anchor.id)+'〕';names.set(key(name),seriesId);if(!existing)created++;
       for(const i of group){if(i.seriesLocked)continue;const entry=cache[i.bangumiId],own=evidenceById.get(node(i))||(!entry&&i.seriesAnalysisVersion===VERSION?i.seriesEvidence:[])||[];
@@ -116,8 +142,8 @@
     const parent=new Map(),separate=new Set(items.filter(i=>(i.locked||i.seriesLocked)&&!i.seriesId).map(i=>i.bangumiId));
     const find=k=>{if(!parent.has(k))parent.set(k,k);let root=k;while(parent.get(root)!==root)root=parent.get(root);while(parent.get(k)!==k){const next=parent.get(k);parent.set(k,root);k=next;}return root;};
     const join=(a,b)=>{a=find(a);b=find(b);if(a!==b)parent.set(b,a);};
-    const nodes=relationNodes(items,cache,subjects);
-    for(const [from,e] of Object.entries(cache))for(const r of e?.rows||[])if(relationProof(nodes.get(from),nodes.get(r.id),r,subjects).level==='high'&&!separate.has(from)&&!separate.has(r.id))join(from,r.id);
+    const nodes=relationNodes(items,cache,subjects),memo=new Map();
+    for(const [from,e] of Object.entries(cache))for(const r of e?.rows||[])if(relationProof(nodes.get(from),nodes.get(r.id),r,subjects,memo).level==='high'&&!separate.has(from)&&!separate.has(r.id))join(from,r.id);
     const groups=new Map();for(const i of items){if(!i.seriesId)continue;const root=find(i.bangumiId);if(!groups.has(root))groups.set(root,new Map());groups.get(root).set(i.seriesId,{seriesId:i.seriesId,series:i.series});}
     return {find,parent,groups};
   }
@@ -152,5 +178,5 @@
     async function load(sid,kind,force=false){sid=id(sid);if(!sid)throw new Error('Bangumi ID 无效');const k=kind+':'+sid,old=await get(k);if(!force&&old&&!old.partial&&Date.now()-old.at<ttl&&(kind==='relations'?Array.isArray(old.rows):old.item?.bangumiId===sid))return old;if(inflight.has(k))return inflight.get(k);const p=tail.catch(()=>{}).then(async()=>{const raw=await request(sid+(kind==='relations'?'/subjects':''));const value={at:Date.now(),...(kind==='relations'?{rows:cleanRelations(raw)}:{item:C.bgmSubject(raw)})};await set(k,value);return value;});tail=p;inflight.set(k,p);try{return await p;}finally{inflight.delete(k);}}
     return {relations:(sid,force)=>load(sid,'relations',force),subject:(sid,force)=>load(sid,'subject',force)};
   }
-  return {VERSION,TTL,stableId,migrate,relationLevel,cleanRelations,position,arrange,signatures,titleProof,sharedCreator,referenceBook,canonicalBook,relationProof,bridgePriority,metrics,analyse,minimalIndex,classifier,classify,createClient};
+  return {VERSION,TTL,stableId,migrate,relationLevel,cleanRelations,position,arrange,signatures,titleProof,sharedCreator,referenceBook,canonicalBook,relationProof,bridgePriority,metrics,analysisInputs,analyseChanged,analyse,minimalIndex,classifier,classify,createClient};
 });

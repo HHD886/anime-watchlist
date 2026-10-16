@@ -1,0 +1,23 @@
+{
+  "version": "4.8.0",
+  "phase": "code_verified_pending_deployment",
+  "baseCommit": "1cc1194228eb62660c46471ca9816747e68bb2db",
+  "publishedRecords": 853,
+  "dataBlobPreserved": "c13c5fb96f52f671227a2792862388e209399085",
+  "tests": {
+    "fullSuitePassed": 133,
+    "fullSuiteFailed": 0,
+    "repositorySuitePassed": 70
+  },
+  "buildVerified": true,
+  "allPersonalFieldsPreserved": true,
+  "seriesOutputMatchesPreviousRules": true,
+  "pages": "pending",
+  "liveBrowser": "pending",
+  "limitations": [
+    "iPhone Safari physical device not tested",
+    "Chrome/Edge extension installation tested with mocks, not user installation",
+    "Automatic offline cover cache retains the existing 200-cover bound; not every cover in a large library",
+    "Unpublished records on user devices were not accessed or overwritten"
+  ]
+}

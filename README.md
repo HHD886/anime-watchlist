@@ -1,8 +1,8 @@
-> 最新修复：**[v4.7 系列证据、子作品搜索与插件更新](UPGRADE-v4.7.md)**。保留本机数据；更新程序请用浏览器 Ctrl + F5。
+> 最新修复：**[v4.8 性能、封面稳定性与增量整理](UPGRADE-v4.8.md)**。保留本机数据；更新程序请用浏览器刷新，手机可关闭页面后重新打开。
 
 # anime-watchlist
 
-**当前 v4.6.1：[系列修复与升级说明](UPGRADE-v4.6.md) · [下载 Bangumi 插件 v4.6](Bangumi-Importer-v4.6.zip)**
+**当前 v4.8：[升级说明](UPGRADE-v4.8.md) · [下载 Bangumi 插件 v4.8](Bangumi-Importer-v4.8.zip)**
 
 v4.6 修复旧单作品系列没有真正合并、失败被计为成功、旧扫描结果阻止重新分析和搜索结果不及时更新。结合 Bangumi 关系、双语标题、别名和版本信息分析全部已有作品，保留个人记录与手动决定。更新程序请使用浏览器刷新；网页右上角“刷新”读取 GitHub 数据。
 
@@ -25,11 +25,12 @@ GitHub Pages 是公开网站；希望作品内容需要口令才能查看，可�
 
 ## 开发与验证
 
-不依赖 npm 包或 CDN 脚本。Node 18+：
+网站运行与构建不依赖 npm 包或 CDN。DOM / IndexedDB 回归测试使用两个仅开发时安装的测试包，Node 20.19+：
 
 ```sh
 node build.mjs
-node --test src/core.test.cjs src/series.test.cjs src/series-v46.test.cjs
+npm ci
+npm test
 ```
 
 重建保留现有 `data.json`，两个网页的内置作品数组均为空。`node build.mjs --standalone` 仅供制作含当前明文记录的本地编辑包，不应用于加密网站。

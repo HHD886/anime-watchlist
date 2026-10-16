@@ -1,0 +1,16 @@
+{
+  "name": "king-shelf",
+  "version": "4.8.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test src/*.test.cjs"
+  },
+  "devDependencies": {
+    "fake-indexeddb": "6.2.5",
+    "linkedom": "0.18.13"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

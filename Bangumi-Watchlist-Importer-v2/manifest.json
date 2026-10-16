@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "王之宝库 · Bangumi 导入助手",
-  "version": "4.7.0",
+  "version": "4.8.0",
   "description": "自动识别系列、入库状态与列表筛选；持久化队列、保存确认与双向同步，兼容原有个人作品库。",
   "permissions": [
     "storage"

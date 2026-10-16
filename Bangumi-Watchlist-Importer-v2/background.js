@@ -62,7 +62,7 @@ async function handle(message,sender){
   }
   if(message.type==='STATUS_BATCH'&&kind==='bangumi'){
     const ids=[...new Set((message.ids||[]).map(C.subjectId).filter(Boolean))].slice(0,500),index=await get(INDEX_KEY),q=await getQueue(),cache={};
-    await Promise.all(ids.map(async id=>{const e=await cacheGet('relations:'+id);if(e)cache[id]=e;}));
+    const known=new Set([...(index?.items||[]).map(i=>i.bangumiId),...q.map(i=>i.bangumiId)]);await Promise.all(ids.filter(id=>!known.has(id)&&!index?.related?.[id]).map(async id=>{const e=await cacheGet('relations:'+id);if(e)cache[id]=e;}));
     if(message.resolve&&ids.length===1&&index&&!index.items.some(i=>i.bangumiId===ids[0])&&!index.related?.[ids[0]]&&!q.some(i=>i.bangumiId===ids[0])){try{cache[ids[0]]=await client.relations(ids[0]);}catch{}}
     const classify=S.classifier(index,cache,q);return {states:Object.fromEntries(ids.map(id=>[id,classify(id)])),...await status()};
   }
