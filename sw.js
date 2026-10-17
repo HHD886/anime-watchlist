@@ -1,6 +1,6 @@
 /* Scope-local caches; API requests and credentials are never cached. */
 const CACHE_PREFIX='hhd-workshelf-'+new URL(self.registration.scope).pathname+'-';
-const CACHE=CACHE_PREFIX+'4.8.0',RUNTIME=CACHE_PREFIX+'runtime-v1';
+const CACHE=CACHE_PREFIX+'4.8.1',RUNTIME=CACHE_PREFIX+'runtime-v1';
 const BASE=self.registration.scope,SHELL=['index.html','editor.html','manifest.webmanifest','icon.svg'];
 const covers=new Map();let coverWrites=0,trim=Promise.resolve(),legacyKeys;
 const isCoverURL=u=>new URL(u).hostname==='lain.bgm.tv';

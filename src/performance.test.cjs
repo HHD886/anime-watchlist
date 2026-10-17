@@ -5,6 +5,25 @@ const work=(id,title,extra={})=>C.normalize({id:'bgm-'+id,bangumiId:String(id),t
 const relation=(id,name,kind='续集')=>({id:String(id),name,type:2,relation:kind});
 const tick=()=>new Promise(r=>setImmediate(r));
 
+test('浏览与编辑模式可选择两种评分排序，个人榜单保留个人名次和分区',async()=>{
+ const items=[work(1,'个人高分',{score:9.9,bgmScore:7}),work(2,'Bangumi 高分',{score:8,bgmScore:9.1}),work(3,'缺少参考分',{score:9,bgmScore:null}),work(4,'未打个人分',{score:null,bgmScore:8.5})];
+ for(const role of ['viewer','editor']){
+  const {q,document,window}=await setup({boot:{role,seed:{items}},fetch:async()=>response({items})});
+  const before=JSON.stringify(q.state.payload),logo=document.querySelector('.brand-mark img'),poster=document.querySelector('[data-work="bgm-1"] img');
+  const select=document.getElementById('filter-sort');
+  assert.equal(select.querySelector('[value="score"]').textContent,'个人评分从高到低');assert.equal(select.querySelector('[value="bgmScore"]').textContent,'Bangumi 评分从高到低');
+  for(const o of select.options)o.removeAttribute('selected');select.querySelector('[value="bgmScore"]').setAttribute('selected','');select.dispatchEvent(new window.Event('change',{bubbles:true}));
+  assert.equal(q.state.sort,'bgmScore');assert.deepEqual([...document.querySelectorAll('.work-card')].map(n=>n.dataset.work),['bgm-2','bgm-4','bgm-1','bgm-3']);
+  assert.equal(document.querySelector('.brand-mark img'),logo);assert.equal(document.querySelector('[data-work="bgm-1"] img'),poster);
+  q.state.view='ranking';q.render();assert.equal(document.getElementById('filter-sort').value,'bgmScore');
+  assert.deepEqual([...document.querySelectorAll('.rank-row')].map(n=>n.dataset.work),['bgm-2','bgm-1','bgm-3']);
+  assert.equal(document.querySelector('[data-work="bgm-2"] .rank-n').textContent,'03');assert.match(document.querySelector('[data-work="bgm-2"] .rank-score').textContent,/8.0我的评分Bangumi 9.1/);
+  q.state.rankGroup=true;q.render();assert.match(document.querySelector('.result-line').textContent,/区内按 Bangumi/);
+  q.state.rankGroup=false;q.state.sort='score';q.render();assert.deepEqual([...document.querySelectorAll('.rank-row')].map(n=>n.dataset.work),['bgm-1','bgm-3','bgm-2']);
+  assert.equal(JSON.stringify(q.state.payload),before);
+ }
+});
+
 test('background saves retain the exact logo, cover, card and search DOM nodes',async()=>{
  const items=[work(1,'宇宙冒险 第一季'),work(2,'另一部故事')],{q,document}=await setup({boot:{role:'editor',seed:{items}}});
  const logo=document.querySelector('.brand-mark img'),cover=document.querySelector('[data-work="bgm-1"] img'),card=cover.closest('article'),search=document.getElementById('search');

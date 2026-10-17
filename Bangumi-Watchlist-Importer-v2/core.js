@@ -78,8 +78,8 @@
     for(const i of items){const key=seriesKey(i.series);if(!key){out.push(i);continue;}if(!groups.has(key)){const entry={_series:true,key,title:seriesName(i.series),series:seriesName(i.series),matches:[],members:allGroups.get(key)||[]};groups.set(key,entry);out.push(entry);}groups.get(key).matches.push(i);}
     for(const g of groups.values()){
       const ordered=seriesOrder(g.members),representative=ordered.find(i=>i.seriesCover&&i.image)||ordered.find(i=>i.image)||ordered[0];
-      const scores=g.matches.map(i=>i.score).filter(s=>s!==null),years=g.matches.map(yearOf).filter(Boolean).sort();
-      Object.assign(g,{id:representative.id,image:representative.image,media:representative.media,score:scores.length?Math.max(...scores):null,year:years.at(-1)||'',favorite:g.matches.some(i=>i.favorite),tags:tags(g.matches.flatMap(i=>i.tags)),personalTags:tags(g.matches.flatMap(i=>i.personalTags)),priority:priorities.find(p=>g.matches.some(i=>i.priority===p))||'R',updatedAt:g.matches.map(i=>i.updatedAt||i.createdAt||'').sort().at(-1)||'',createdAt:''});
+      const scores=g.matches.map(i=>i.score).filter(s=>s!==null),bgmScores=g.matches.map(i=>i.bgmScore).filter(s=>s>0),years=g.matches.map(yearOf).filter(Boolean).sort();
+      Object.assign(g,{id:representative.id,image:representative.image,media:representative.media,score:scores.length?Math.max(...scores):null,bgmScore:bgmScores.length?Math.max(...bgmScores):null,year:years.at(-1)||'',favorite:g.matches.some(i=>i.favorite),tags:tags(g.matches.flatMap(i=>i.tags)),personalTags:tags(g.matches.flatMap(i=>i.personalTags)),priority:priorities.find(p=>g.matches.some(i=>i.priority===p))||'R',updatedAt:g.matches.map(i=>i.updatedAt||i.createdAt||'').sort().at(-1)||'',createdAt:''});
     }
     return out;
   }
@@ -221,6 +221,7 @@
     return [...items].sort((a,b)=>{
       if(by==='year')return Number(yearOf(b))-Number(yearOf(a))||a.title.localeCompare(b.title,'zh-CN');
       if(by==='score')return (b.score??-1)-(a.score??-1)||a.title.localeCompare(b.title,'zh-CN');
+      if(by==='bgmScore')return (b.bgmScore>0?b.bgmScore:-1)-(a.bgmScore>0?a.bgmScore:-1)||a.title.localeCompare(b.title,'zh-CN');
       if(by==='title')return a.title.localeCompare(b.title,'zh-CN');
       if(by==='priority')return priorities.indexOf(a.priority)-priorities.indexOf(b.priority)||a.title.localeCompare(b.title,'zh-CN');
       return Number(b.favorite)-Number(a.favorite)||(b.updatedAt||b.createdAt).localeCompare(a.updatedAt||a.createdAt)||a.title.localeCompare(b.title,'zh-CN');

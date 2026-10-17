@@ -2,6 +2,22 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const C=require('./core.js');
+test('Bangumi 排序独立于个人评分，缺分置后，收起系列取当前匹配子作品最高分',()=>{
+ const items=[
+  {id:'a',title:'第一季',score:9.9,bgmScore:7,series:'系列甲',year:'2020'},
+  {id:'b',title:'第二季',score:6,bgmScore:9.1,series:'系列甲',year:'2021'},
+  {id:'c',title:'另一作品',score:10,bgmScore:8.5,series:'系列乙',year:'2020'},
+  {id:'d',title:'缺分作品',score:9,bgmScore:null,favorite:true},
+  {id:'e',title:'尚无投票',score:8,bgmScore:0}
+ ].map(C.normalize),before=JSON.stringify(items);
+ assert.deepEqual(C.sort(items,'bgmScore').slice(0,3).map(i=>i.id),['b','c','a']);
+ assert.ok(C.sort(items,'bgmScore').slice(3).every(i=>!(i.bgmScore>0)));
+ assert.deepEqual(C.sort(items,'score').map(i=>i.id),['c','a','d','e','b']);
+ const groups=C.groupSeries(items);assert.equal(groups.find(g=>g.series==='系列甲').bgmScore,9.1);assert.equal(groups.find(g=>g.series==='系列甲').score,9.9);
+ assert.equal(C.sort(groups,'bgmScore')[0].series,'系列甲');
+ const filtered=C.groupSeries(C.filter(items,{years:['2020']}),items);assert.equal(C.sort(filtered,'bgmScore')[0].series,'系列乙');assert.equal(filtered.find(g=>g.series==='系列甲').bgmScore,7);
+ assert.equal(JSON.stringify(items),before);
+});
 test('细评分覆盖 0.0–10.0 每个十分位且无重叠，9.5/9.6 与 5.0 边界正确',()=>{
  for(let n=0;n<=100;n++){const score=n/10;assert.equal(C.gradeBands.filter(b=>score>=b.min&&score<=b.max).length,1,'score '+score);}
  assert.equal(C.grade({score:9.6}),'9.6');assert.equal(C.grade({score:9.5}),'9.0');assert.equal(C.grade({score:9}),'9.0');assert.equal(C.grade({score:8.9}),'8.5');assert.equal(C.grade({score:5}),'5.0');assert.equal(C.grade({score:4.9}),'low');assert.equal(C.grade({score:null}),'unrated');
